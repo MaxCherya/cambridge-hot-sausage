@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "eyebrow": "Seit 1986 · Fitzroy Street",
+    "title": "Cambridge Hot Sausage",
+    "subtitle": "Seit über 40 Jahren servieren wir die berühmten Cambridge-Hotdogs aus unserem viktorianischen Wagen."
+  },
+  "certifications": {
+    "eyebrow": "Zertifiziert & akkreditiert",
+    "title": "Qualität, der Sie vertrauen können",
+    "subtitle": "Unabhängig geprüft auf Lebensmittelsicherheit, Hygiene und Qualität — damit Sie sich nur auf den Geschmack konzentrieren müssen."
+  },
+  "moments": {
+    "eyebrow": "Vierzig Jahre Fitzroy Street",
+    "title": "Momente vom Wagen",
+    "subtitle": "Hotdogs, Hochzeiten, nächtliche Warteschlangen — die Geschichte Cambridges, die wir seit 1986 schreiben.",
+    "hint": "Scrollen zum Erkunden"
+  },
+  "eventBooking": {
+    "eyebrow": "Wagen buchen",
+    "title": "Unsere Hotdogs auf deinem Event",
+    "subtitle": "Pop-up-Service für Hochzeiten, Partys und Firmenfeiern — komplett autark und überall rund um Cambridge einsatzbereit.",
+    "features": {
+      "schedule": {
+        "title": "Pop-up-Events",
+        "description": "Tagesbuchungen, abgestimmt auf deinen Anlass."
+      },
+      "service": {
+        "title": "Flexible Zeiten",
+        "description": "Ein kurzes Servicefenster, passend zu deinem Plan."
+      },
+      "venue": {
+        "title": "Jede Location",
+        "description": "Komplett autark — egal, wo gefeiert wird."
+      }
+    },
+    "ctaLabel": "Verfügbarkeit prüfen",
+    "ctaNote": "Datum wählen · sichere Zahlung mit Stripe"
+  },
+  "locateUs": {
+    "eyebrow": "Finde den Wagen",
+    "title": "Besuch uns in der Market Passage",
+    "subtitle": "Direkt neben der Hauptstraße, zwei Minuten von der Grand Arcade.",
+    "addressLabel": "Adresse",
+    "directions": "Route anzeigen",
+    "directionsHint": "Öffnet in deiner Karten-App"
+  }
+}

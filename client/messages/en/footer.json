@@ -1,0 +1,36 @@
+{
+  "tagline": "Serving the legendary Cambridge sausage from our Victorian-style barrow on Fitzroy Street since 1986.",
+  "address": {
+    "line1": "Fitzroy Street",
+    "line2": "Cambridge, United Kingdom"
+  },
+  "columns": {
+    "shop": "Shop",
+    "company": "Company"
+  },
+  "links": {
+    "visitShop": "Visit shop",
+    "events": "Book an event",
+    "about": "About us",
+    "locations": "Locations",
+    "reviews": "Reviews",
+    "contact": "Contact",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies"
+  },
+  "newsletter": {
+    "title": "Stay in the loop",
+    "description": "Behind-the-barrow stories, new flavours and event dates — straight to your inbox.",
+    "placeholder": "you@example.com",
+    "submit": "Subscribe",
+    "success": "Welcome aboard. Check your inbox to confirm."
+  },
+  "social": {
+    "follow": "Follow us"
+  },
+  "bottom": {
+    "copyright": "© {year} The Hot Sausage Company. All rights reserved.",
+    "madeIn": "Made with hot sauce in Cambridge"
+  }
+}

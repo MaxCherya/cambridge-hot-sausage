@@ -1,0 +1,36 @@
+{
+  "tagline": "1986年以来、Fitzroy Streetのヴィクトリア様式バローから伝説のケンブリッジ・ソーセージをお届けしています。",
+  "address": {
+    "line1": "Fitzroy Street",
+    "line2": "ケンブリッジ、イギリス"
+  },
+  "columns": {
+    "shop": "ショップ",
+    "company": "会社情報"
+  },
+  "links": {
+    "visitShop": "ショップを見る",
+    "events": "イベントを予約",
+    "about": "私たちについて",
+    "locations": "店舗",
+    "reviews": "レビュー",
+    "contact": "お問い合わせ",
+    "privacy": "プライバシー",
+    "terms": "利用規約",
+    "cookies": "Cookie"
+  },
+  "newsletter": {
+    "title": "最新情報をお届け",
+    "description": "バロー裏の物語、新しいフレーバー、イベント情報をメールで直接お届けします。",
+    "placeholder": "you@example.com",
+    "submit": "登録する",
+    "success": "ようこそ!メールをご確認のうえ登録を完了してください。"
+  },
+  "social": {
+    "follow": "フォローする"
+  },
+  "bottom": {
+    "copyright": "© {year} The Hot Sausage Company. All rights reserved.",
+    "madeIn": "ケンブリッジでホットソースとともに"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "eyebrow": "始于 1986 · Fitzroy Street",
+    "title": "Cambridge Hot Sausage",
+    "subtitle": "四十多年来,我们的维多利亚式餐车一直在剑桥供应着远近闻名的热狗。"
+  },
+  "certifications": {
+    "eyebrow": "权威认证",
+    "title": "值得信赖的品质",
+    "subtitle": "通过独立机构在食品安全、卫生与品质方面的认证 —— 您只需专注于美味。"
+  },
+  "moments": {
+    "eyebrow": "Fitzroy Street 上的四十年",
+    "title": "餐车时光",
+    "subtitle": "热狗、婚礼、深夜的长队 —— 自 1986 年起,我们与剑桥共同书写的故事。",
+    "hint": "滚动查看"
+  },
+  "eventBooking": {
+    "eyebrow": "预订餐车",
+    "title": "把我们的热狗带到你的活动现场",
+    "subtitle": "面向婚礼、派对与企业活动的快闪服务 —— 自给自足,可在剑桥周边任何场地随时开张。",
+    "features": {
+      "schedule": {
+        "title": "快闪活动",
+        "description": "围绕你的活动日量身定制的单日预订。"
+      },
+      "service": {
+        "title": "灵活时段",
+        "description": "短时段服务,完美契合你的安排。"
+      },
+      "venue": {
+        "title": "任意场地",
+        "description": "完全自给自足 —— 庆典在哪里,我们就到哪里。"
+      }
+    },
+    "ctaLabel": "查看可预订日期",
+    "ctaNote": "选择日期 · 通过 Stripe 安全付款"
+  },
+  "locateUs": {
+    "eyebrow": "找到我们",
+    "title": "在 Market Passage 来访",
+    "subtitle": "距 Grand Arcade 仅两分钟,就在主街旁。",
+    "addressLabel": "地址",
+    "directions": "获取路线",
+    "directionsHint": "将在你的地图应用中打开"
+  }
+}

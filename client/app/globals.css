@@ -1,0 +1,35 @@
+@import "@heroui/styles";
+
+@theme inline {
+  --font-display: var(--font-rye);
+  --color-brand-cream: #f5f1e8;
+  --color-brand-gold: #ecd691;
+  --color-brand-maroon: #5a1f1f;
+  --color-brand-ink: #2b2b2b;
+  --color-brand-sage: #4f6b58;
+}
+
+@layer base {
+  :root,
+  .light,
+  [data-theme="light"] {
+    --background: #f5f1e8;
+    --foreground: #2b2b2b;
+    --accent: #5a1f1f;
+    --accent-foreground: #f5f1e8;
+  }
+
+  .dark,
+  [data-theme="dark"] {
+    --background: #2b2b2b;
+    --foreground: #f5f1e8;
+    --accent: #ecd691;
+    --accent-foreground: #2b2b2b;
+  }
+
+  html,
+  body {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}

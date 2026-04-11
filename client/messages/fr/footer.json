@@ -1,0 +1,36 @@
+{
+  "tagline": "Nous servons la légendaire saucisse de Cambridge depuis 1986, depuis notre charrette victorienne de Fitzroy Street.",
+  "address": {
+    "line1": "Fitzroy Street",
+    "line2": "Cambridge, Royaume-Uni"
+  },
+  "columns": {
+    "shop": "Boutique",
+    "company": "L'entreprise"
+  },
+  "links": {
+    "visitShop": "Voir la boutique",
+    "events": "Réserver un événement",
+    "about": "À propos",
+    "locations": "Emplacements",
+    "reviews": "Avis",
+    "contact": "Contact",
+    "privacy": "Confidentialité",
+    "terms": "Conditions",
+    "cookies": "Cookies"
+  },
+  "newsletter": {
+    "title": "Restez informés",
+    "description": "Histoires en coulisses, nouvelles saveurs et dates d'événements — directement dans votre boîte mail.",
+    "placeholder": "vous@exemple.com",
+    "submit": "S'abonner",
+    "success": "Bienvenue à bord. Vérifiez votre boîte mail pour confirmer."
+  },
+  "social": {
+    "follow": "Suivez-nous"
+  },
+  "bottom": {
+    "copyright": "© {year} The Hot Sausage Company. Tous droits réservés.",
+    "madeIn": "Concocté avec de la sauce piquante à Cambridge"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "eyebrow": "Est. 1986 · Fitzroy Street",
+    "title": "Cambridge Hot Sausage",
+    "subtitle": "Serving Cambridge's famous hot sausages for over 40 years from our Victorian-style barrow."
+  },
+  "certifications": {
+    "eyebrow": "Certified & accredited",
+    "title": "Quality you can trust",
+    "subtitle": "Independently verified for food safety, hygiene and quality — so you can focus on the flavour."
+  },
+  "moments": {
+    "eyebrow": "Forty years on Fitzroy Street",
+    "title": "Moments from the barrow",
+    "subtitle": "Hot dogs, weddings, late-night queues — the Cambridge story we've been writing since 1986.",
+    "hint": "Scroll to explore"
+  },
+  "eventBooking": {
+    "eyebrow": "Book the barrow",
+    "title": "Bring our hot dogs to your event",
+    "subtitle": "Pop-up service for weddings, parties and corporate events — fully self-contained, ready to serve at any venue around Cambridge.",
+    "features": {
+      "schedule": {
+        "title": "Pop-up events",
+        "description": "Single-day bookings tailored around your day."
+      },
+      "service": {
+        "title": "Flexible hours",
+        "description": "A short service window built around your schedule."
+      },
+      "venue": {
+        "title": "Any venue",
+        "description": "Fully self-contained — wherever the celebration is."
+      }
+    },
+    "ctaLabel": "Check availability",
+    "ctaNote": "Pick a date · pay securely with Stripe"
+  },
+  "locateUs": {
+    "eyebrow": "Find the barrow",
+    "title": "Visit us on Market Passage",
+    "subtitle": "Tucked just off the high street, two minutes from the Grand Arcade.",
+    "addressLabel": "Address",
+    "directions": "Get directions",
+    "directionsHint": "Opens in your maps app"
+  }
+}

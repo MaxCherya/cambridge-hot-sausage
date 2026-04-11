@@ -1,0 +1,36 @@
+{
+  "tagline": "自 1986 年起,我们的维多利亚式餐车一直在 Fitzroy Street 供应远近闻名的剑桥香肠。",
+  "address": {
+    "line1": "Fitzroy Street",
+    "line2": "英国剑桥"
+  },
+  "columns": {
+    "shop": "商店",
+    "company": "关于我们"
+  },
+  "links": {
+    "visitShop": "进入商店",
+    "events": "预订活动",
+    "about": "关于我们",
+    "locations": "门店位置",
+    "reviews": "评价",
+    "contact": "联系我们",
+    "privacy": "隐私政策",
+    "terms": "使用条款",
+    "cookies": "Cookie 政策"
+  },
+  "newsletter": {
+    "title": "保持联系",
+    "description": "餐车背后的故事、新口味与活动日程,直接发送到你的邮箱。",
+    "placeholder": "you@example.com",
+    "submit": "订阅",
+    "success": "欢迎加入!请查收邮件以完成确认。"
+  },
+  "social": {
+    "follow": "关注我们"
+  },
+  "bottom": {
+    "copyright": "© {year} The Hot Sausage Company. 保留所有权利。",
+    "madeIn": "在剑桥用辣酱用心制作"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "tagline": "Seit 1986 servieren wir die legendäre Cambridge-Wurst aus unserem viktorianischen Wagen in der Fitzroy Street.",
+  "address": {
+    "line1": "Fitzroy Street",
+    "line2": "Cambridge, Vereinigtes Königreich"
+  },
+  "columns": {
+    "shop": "Shop",
+    "company": "Unternehmen"
+  },
+  "links": {
+    "visitShop": "Shop besuchen",
+    "events": "Event buchen",
+    "about": "Über uns",
+    "locations": "Standorte",
+    "reviews": "Bewertungen",
+    "contact": "Kontakt",
+    "privacy": "Datenschutz",
+    "terms": "AGB",
+    "cookies": "Cookies"
+  },
+  "newsletter": {
+    "title": "Auf dem Laufenden bleiben",
+    "description": "Geschichten hinter dem Wagen, neue Sorten und Eventtermine — direkt in dein Postfach.",
+    "placeholder": "du@beispiel.de",
+    "submit": "Abonnieren",
+    "success": "Willkommen an Bord. Bitte E-Mail bestätigen."
+  },
+  "social": {
+    "follow": "Folge uns"
+  },
+  "bottom": {
+    "copyright": "© {year} The Hot Sausage Company. Alle Rechte vorbehalten.",
+    "madeIn": "Mit scharfer Sauce in Cambridge gemacht"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "hero": {
+    "eyebrow": "1986年創業 · Fitzroy Street",
+    "title": "Cambridge Hot Sausage",
+    "subtitle": "ヴィクトリア様式のバローから、ケンブリッジ名物のホットドッグを40年以上お届けしています。"
+  },
+  "certifications": {
+    "eyebrow": "認証・認定取得",
+    "title": "信頼できる品質",
+    "subtitle": "食品安全・衛生・品質について第三者機関の認証を取得 — 安心して味だけに集中していただけます。"
+  },
+  "moments": {
+    "eyebrow": "Fitzroy Streetでの40年",
+    "title": "バローからの瞬間",
+    "subtitle": "ホットドッグ、結婚式、深夜の行列 — 1986年から綴ってきたケンブリッジの物語。",
+    "hint": "スクロールして見る"
+  },
+  "eventBooking": {
+    "eyebrow": "バローを予約",
+    "title": "あなたのイベントに、私たちのホットドッグを",
+    "subtitle": "結婚式・パーティー・企業イベント向けのポップアップサービス。完全自立型で、ケンブリッジ周辺のあらゆる会場で出店可能です。",
+    "features": {
+      "schedule": {
+        "title": "ポップアップ出店",
+        "description": "あなたの一日に合わせた単日予約。"
+      },
+      "service": {
+        "title": "柔軟な時間",
+        "description": "ご予定に合わせた短時間のサービス。"
+      },
+      "venue": {
+        "title": "どんな会場でも",
+        "description": "完全自立型 — 祝いの場がどこでも。"
+      }
+    },
+    "ctaLabel": "空き状況を確認",
+    "ctaNote": "日付を選択 · Stripeで安全に決済"
+  },
+  "locateUs": {
+    "eyebrow": "場所を確認",
+    "title": "Market Passageでお待ちしています",
+    "subtitle": "Grand Arcadeから徒歩2分、メインストリートのすぐ脇。",
+    "addressLabel": "住所",
+    "directions": "ルート案内",
+    "directionsHint": "お使いの地図アプリで開きます"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "tagline": "Servimos la legendaria salchicha de Cambridge desde nuestro carrito victoriano en Fitzroy Street desde 1986.",
+  "address": {
+    "line1": "Fitzroy Street",
+    "line2": "Cambridge, Reino Unido"
+  },
+  "columns": {
+    "shop": "Tienda",
+    "company": "Empresa"
+  },
+  "links": {
+    "visitShop": "Visitar la tienda",
+    "events": "Reservar un evento",
+    "about": "Sobre nosotros",
+    "locations": "Ubicaciones",
+    "reviews": "Opiniones",
+    "contact": "Contacto",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "cookies": "Cookies"
+  },
+  "newsletter": {
+    "title": "Mantente al día",
+    "description": "Historias del carrito, nuevos sabores y fechas de eventos — directo a tu bandeja de entrada.",
+    "placeholder": "tu@ejemplo.com",
+    "submit": "Suscribirse",
+    "success": "Bienvenido a bordo. Revisa tu correo para confirmar."
+  },
+  "social": {
+    "follow": "Síguenos"
+  },
+  "bottom": {
+    "copyright": "© {year} The Hot Sausage Company. Todos los derechos reservados.",
+    "madeIn": "Hecho con salsa picante en Cambridge"
+  }
+}

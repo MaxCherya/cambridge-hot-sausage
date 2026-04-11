@@ -1,0 +1,28 @@
+{
+  "brand": "Cambridge Hot Sausage",
+  "tagline": "1986年創業 · Fitzroy Street",
+  "nav": {
+    "home": "ホーム",
+    "about": "私たちについて",
+    "shop": "ショップ",
+    "locations": "店舗",
+    "events": "イベント予約",
+    "reviews": "レビュー",
+    "contact": "お問い合わせ"
+  },
+  "actions": {
+    "visitShop": "ショップを見る",
+    "bookEvent": "イベントを予約",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "changeLanguage": "言語を変更"
+  },
+  "locales": {
+    "en": "English",
+    "fr": "Français",
+    "de": "Deutsch",
+    "es": "Español",
+    "zh": "中文",
+    "ja": "日本語"
+  }
+}
