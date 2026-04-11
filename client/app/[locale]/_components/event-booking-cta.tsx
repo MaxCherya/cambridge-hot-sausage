@@ -1,14 +1,9 @@
 "use client";
 
-import { useRef, type ReactNode } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
+import { type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Calendar, Clock, MapPin } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 type FeatureKey = "schedule" | "service" | "venue";
 
@@ -19,67 +14,10 @@ const FEATURES: { key: FeatureKey; icon: ReactNode }[] = [
 ];
 
 export function EventBookingCta() {
-  const root = useRef<HTMLElement>(null);
   const t = useTranslations("home.eventBooking");
-
-  useGSAP(
-    () => {
-      if (!root.current) return;
-
-      const headingEls = root.current.querySelectorAll(".cta-heading > *");
-      const statEls = root.current.querySelectorAll(".cta-stat");
-      const actionEls = root.current.querySelectorAll(".cta-action > *");
-
-      gsap.set(headingEls, { opacity: 0, y: 40 });
-      gsap.set(statEls, { opacity: 0, y: 50, scale: 0.9 });
-      gsap.set(actionEls, { opacity: 0, y: 24 });
-
-      gsap.to(headingEls, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      gsap.to(statEls, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "back.out(1.4)",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: root.current.querySelector(".cta-stats"),
-          start: "top bottom",
-          toggleActions: "play none none none",
-        },
-      });
-
-      gsap.to(actionEls, {
-        opacity: 1,
-        y: 0,
-        duration: 0.7,
-        ease: "power3.out",
-        stagger: 0.08,
-        scrollTrigger: {
-          trigger: root.current.querySelector(".cta-action"),
-          start: "top bottom",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: root },
-  );
 
   return (
     <section
-      ref={root}
       id="event-booking"
       className="relative z-10 overflow-hidden bg-brand-maroon py-24 text-brand-cream sm:py-32"
     >
@@ -91,23 +29,36 @@ export function EventBookingCta() {
       </div>
 
       <div className="relative mx-auto max-w-5xl px-6 text-center">
-        <div className="cta-heading">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold sm:text-xs">
+        <div>
+          <span
+            data-reveal
+            className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-gold sm:text-xs"
+          >
             {t("eyebrow")}
           </span>
-          <h2 className="mt-3 font-display text-4xl leading-[1.1] sm:mt-4 sm:text-5xl lg:text-6xl">
+          <h2
+            data-reveal
+            style={{ transitionDelay: "100ms" }}
+            className="mt-3 font-display text-4xl leading-[1.1] sm:mt-4 sm:text-5xl lg:text-6xl"
+          >
             {t("title")}
           </h2>
-          <p className="mx-auto mt-5 max-w-2xl text-balance text-base text-brand-cream/75 sm:mt-6 sm:text-lg">
+          <p
+            data-reveal
+            style={{ transitionDelay: "200ms" }}
+            className="mx-auto mt-5 max-w-2xl text-balance text-base text-brand-cream/75 sm:mt-6 sm:text-lg"
+          >
             {t("subtitle")}
           </p>
         </div>
 
-        <ul className="cta-stats mt-12 grid gap-4 sm:mt-16 sm:grid-cols-3 sm:gap-5 lg:gap-7">
-          {FEATURES.map((feature) => (
+        <ul className="mt-12 grid gap-4 sm:mt-16 sm:grid-cols-3 sm:gap-5 lg:gap-7">
+          {FEATURES.map((feature, i) => (
             <li
               key={feature.key}
-              className="cta-stat group relative overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/3 p-6 text-left backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-brand-gold hover:bg-brand-cream/6 sm:p-7"
+              data-reveal
+              style={{ transitionDelay: `${300 + i * 120}ms` }}
+              className="group relative overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/3 p-6 text-left backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-brand-gold hover:bg-brand-cream/6 sm:p-7"
             >
               <div
                 aria-hidden
@@ -126,20 +77,28 @@ export function EventBookingCta() {
           ))}
         </ul>
 
-        <div className="cta-action mt-12 sm:mt-16">
-          <Link
-            href="/events"
-            className="group inline-flex items-center gap-3 rounded-full bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-wider text-brand-maroon shadow-[0_20px_45px_-15px_rgba(236,214,145,0.55)] transition-all duration-300 ease-out hover:scale-[1.04] hover:shadow-[0_30px_55px_-15px_rgba(236,214,145,0.75)] active:scale-100 sm:text-base"
-          >
-            <span>{t("ctaLabel")}</span>
-            <span
-              aria-hidden
-              className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-maroon text-brand-gold transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-12"
+        <div className="mt-12 sm:mt-16">
+          <div data-reveal style={{ transitionDelay: "300ms" }}>
+            <Link
+              href="/events"
+              className="group inline-flex items-center gap-3 rounded-full bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-wider text-brand-maroon shadow-[0_20px_45px_-15px_rgba(236,214,145,0.55)] transition-all duration-300 ease-out hover:scale-[1.04] hover:shadow-[0_30px_55px_-15px_rgba(236,214,145,0.75)] active:scale-100 sm:text-base"
             >
-              <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.6} />
-            </span>
-          </Link>
-          <p className="mt-5 text-xs text-brand-cream/55">{t("ctaNote")}</p>
+              <span>{t("ctaLabel")}</span>
+              <span
+                aria-hidden
+                className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-brand-maroon text-brand-gold transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-12"
+              >
+                <ArrowRight className="h-3.5 w-3.5" strokeWidth={2.6} />
+              </span>
+            </Link>
+          </div>
+          <p
+            data-reveal
+            style={{ transitionDelay: "400ms" }}
+            className="mt-5 text-xs text-brand-cream/55"
+          >
+            {t("ctaNote")}
+          </p>
         </div>
       </div>
     </section>

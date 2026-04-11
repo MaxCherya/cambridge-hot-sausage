@@ -35,19 +35,6 @@ export function Certifications() {
     () => {
       if (!root.current) return;
 
-      // Heading: scroll-linked scrub reveal
-      gsap.from(root.current.querySelectorAll(".cert-heading > *"), {
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 85%",
-          end: "top 45%",
-          scrub: 0.6,
-        },
-        y: 50,
-        opacity: 0,
-        stagger: 0.08,
-      });
-
       // Marquee: continuous linear loop
       const track = trackRef.current;
       if (!track) return;
@@ -100,18 +87,27 @@ export function Certifications() {
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(90,31,31,0.06),transparent_60%)]"
       />
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        <div className="cert-heading mx-auto max-w-2xl text-center">
-          <span className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-sage">
-            {t("eyebrow")}
-          </span>
-          <h2 className="mt-3 font-display text-4xl leading-tight text-brand-maroon sm:text-5xl">
-            {t("title")}
-          </h2>
-          <p className="mt-4 text-balance text-base text-brand-ink/70 sm:text-lg">
-            {t("subtitle")}
-          </p>
-        </div>
+      <div className="relative mx-auto max-w-2xl px-6 text-center">
+        <span
+          data-reveal
+          className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-sage"
+        >
+          {t("eyebrow")}
+        </span>
+        <h2
+          data-reveal
+          style={{ transitionDelay: "100ms" }}
+          className="mt-3 font-display text-4xl leading-tight text-brand-maroon sm:text-5xl"
+        >
+          {t("title")}
+        </h2>
+        <p
+          data-reveal
+          style={{ transitionDelay: "200ms" }}
+          className="mt-4 text-balance text-base text-brand-ink/70 sm:text-lg"
+        >
+          {t("subtitle")}
+        </p>
       </div>
 
       {/* Marquee — full-bleed so logos slide off the page edges */}

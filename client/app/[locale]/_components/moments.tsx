@@ -76,19 +76,6 @@ export function Moments() {
       const progress = progressRef.current;
 
       const ctx = gsap.context(() => {
-        // Heading reveal — scrubbed to scroll progress
-        gsap.from(root_.querySelectorAll(".moments-heading > *"), {
-          scrollTrigger: {
-            trigger: root_,
-            start: "top 80%",
-            end: "top 30%",
-            scrub: 0.5,
-          },
-          y: 40,
-          opacity: 0,
-          stagger: 0.08,
-        });
-
         // Pinned horizontal scroll
         const getDistance = () => track.scrollWidth - window.innerWidth;
 
@@ -128,14 +115,25 @@ export function Moments() {
     >
       <div className="flex h-full flex-col">
         {/* Heading row */}
-        <div className="moments-heading shrink-0 px-6 pb-4 pt-20 text-center sm:pb-6 sm:pt-24">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-sage sm:text-xs">
+        <div className="shrink-0 px-6 pb-4 pt-20 text-center sm:pb-6 sm:pt-24">
+          <span
+            data-reveal
+            className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-sage sm:text-xs"
+          >
             {t("eyebrow")}
           </span>
-          <h2 className="mt-2 font-display text-3xl leading-tight text-brand-maroon sm:mt-3 sm:text-4xl lg:text-5xl">
+          <h2
+            data-reveal
+            style={{ transitionDelay: "100ms" }}
+            className="mt-2 font-display text-3xl leading-tight text-brand-maroon sm:mt-3 sm:text-4xl lg:text-5xl"
+          >
             {t("title")}
           </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-balance text-sm text-brand-ink/70 sm:mt-3 sm:text-base">
+          <p
+            data-reveal
+            style={{ transitionDelay: "200ms" }}
+            className="mx-auto mt-2 max-w-2xl text-balance text-sm text-brand-ink/70 sm:mt-3 sm:text-base"
+          >
             {t("subtitle")}
           </p>
         </div>

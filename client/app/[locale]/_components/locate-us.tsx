@@ -1,14 +1,8 @@
 "use client";
 
-import { useRef } from "react";
 import dynamic from "next/dynamic";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
 import { MapPin, Navigation } from "lucide-react";
-
-gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const LocateUsMap = dynamic(() => import("./locate-us-map"), {
   ssr: false,
@@ -29,51 +23,10 @@ const ADDRESS = "2 Market Passage, Cambridge CB2 3PA";
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${LAT},${LNG}`;
 
 export function LocateUs() {
-  const root = useRef<HTMLElement>(null);
   const t = useTranslations("home.locateUs");
-
-  useGSAP(
-    () => {
-      if (!root.current) return;
-
-      const headingEls = root.current.querySelectorAll(".locate-heading > *");
-      const cards = root.current.querySelectorAll(".locate-card");
-
-      gsap.set(headingEls, { opacity: 0, y: 32 });
-      gsap.set(cards, { opacity: 0, y: 40 });
-
-      gsap.to(headingEls, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.08,
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
-
-      gsap.to(cards, {
-        opacity: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        stagger: 0.12,
-        scrollTrigger: {
-          trigger: root.current.querySelector(".locate-grid"),
-          start: "top bottom",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: root },
-  );
 
   return (
     <section
-      ref={root}
       id="locate-us"
       className="relative z-10 overflow-hidden bg-brand-cream py-24 sm:py-32"
     >
@@ -83,42 +36,77 @@ export function LocateUs() {
       />
 
       <div className="relative mx-auto max-w-6xl px-6">
-        <div className="locate-heading mx-auto max-w-2xl text-center">
-          <span className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-sage sm:text-xs">
+        <div className="mx-auto max-w-2xl text-center">
+          <span
+            data-reveal
+            className="text-[10px] font-semibold uppercase tracking-[0.3em] text-brand-sage sm:text-xs"
+          >
             {t("eyebrow")}
           </span>
-          <h2 className="mt-3 font-display text-4xl leading-tight text-brand-maroon sm:text-5xl">
+          <h2
+            data-reveal
+            style={{ transitionDelay: "100ms" }}
+            className="mt-3 font-display text-4xl leading-tight text-brand-maroon sm:text-5xl"
+          >
             {t("title")}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-balance text-base text-brand-ink/70 sm:text-lg">
+          <p
+            data-reveal
+            style={{ transitionDelay: "200ms" }}
+            className="mx-auto mt-4 max-w-xl text-balance text-base text-brand-ink/70 sm:text-lg"
+          >
             {t("subtitle")}
           </p>
         </div>
 
-        <div className="locate-grid mt-12 grid gap-6 sm:mt-16 lg:grid-cols-5 lg:gap-8">
+        <div className="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-5 lg:gap-8">
           {/* Map card */}
-          <div className="locate-card relative h-[360px] overflow-hidden rounded-3xl bg-white shadow-[0_30px_60px_-25px_rgba(43,43,43,0.35)] ring-1 ring-brand-maroon/10 sm:h-[480px] lg:col-span-3">
+          <div
+            data-reveal="left"
+            style={{ transitionDelay: "100ms" }}
+            className="relative h-[360px] overflow-hidden rounded-3xl bg-white shadow-[0_30px_60px_-25px_rgba(43,43,43,0.35)] ring-1 ring-brand-maroon/10 sm:h-[480px] lg:col-span-3"
+          >
             <LocateUsMap />
           </div>
 
           {/* Address + directions card */}
-          <div className="locate-card flex flex-col justify-between gap-8 rounded-3xl bg-white p-8 shadow-[0_30px_60px_-25px_rgba(43,43,43,0.35)] ring-1 ring-brand-maroon/10 sm:p-10 lg:col-span-2">
+          <div
+            data-reveal="right"
+            style={{ transitionDelay: "200ms" }}
+            className="flex flex-col justify-between gap-8 rounded-3xl bg-white p-8 shadow-[0_30px_60px_-25px_rgba(43,43,43,0.35)] ring-1 ring-brand-maroon/10 sm:p-10 lg:col-span-2"
+          >
             <div>
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-maroon/10 text-brand-maroon ring-1 ring-brand-maroon/15">
+              <div
+                data-reveal
+                style={{ transitionDelay: "300ms" }}
+                className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-maroon/10 text-brand-maroon ring-1 ring-brand-maroon/15"
+              >
                 <MapPin className="h-6 w-6" strokeWidth={1.8} />
               </div>
-              <h3 className="mt-6 font-display text-2xl leading-snug text-brand-maroon sm:text-3xl">
+              <h3
+                data-reveal
+                style={{ transitionDelay: "350ms" }}
+                className="mt-6 font-display text-2xl leading-snug text-brand-maroon sm:text-3xl"
+              >
                 {NAME}
               </h3>
-              <span className="mt-4 block text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-sage">
+              <span
+                data-reveal
+                style={{ transitionDelay: "400ms" }}
+                className="mt-4 block text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-sage"
+              >
                 {t("addressLabel")}
               </span>
-              <address className="mt-2 text-base not-italic leading-relaxed text-brand-ink/80">
+              <address
+                data-reveal
+                style={{ transitionDelay: "450ms" }}
+                className="mt-2 text-base not-italic leading-relaxed text-brand-ink/80"
+              >
                 {ADDRESS}
               </address>
             </div>
 
-            <div>
+            <div data-reveal style={{ transitionDelay: "500ms" }}>
               <a
                 href={DIRECTIONS_URL}
                 target="_blank"

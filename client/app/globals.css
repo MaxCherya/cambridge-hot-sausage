@@ -32,4 +32,149 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+  /* Force body to be its own isolated stacking/blend group so the
+     mix-blend-mode cursor renders deterministically above siblings */
+  body {
+    isolation: isolate;
+  }
+
+  /* Brand-tinted native scrollbar (visible when Lenis isn't active) */
+  html {
+    scrollbar-color: #5a1f1f #f5f1e8;
+    scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f5f1e8;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #5a1f1f;
+    border: 2px solid #f5f1e8;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2b2b2b;
+  }
+}
+
+/* Custom cursor — only on fine pointers with motion enabled.
+
+   Wrapped in @layer utilities so this rule lands in the same layer
+   that HeroUI defines for utilities. CSS cascade layers have a quirk:
+   `!important` rules in *unlayered* CSS are treated as the LATEST
+   layer for important declarations, which makes them LOSE to
+   important rules in earlier named layers (like `components`).
+   Putting our overrides into `utilities` puts them after HeroUI's
+   `components` layer, so they win cleanly. */
+@layer utilities {
+  @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    html.custom-cursor-on,
+    html.custom-cursor-on * {
+      cursor: none !important;
+    }
+    html.custom-cursor-on input,
+    html.custom-cursor-on textarea,
+    html.custom-cursor-on [contenteditable="true"] {
+      cursor: text !important;
+    }
+  }
+}
+
+@layer utilities {
+  .custom-cursor-ring,
+  .custom-cursor-dot {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    pointer-events: none !important;
+    /* Max int — beat react-aria's inline z-index: 100000 on popovers,
+       HeroUI overlays, modal backdrops, and any third-party widget */
+    z-index: 2147483647 !important;
+    mix-blend-mode: difference;
+    will-change: transform, opacity;
+    display: none;
+  }
+  html.custom-cursor-on .custom-cursor-ring,
+  html.custom-cursor-on .custom-cursor-dot {
+    display: block;
+  }
+}
+
+.custom-cursor-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  border: 1.5px solid #ffffff;
+  background-color: transparent;
+  /* Centering and position come from the JS-set transform
+     (translate3d + translate(-50%, -50%)). Don't add margins here
+     or the dot and ring will end up offset by different amounts. */
+  transition:
+    width 0.3s ease-out,
+    height 0.3s ease-out,
+    background-color 0.3s ease-out,
+    opacity 0.25s ease-out,
+    border-color 0.3s ease-out;
+}
+.custom-cursor-ring.cursor-hover {
+  width: 64px;
+  height: 64px;
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: #ffffff;
+}
+.custom-cursor-ring.cursor-down {
+  width: 28px;
+  height: 28px;
+}
+.custom-cursor-ring.cursor-hidden,
+.custom-cursor-dot.cursor-hidden {
+  opacity: 0;
+}
+
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: #ffffff;
+  transition: opacity 0.25s ease-out;
+}
+
+/* ─── Reveal on scroll ──────────────────────────────────────────────
+   Elements tagged with [data-reveal] start hidden and offset.
+   The RevealOnScroll provider adds [data-revealed] when they enter
+   the viewport — CSS does the rest. */
+[data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 40px, 0);
+  transition:
+    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+[data-reveal="left"] {
+  transform: translate3d(40px, 0, 0);
+}
+[data-reveal="right"] {
+  transform: translate3d(-40px, 0, 0);
+}
+[data-reveal="scale"] {
+  transform: scale(0.92);
+}
+[data-reveal][data-revealed] {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+[data-reveal="scale"][data-revealed] {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

@@ -6,6 +6,9 @@ import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { Navbar } from "./_components/navbar";
 import { Footer } from "./_components/footer";
+import { SmoothScroll } from "./_components/smooth-scroll";
+import { CustomCursor } from "./_components/custom-cursor";
+import { RevealOnScroll } from "./_components/reveal-on-scroll";
 import "../globals.css";
 
 const rye = Rye({
@@ -51,6 +54,9 @@ export default async function LocaleLayout({
     <html lang={locale} className={rye.variable} suppressHydrationWarning>
       <body className="min-h-dvh bg-background text-foreground">
         <NextIntlClientProvider>
+          <SmoothScroll />
+          <RevealOnScroll />
+          <CustomCursor />
           <Navbar />
           {children}
           <Footer />

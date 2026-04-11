@@ -44,20 +44,6 @@ export function Footer() {
     () => {
       if (!root.current) return;
 
-      // Block fade-up on enter
-      gsap.from(root.current.querySelectorAll(".footer-block"), {
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse",
-        },
-        y: 32,
-        opacity: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        stagger: 0.08,
-      });
-
       // Giant ghost wordmark — continuous linear marquee
       const track = wordmarkRef.current;
       if (track) {
@@ -126,7 +112,7 @@ export function Footer() {
       <div className="relative mx-auto max-w-7xl px-6 pb-20 pt-32 sm:pt-40">
         <div className="grid gap-14 lg:grid-cols-12 lg:gap-12">
           {/* Brand */}
-          <div className="footer-block lg:col-span-5">
+          <div data-reveal className="lg:col-span-5">
             <Link
               href="/"
               className="group inline-block"
@@ -177,7 +163,12 @@ export function Footer() {
           </div>
 
           {/* Shop */}
-          <nav className="footer-block lg:col-span-2" aria-label={t("columns.shop")}>
+          <nav
+            data-reveal
+            style={{ transitionDelay: "100ms" }}
+            className="lg:col-span-2"
+            aria-label={t("columns.shop")}
+          >
             <h3 className="font-display text-base uppercase tracking-wider text-brand-gold">
               {t("columns.shop")}
             </h3>
@@ -192,7 +183,9 @@ export function Footer() {
 
           {/* Company */}
           <nav
-            className="footer-block lg:col-span-2"
+            data-reveal
+            style={{ transitionDelay: "200ms" }}
+            className="lg:col-span-2"
             aria-label={t("columns.company")}
           >
             <h3 className="font-display text-base uppercase tracking-wider text-brand-gold">
@@ -208,7 +201,11 @@ export function Footer() {
           </nav>
 
           {/* Newsletter */}
-          <div className="footer-block lg:col-span-3">
+          <div
+            data-reveal
+            style={{ transitionDelay: "300ms" }}
+            className="lg:col-span-3"
+          >
             <h3 className="font-display text-base uppercase tracking-wider text-brand-gold">
               {t("newsletter.title")}
             </h3>
