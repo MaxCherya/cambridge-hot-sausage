@@ -165,7 +165,7 @@ export function Footer() {
           {/* Shop */}
           <nav
             data-reveal
-            style={{ transitionDelay: "100ms" }}
+            style={{ animationDelay: "100ms" }}
             className="lg:col-span-2"
             aria-label={t("columns.shop")}
           >
@@ -184,7 +184,7 @@ export function Footer() {
           {/* Company */}
           <nav
             data-reveal
-            style={{ transitionDelay: "200ms" }}
+            style={{ animationDelay: "200ms" }}
             className="lg:col-span-2"
             aria-label={t("columns.company")}
           >
@@ -203,7 +203,7 @@ export function Footer() {
           {/* Newsletter */}
           <div
             data-reveal
-            style={{ transitionDelay: "300ms" }}
+            style={{ animationDelay: "300ms" }}
             className="lg:col-span-3"
           >
             <h3 className="font-display text-base uppercase tracking-wider text-brand-gold">

@@ -38,14 +38,14 @@ export function EventBookingCta() {
           </span>
           <h2
             data-reveal
-            style={{ transitionDelay: "100ms" }}
+            style={{ animationDelay: "100ms" }}
             className="mt-3 font-display text-4xl leading-[1.1] sm:mt-4 sm:text-5xl lg:text-6xl"
           >
             {t("title")}
           </h2>
           <p
             data-reveal
-            style={{ transitionDelay: "200ms" }}
+            style={{ animationDelay: "200ms" }}
             className="mx-auto mt-5 max-w-2xl text-balance text-base text-brand-cream/75 sm:mt-6 sm:text-lg"
           >
             {t("subtitle")}
@@ -57,7 +57,7 @@ export function EventBookingCta() {
             <li
               key={feature.key}
               data-reveal
-              style={{ transitionDelay: `${300 + i * 120}ms` }}
+              style={{ animationDelay: `${300 + i * 120}ms` }}
               className="group relative overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/3 p-6 text-left backdrop-blur-sm transition-all duration-500 ease-out hover:-translate-y-2 hover:border-brand-gold hover:bg-brand-cream/6 sm:p-7"
             >
               <div
@@ -78,7 +78,7 @@ export function EventBookingCta() {
         </ul>
 
         <div className="mt-12 sm:mt-16">
-          <div data-reveal style={{ transitionDelay: "300ms" }}>
+          <div data-reveal style={{ animationDelay: "300ms" }}>
             <Link
               href="/events"
               className="group inline-flex items-center gap-3 rounded-full bg-brand-gold px-8 py-4 text-sm font-semibold uppercase tracking-wider text-brand-maroon shadow-[0_20px_45px_-15px_rgba(236,214,145,0.55)] transition-all duration-300 ease-out hover:scale-[1.04] hover:shadow-[0_30px_55px_-15px_rgba(236,214,145,0.75)] active:scale-100 sm:text-base"
@@ -94,7 +94,7 @@ export function EventBookingCta() {
           </div>
           <p
             data-reveal
-            style={{ transitionDelay: "400ms" }}
+            style={{ animationDelay: "400ms" }}
             className="mt-5 text-xs text-brand-cream/55"
           >
             {t("ctaNote")}

@@ -3,8 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const INTERACTIVE_SELECTOR =
-  "a, button, [role='button'], [role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox'], [role='option'], [role='tab'], summary, label, select, [data-cursor='hover']";
-const TEXT_SELECTOR = "input, textarea, [contenteditable='true']";
+  "a, button, [role='button'], [role='menuitem'], [role='menuitemradio'], [role='menuitemcheckbox'], [role='option'], [role='tab'], summary, label, select, input, textarea, [contenteditable='true'], [data-cursor='hover']";
 
 export function CustomCursor() {
   const ringRef = useRef<HTMLDivElement>(null);
@@ -39,13 +38,6 @@ export function CustomCursor() {
     const onOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
-      if (target.closest(TEXT_SELECTOR)) {
-        ring.classList.add("cursor-hidden");
-        dot.classList.add("cursor-hidden");
-        return;
-      }
-      ring.classList.remove("cursor-hidden");
-      dot.classList.remove("cursor-hidden");
       if (target.closest(INTERACTIVE_SELECTOR)) {
         ring.classList.add("cursor-hover");
       } else {

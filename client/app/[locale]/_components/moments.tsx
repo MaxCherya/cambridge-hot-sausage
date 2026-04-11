@@ -124,14 +124,14 @@ export function Moments() {
           </span>
           <h2
             data-reveal
-            style={{ transitionDelay: "100ms" }}
+            style={{ animationDelay: "100ms" }}
             className="mt-2 font-display text-3xl leading-tight text-brand-maroon sm:mt-3 sm:text-4xl lg:text-5xl"
           >
             {t("title")}
           </h2>
           <p
             data-reveal
-            style={{ transitionDelay: "200ms" }}
+            style={{ animationDelay: "200ms" }}
             className="mx-auto mt-2 max-w-2xl text-balance text-sm text-brand-ink/70 sm:mt-3 sm:text-base"
           >
             {t("subtitle")}

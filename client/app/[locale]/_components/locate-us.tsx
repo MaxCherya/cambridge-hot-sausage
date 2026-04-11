@@ -45,14 +45,14 @@ export function LocateUs() {
           </span>
           <h2
             data-reveal
-            style={{ transitionDelay: "100ms" }}
+            style={{ animationDelay: "100ms" }}
             className="mt-3 font-display text-4xl leading-tight text-brand-maroon sm:text-5xl"
           >
             {t("title")}
           </h2>
           <p
             data-reveal
-            style={{ transitionDelay: "200ms" }}
+            style={{ animationDelay: "200ms" }}
             className="mx-auto mt-4 max-w-xl text-balance text-base text-brand-ink/70 sm:text-lg"
           >
             {t("subtitle")}
@@ -63,7 +63,7 @@ export function LocateUs() {
           {/* Map card */}
           <div
             data-reveal="left"
-            style={{ transitionDelay: "100ms" }}
+            style={{ animationDelay: "100ms" }}
             className="relative h-[360px] overflow-hidden rounded-3xl bg-white shadow-[0_30px_60px_-25px_rgba(43,43,43,0.35)] ring-1 ring-brand-maroon/10 sm:h-[480px] lg:col-span-3"
           >
             <LocateUsMap />
@@ -72,41 +72,41 @@ export function LocateUs() {
           {/* Address + directions card */}
           <div
             data-reveal="right"
-            style={{ transitionDelay: "200ms" }}
+            style={{ animationDelay: "200ms" }}
             className="flex flex-col justify-between gap-8 rounded-3xl bg-white p-8 shadow-[0_30px_60px_-25px_rgba(43,43,43,0.35)] ring-1 ring-brand-maroon/10 sm:p-10 lg:col-span-2"
           >
             <div>
               <div
                 data-reveal
-                style={{ transitionDelay: "300ms" }}
+                style={{ animationDelay: "300ms" }}
                 className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-maroon/10 text-brand-maroon ring-1 ring-brand-maroon/15"
               >
                 <MapPin className="h-6 w-6" strokeWidth={1.8} />
               </div>
               <h3
                 data-reveal
-                style={{ transitionDelay: "350ms" }}
+                style={{ animationDelay: "350ms" }}
                 className="mt-6 font-display text-2xl leading-snug text-brand-maroon sm:text-3xl"
               >
                 {NAME}
               </h3>
               <span
                 data-reveal
-                style={{ transitionDelay: "400ms" }}
+                style={{ animationDelay: "400ms" }}
                 className="mt-4 block text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-sage"
               >
                 {t("addressLabel")}
               </span>
               <address
                 data-reveal
-                style={{ transitionDelay: "450ms" }}
+                style={{ animationDelay: "450ms" }}
                 className="mt-2 text-base not-italic leading-relaxed text-brand-ink/80"
               >
                 {ADDRESS}
               </address>
             </div>
 
-            <div data-reveal style={{ transitionDelay: "500ms" }}>
+            <div data-reveal style={{ animationDelay: "500ms" }}>
               <a
                 href={DIRECTIONS_URL}
                 target="_blank"

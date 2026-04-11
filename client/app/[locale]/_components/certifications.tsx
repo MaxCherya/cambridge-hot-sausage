@@ -96,14 +96,14 @@ export function Certifications() {
         </span>
         <h2
           data-reveal
-          style={{ transitionDelay: "100ms" }}
+          style={{ animationDelay: "100ms" }}
           className="mt-3 font-display text-4xl leading-tight text-brand-maroon sm:text-5xl"
         >
           {t("title")}
         </h2>
         <p
           data-reveal
-          style={{ transitionDelay: "200ms" }}
+          style={{ animationDelay: "200ms" }}
           className="mt-4 text-balance text-base text-brand-ink/70 sm:text-lg"
         >
           {t("subtitle")}
