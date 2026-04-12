@@ -8,6 +8,7 @@ urlpatterns = [
     path("api/v1/shop/", include("shop.urls")),
     path("api/v1/orders/", include("orders.urls")),
     path("api/v1/contact", include("contact.urls")),
+    path("api/v1/newsletter/", include("newsletter.urls")),
 ]
 
 # Serve media files in development

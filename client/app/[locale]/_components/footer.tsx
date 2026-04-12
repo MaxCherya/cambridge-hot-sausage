@@ -75,11 +75,19 @@ export function Footer() {
     { scope: root },
   );
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email) return;
-    // TODO: wire to actual newsletter API (Django backend)
-    setSubmitted(true);
+    try {
+      const res = await fetch("/api/v1/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (res.ok) setSubmitted(true);
+    } catch {
+      // Fail silently — non-critical feature
+    }
   }
 
   return (
