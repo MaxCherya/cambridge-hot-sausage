@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, Check, Minus, Plus, Star, ShoppingCart } from "lucide-react";
 import ReactMarkdown from "react-markdown";
+import rehypeSanitize from "rehype-sanitize";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/lib/cart/context";
 import type { ProductDetail, ProductVariant } from "@/types/shop";
@@ -277,7 +278,7 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                   {t("detail.description")}
                 </h2>
                 <div className="prose prose-sm mt-3 max-w-none text-brand-ink/70">
-                  <ReactMarkdown>{product.description}</ReactMarkdown>
+                  <ReactMarkdown rehypePlugins={[rehypeSanitize]}>{product.description}</ReactMarkdown>
                 </div>
               </div>
             </div>

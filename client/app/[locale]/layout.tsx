@@ -12,6 +12,7 @@ import { RevealOnScroll } from "./_components/reveal-on-scroll";
 import { QueryProvider } from "./_components/query-provider";
 import { CartProvider } from "@/lib/cart/context";
 import { CartDrawer } from "./_components/cart-drawer";
+import { CookieConsent } from "./_components/cookie-consent";
 import "../globals.css";
 
 const rye = Rye({
@@ -29,6 +30,21 @@ export const metadata: Metadata = {
   description:
     "Serving Cambridge's famous hot sausages since 1986 — Victorian-style barrow on Fitzroy Street.",
   metadataBase: new URL("https://www.hotsausagecompany.com"),
+  openGraph: {
+    title: "Cambridge Hot Sausage",
+    description:
+      "Serving Cambridge's famous hot sausages since 1986 — Victorian-style barrow on Fitzroy Street.",
+    url: "https://www.hotsausagecompany.com",
+    siteName: "Cambridge Hot Sausage",
+    locale: "en_GB",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cambridge Hot Sausage",
+    description:
+      "Serving Cambridge's famous hot sausages since 1986 — Victorian-style barrow on Fitzroy Street.",
+  },
 };
 
 export const viewport: Viewport = {
@@ -66,6 +82,7 @@ export default async function LocaleLayout({
               <CartDrawer />
               {children}
               <Footer />
+              <CookieConsent />
             </CartProvider>
           </QueryProvider>
         </NextIntlClientProvider>

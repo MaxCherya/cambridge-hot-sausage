@@ -8,6 +8,11 @@
 .leaflet-control { z-index: 2 !important; }
 .leaflet-top, .leaflet-bottom { z-index: 2 !important; }
 
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 @theme inline {
   --font-display: var(--font-rye);
   --color-brand-cream: #f5f1e8;
