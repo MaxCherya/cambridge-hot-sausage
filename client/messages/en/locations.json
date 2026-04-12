@@ -17,10 +17,15 @@
     }
   },
   "info": {
-    "address": {
-      "label": "Address",
-      "name": "Cambridge Hot Sausage",
+    "main": {
+      "label": "Main location",
+      "name": "The Barrow — Fitzroy Street",
       "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
+    },
+    "secondary": {
+      "label": "Second location",
+      "name": "Market Passage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
     },
     "hours": {
       "label": "Opening hours",

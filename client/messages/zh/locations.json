@@ -11,17 +11,21 @@
     "title": "一个地点。四十年。无数热狗。",
     "subtitle": "自1986年以来，剑桥的同一个角落——无论风雨，我们都在。",
     "stats": {
-      "years": { "value": "40+", "label": "年服务" },
-      "dogs": { "value": "100万+", "label": "热狗售出" },
-      "days": { "value": "7", "label": "天营业" }
+      "years": {
+        "value": "40+",
+        "label": "年服务"
+      },
+      "dogs": {
+        "value": "100万+",
+        "label": "热狗售出"
+      },
+      "days": {
+        "value": "7",
+        "label": "天营业"
+      }
     }
   },
   "info": {
-    "address": {
-      "label": "地址",
-      "name": "Cambridge Hot Sausage",
-      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
-    },
     "hours": {
       "label": "营业时间",
       "weekdays": "周一至周五",
@@ -39,6 +43,16 @@
         "kings": "国王学院 — 步行5分钟",
         "station": "剑桥火车站 — 步行20分钟"
       }
+    },
+    "main": {
+      "label": "主要地点",
+      "name": "The Barrow — Fitzroy Street",
+      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
+    },
+    "secondary": {
+      "label": "第二地点",
+      "name": "Market Passage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
     }
   },
   "directions": {

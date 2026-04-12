@@ -2,6 +2,11 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Tame Leaflet z-indexes so maps don't overlap navbar/drawer */
+.leaflet-pane { z-index: 1 !important; }
+.leaflet-control { z-index: 2 !important; }
+.leaflet-top, .leaflet-bottom { z-index: 2 !important; }
+
 @theme inline {
   --font-display: var(--font-rye);
   --color-brand-cream: #f5f1e8;

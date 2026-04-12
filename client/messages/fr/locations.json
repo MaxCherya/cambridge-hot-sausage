@@ -11,17 +11,21 @@
     "title": "Un seul endroit. Quarante ans. D'innombrables hot dogs.",
     "subtitle": "Le même coin de Cambridge depuis 1986 — pluie ou soleil, nous sommes là.",
     "stats": {
-      "years": { "value": "40+", "label": "Années de service" },
-      "dogs": { "value": "1M+", "label": "Hot dogs vendus" },
-      "days": { "value": "7", "label": "Jours par semaine" }
+      "years": {
+        "value": "40+",
+        "label": "Années de service"
+      },
+      "dogs": {
+        "value": "1M+",
+        "label": "Hot dogs vendus"
+      },
+      "days": {
+        "value": "7",
+        "label": "Jours par semaine"
+      }
     }
   },
   "info": {
-    "address": {
-      "label": "Adresse",
-      "name": "Cambridge Hot Sausage",
-      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
-    },
     "hours": {
       "label": "Heures d'ouverture",
       "weekdays": "Lundi – Vendredi",
@@ -39,6 +43,16 @@
         "kings": "King's College — 5 min à pied",
         "station": "Gare de Cambridge — 20 min à pied"
       }
+    },
+    "main": {
+      "label": "Emplacement principal",
+      "name": "The Barrow — Fitzroy Street",
+      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
+    },
+    "secondary": {
+      "label": "Deuxième emplacement",
+      "name": "Market Passage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
     }
   },
   "directions": {

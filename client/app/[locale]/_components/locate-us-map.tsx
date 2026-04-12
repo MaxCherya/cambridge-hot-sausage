@@ -4,13 +4,24 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const POSITION: [number, number] = [
-  52.206680540625506, 0.1298263621124822,
-];
-const NAME = "Cambridge Hot Sausage";
-const ADDRESS = "Pitch 14, Fitzroy Street, Cambridge CB1 1EW";
+interface MapPin {
+  lat: number;
+  lng: number;
+  name: string;
+  address: string;
+}
 
-// Custom maroon pin built from inline HTML so it picks up brand colors
+interface LocateUsMapProps {
+  pins?: MapPin[];
+}
+
+const DEFAULT_PIN: MapPin = {
+  lat: 52.206680540625506,
+  lng: 0.1298263621124822,
+  name: "Cambridge Hot Sausage",
+  address: "Pitch 14, Fitzroy Street, Cambridge CB1 1EW",
+};
+
 const pinIcon = L.divIcon({
   className: "chs-pin",
   html: `
@@ -27,11 +38,15 @@ const pinIcon = L.divIcon({
   popupAnchor: [0, -44],
 });
 
-export default function LocateUsMap() {
+export default function LocateUsMap({ pins }: LocateUsMapProps) {
+  const markers = pins && pins.length > 0 ? pins : [DEFAULT_PIN];
+  const center: [number, number] = [markers[0].lat, markers[0].lng];
+  const zoom = markers.length > 1 ? 15 : 17;
+
   return (
     <MapContainer
-      center={POSITION}
-      zoom={17}
+      center={center}
+      zoom={zoom}
       scrollWheelZoom={false}
       zoomControl={true}
       className="h-full w-full"
@@ -40,16 +55,18 @@ export default function LocateUsMap() {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
-      <Marker position={POSITION} icon={pinIcon}>
-        <Popup>
-          <div style={{ fontFamily: "system-ui, sans-serif" }}>
-            <strong style={{ display: "block", marginBottom: 4, color: "#5A1F1F" }}>
-              {NAME}
-            </strong>
-            <span style={{ color: "#2B2B2B" }}>{ADDRESS}</span>
-          </div>
-        </Popup>
-      </Marker>
+      {markers.map((pin, i) => (
+        <Marker key={i} position={[pin.lat, pin.lng]} icon={pinIcon}>
+          <Popup>
+            <div style={{ fontFamily: "system-ui, sans-serif" }}>
+              <strong style={{ display: "block", marginBottom: 4, color: "#5A1F1F" }}>
+                {pin.name}
+              </strong>
+              <span style={{ color: "#2B2B2B" }}>{pin.address}</span>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }

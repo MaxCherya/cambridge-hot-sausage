@@ -11,17 +11,21 @@
     "title": "一つの場所。四十年。数えきれないホットドッグ。",
     "subtitle": "1986年からケンブリッジの同じ場所で——雨の日も晴れの日も、ここにいます。",
     "stats": {
-      "years": { "value": "40+", "label": "年の歴史" },
-      "dogs": { "value": "100万+", "label": "本のホットドッグ" },
-      "days": { "value": "7", "label": "日営業" }
+      "years": {
+        "value": "40+",
+        "label": "年の歴史"
+      },
+      "dogs": {
+        "value": "100万+",
+        "label": "本のホットドッグ"
+      },
+      "days": {
+        "value": "7",
+        "label": "日営業"
+      }
     }
   },
   "info": {
-    "address": {
-      "label": "住所",
-      "name": "Cambridge Hot Sausage",
-      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
-    },
     "hours": {
       "label": "営業時間",
       "weekdays": "月曜日〜金曜日",
@@ -39,6 +43,16 @@
         "kings": "キングス・カレッジ — 徒歩5分",
         "station": "ケンブリッジ駅 — 徒歩20分"
       }
+    },
+    "main": {
+      "label": "メインの場所",
+      "name": "The Barrow — Fitzroy Street",
+      "line": "Pitch 14, Fitzroy Street, Cambridge CB1 1EW"
+    },
+    "secondary": {
+      "label": "2番目の場所",
+      "name": "Market Passage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
     }
   },
   "directions": {

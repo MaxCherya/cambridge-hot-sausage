@@ -13,10 +13,21 @@ const LocateUsMap = dynamic(() => import("./locate-us-map"), {
   ),
 });
 
-// Main location — Fitzroy Street
-const LAT = 52.206680540625506;
-const LNG = 0.1298263621124822;
-const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${LAT},${LNG}`;
+const LOCATIONS = [
+  {
+    key: "main" as const,
+    lat: 52.206680540625506,
+    lng: 0.1298263621124822,
+  },
+  {
+    key: "secondary" as const,
+    lat: 52.206090944020346,
+    lng: 0.12063357052785396,
+  },
+];
+
+const MAIN = LOCATIONS[0];
+const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${MAIN.lat},${MAIN.lng}`;
 
 type NearbyKey = "arcade" | "market" | "kings" | "station";
 const NEARBY_KEYS: NearbyKey[] = ["arcade", "market", "kings", "station"];
@@ -68,7 +79,12 @@ export function LocationsHero() {
           >
             <div className="overflow-hidden rounded-3xl shadow-[0_30px_80px_-20px_rgba(0,0,0,0.4)] ring-1 ring-white/10">
               <div className="h-[340px] sm:h-[440px] lg:h-[500px]">
-                <LocateUsMap />
+                <LocateUsMap
+                  pins={[
+                    { lat: LOCATIONS[0].lat, lng: LOCATIONS[0].lng, name: t("info.main.name"), address: t("info.main.line") },
+                    { lat: LOCATIONS[1].lat, lng: LOCATIONS[1].lng, name: t("info.secondary.name"), address: t("info.secondary.line") },
+                  ]}
+                />
               </div>
             </div>
           </div>
@@ -124,25 +140,44 @@ export function LocationsHero() {
         </div>
 
         <div className="relative mx-auto max-w-5xl px-6">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-            {/* Address — data-reveal on wrapper, hover on inner card */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:gap-6">
+            {/* Main location */}
             <div data-reveal style={{ animationDelay: "100ms" }}>
               <div className="group relative h-full overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/[0.04] p-6 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-[0_12px_40px_-12px_rgba(236,214,145,0.2)] sm:p-7">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-brand-gold/0 via-brand-gold/0 to-brand-gold/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                />
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30 transition-all duration-500 group-hover:bg-brand-gold/25 group-hover:ring-brand-gold/60">
+                <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-brand-gold/0 via-brand-gold/0 to-brand-gold/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="flex items-center gap-3">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30">
+                    <MapPin className="h-6 w-6" strokeWidth={1.6} />
+                  </div>
+                  <span className="rounded-full bg-brand-gold/20 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-brand-gold">Main</span>
+                </div>
+                <span className="mt-5 block text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-gold">
+                  {t("info.main.label")}
+                </span>
+                <h3 className="mt-2 font-display text-xl text-brand-cream">
+                  {t("info.main.name")}
+                </h3>
+                <address className="mt-1 text-sm not-italic leading-relaxed text-brand-cream/60">
+                  {t("info.main.line")}
+                </address>
+              </div>
+            </div>
+
+            {/* Secondary location */}
+            <div data-reveal style={{ animationDelay: "150ms" }}>
+              <div className="group relative h-full overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/[0.04] p-6 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-[0_12px_40px_-12px_rgba(236,214,145,0.2)] sm:p-7">
+                <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-brand-gold/0 via-brand-gold/0 to-brand-gold/[0.06] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-gold/15 text-brand-gold ring-1 ring-brand-gold/30">
                   <MapPin className="h-6 w-6" strokeWidth={1.6} />
                 </div>
                 <span className="mt-5 block text-[10px] font-semibold uppercase tracking-[0.25em] text-brand-gold">
-                  {t("info.address.label")}
+                  {t("info.secondary.label")}
                 </span>
                 <h3 className="mt-2 font-display text-xl text-brand-cream">
-                  {t("info.address.name")}
+                  {t("info.secondary.name")}
                 </h3>
                 <address className="mt-1 text-sm not-italic leading-relaxed text-brand-cream/60">
-                  {t("info.address.line")}
+                  {t("info.secondary.line")}
                 </address>
               </div>
             </div>
@@ -174,7 +209,7 @@ export function LocationsHero() {
             </div>
 
             {/* Nearby landmarks */}
-            <div data-reveal style={{ animationDelay: "300ms" }} className="sm:col-span-2 lg:col-span-1">
+            <div data-reveal style={{ animationDelay: "300ms" }}>
               <div className="group relative h-full overflow-hidden rounded-2xl border border-brand-gold/25 bg-brand-cream/[0.04] p-6 backdrop-blur-sm transition-[transform,border-color,box-shadow] duration-500 ease-out hover:-translate-y-1 hover:border-brand-gold/50 hover:shadow-[0_12px_40px_-12px_rgba(236,214,145,0.2)] sm:p-7">
                 <div
                   aria-hidden
