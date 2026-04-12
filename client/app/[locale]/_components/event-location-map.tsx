@@ -4,7 +4,7 @@ import { useMapEvents, MapContainer, TileLayer, Marker, Circle } from "react-lea
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
-const CAMBRIDGE: [number, number] = [52.2053, 0.1218];
+const CAMBRIDGE: [number, number] = [52.206680540625506, 0.1298263621124822];
 const MILES_TO_METERS = 1609.34;
 
 const pinIcon = L.divIcon({

@@ -14,8 +14,8 @@ const LocateUsMap = dynamic(() => import("./locate-us-map"), {
 });
 
 // Main location — Fitzroy Street
-const LAT = 52.2065986;
-const LNG = 0.1300951;
+const LAT = 52.206680540625506;
+const LNG = 0.1298263621124822;
 const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destination=${LAT},${LNG}`;
 
 type NearbyKey = "arcade" | "market" | "kings" | "station";

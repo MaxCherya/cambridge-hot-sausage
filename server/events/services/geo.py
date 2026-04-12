@@ -10,9 +10,9 @@ from dataclasses import dataclass
 
 import requests
 
-# Cambridge city centre coordinates
-CAMBRIDGE_LAT = 52.2053
-CAMBRIDGE_LNG = 0.1218
+# Barrow location — Pitch 14 Fitzroy Street
+CAMBRIDGE_LAT = 52.206680540625506
+CAMBRIDGE_LNG = 0.1298263621124822
 
 # Earth's radius in miles
 EARTH_RADIUS_MI = 3958.8

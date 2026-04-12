@@ -13,8 +13,8 @@ const LocateUsMap = dynamic(() => import("./locate-us-map"), {
   ),
 });
 
-const LAT = 52.2065986;
-const LNG = 0.1300951;
+const LAT = 52.206680540625506;
+const LNG = 0.1298263621124822;
 const NAME = "Cambridge Hot Sausage";
 const ADDRESS = "Pitch 14, Fitzroy Street, Cambridge CB1 1EW";
 

@@ -5,7 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const POSITION: [number, number] = [
-  52.2065986, 0.1300951,
+  52.206680540625506, 0.1298263621124822,
 ];
 const NAME = "Cambridge Hot Sausage";
 const ADDRESS = "Pitch 14, Fitzroy Street, Cambridge CB1 1EW";
