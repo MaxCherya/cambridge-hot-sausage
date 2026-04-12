@@ -24,12 +24,15 @@ export function CartDrawer() {
       if (!overlayRef.current || !popoverRef.current) return;
 
       if (drawerOpen) {
+        const isMobile = window.innerWidth < 640;
+        const slideFrom = isMobile ? 40 : -8;
+
         gsap.set(overlayRef.current, { display: "block" });
         gsap.to(overlayRef.current, { opacity: 1, duration: 0.25, ease: "power2.out" });
         gsap.fromTo(
           popoverRef.current,
-          { opacity: 0, y: -8, scale: 0.97, display: "none" },
-          { opacity: 1, y: 0, scale: 1, display: "flex", duration: 0.3, ease: "power3.out" },
+          { opacity: 0, y: slideFrom, scale: 0.97, display: "none" },
+          { opacity: 1, y: 0, scale: 1, display: "flex", duration: 0.35, ease: "power3.out" },
         );
 
         if (itemsRef.current) {
@@ -40,8 +43,11 @@ export function CartDrawer() {
           );
         }
       } else {
+        const isMobile = window.innerWidth < 640;
+        const slideTo = isMobile ? 40 : -8;
+
         gsap.to(popoverRef.current, {
-          opacity: 0, y: -8, scale: 0.97, duration: 0.2, ease: "power2.in",
+          opacity: 0, y: slideTo, scale: 0.97, duration: 0.2, ease: "power2.in",
           onComplete: () => { if (popoverRef.current) popoverRef.current.style.display = "none"; },
         });
         gsap.to(overlayRef.current, {
@@ -67,7 +73,7 @@ export function CartDrawer() {
       <div
         ref={overlayRef}
         onClick={closeDrawer}
-        className="fixed inset-0 z-[90] hidden"
+        className="fixed inset-0 z-[90] hidden bg-black/30 backdrop-blur-sm sm:bg-transparent sm:backdrop-blur-none"
         style={{ opacity: 0 }}
       />
 
@@ -75,7 +81,7 @@ export function CartDrawer() {
       <div
         ref={popoverRef}
         onWheel={(e) => e.stopPropagation()}
-        className="fixed right-4 top-16 z-[95] hidden w-[360px] max-h-[80vh] flex-col overflow-hidden overscroll-contain rounded-2xl border border-brand-maroon/10 bg-brand-cream shadow-[0_20px_60px_-15px_rgba(90,31,31,0.25)] sm:right-6"
+        className="fixed inset-x-3 bottom-3 top-auto z-[95] hidden max-h-[75vh] flex-col overflow-hidden overscroll-contain rounded-2xl border border-brand-maroon/10 bg-brand-cream shadow-[0_20px_60px_-15px_rgba(90,31,31,0.25)] sm:inset-x-auto sm:bottom-auto sm:right-6 sm:top-16 sm:w-[380px]"
         style={{ display: "none" }}
       >
         {/* Header */}

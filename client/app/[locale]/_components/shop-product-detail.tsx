@@ -198,13 +198,13 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                 <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-brand-ink/50">
                   {t("detail.quantity")}
                 </span>
-                <div className="inline-flex items-center gap-1.5 rounded-full border border-brand-maroon/10 bg-white/70 px-1.5">
+                <div className="inline-flex items-center gap-1 rounded-full border border-brand-maroon/10 bg-white/70 px-1">
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
                   >
-                    <Minus size={14} />
+                    <Minus size={16} />
                   </button>
                   <input
                     type="number"
@@ -215,14 +215,14 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                       const val = parseInt(e.target.value, 10);
                       if (!isNaN(val) && val >= 1) setQuantity(Math.min(val, selectedVariant?.stock ?? 999));
                     }}
-                    className="w-12 bg-transparent text-center text-sm font-semibold tabular-nums text-brand-ink outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="w-12 bg-transparent text-center text-base font-semibold tabular-nums text-brand-ink outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                   />
                   <button
                     type="button"
                     onClick={() => setQuantity((q) => Math.min(q + 1, selectedVariant?.stock ?? 999))}
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
+                    className="inline-flex h-11 w-11 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
                   >
-                    <Plus size={14} />
+                    <Plus size={16} />
                   </button>
                 </div>
               </div>

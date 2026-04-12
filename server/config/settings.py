@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # Local
     "shop.apps.ShopConfig",
     "orders.apps.OrdersConfig",
+    "contact.apps.ContactConfig",
 ]
 
 # ── Middleware ───────────────────────────────────────────────────

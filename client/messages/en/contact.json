@@ -1,0 +1,25 @@
+{
+  "meta": { "title": "Contact" },
+  "hero": {
+    "eyebrow": "Get in touch",
+    "title": "Drop us a line",
+    "subtitle": "Questions, catering enquiries or just want to say hello — we'd love to hear from you."
+  },
+  "form": {
+    "name": "Your name",
+    "email": "Your email",
+    "phone": "Phone number (optional)",
+    "subject": "Subject",
+    "message": "Your message",
+    "submit": "Send message",
+    "submitting": "Sending...",
+    "success": "Message sent! We'll get back to you shortly.",
+    "error": "Something went wrong. Please try again."
+  },
+  "info": {
+    "title": "Other ways to reach us",
+    "address": { "label": "Visit us", "value": "2 Market Passage, Cambridge CB2 3PA" },
+    "email": { "label": "Email", "value": "hello@hotsausagecompany.com" },
+    "phone": { "label": "Phone", "value": "+44 1223 000 000" }
+  }
+}

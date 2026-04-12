@@ -60,7 +60,7 @@ export function CartView() {
                 {/* Image */}
                 <Link
                   href={`/shop/${item.productSlug}`}
-                  className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-brand-cream/80 transition-transform duration-500 group-hover:scale-[1.03] sm:h-28 sm:w-28"
+                  className="h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-brand-cream/80 transition-transform duration-500 group-hover:scale-[1.03] sm:h-28 sm:w-28"
                 >
                   {item.image ? (
                     <img src={item.image} alt={item.productName} className="h-full w-full object-cover" />
@@ -87,13 +87,13 @@ export function CartView() {
 
                   <div className="mt-3 flex items-end justify-between">
                     {/* Quantity */}
-                    <div className="flex items-center gap-1.5 rounded-full border border-brand-maroon/10 bg-brand-cream/50 px-1">
+                    <div className="flex items-center gap-1 rounded-full border border-brand-maroon/10 bg-brand-cream/50 px-0.5">
                       <button
                         type="button"
                         onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
                       >
-                        <Minus size={13} />
+                        <Minus size={14} />
                       </button>
                       <span className="w-6 text-center text-sm font-semibold tabular-nums text-brand-ink">
                         {item.quantity}
@@ -101,9 +101,9 @@ export function CartView() {
                       <button
                         type="button"
                         onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
-                        className="inline-flex h-8 w-8 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
                       >
-                        <Plus size={13} />
+                        <Plus size={14} />
                       </button>
                     </div>
 

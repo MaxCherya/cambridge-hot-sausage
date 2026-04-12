@@ -1,0 +1,25 @@
+{
+  "meta": { "title": "Contact" },
+  "hero": {
+    "eyebrow": "Contactez-nous",
+    "title": "Envoyez-nous un message",
+    "subtitle": "Questions, demandes de traiteur ou simplement envie de dire bonjour — nous serions ravis de vous entendre."
+  },
+  "form": {
+    "name": "Votre nom",
+    "email": "Votre e-mail",
+    "phone": "Num\u00e9ro de t\u00e9l\u00e9phone (facultatif)",
+    "subject": "Objet",
+    "message": "Votre message",
+    "submit": "Envoyer le message",
+    "submitting": "Envoi en cours...",
+    "success": "Message envoy\u00e9 ! Nous vous r\u00e9pondrons dans les plus brefs d\u00e9lais.",
+    "error": "Une erreur s'est produite. Veuillez r\u00e9essayer."
+  },
+  "info": {
+    "title": "Autres moyens de nous joindre",
+    "address": { "label": "Rendez-nous visite", "value": "2 Market Passage, Cambridge CB2 3PA" },
+    "email": { "label": "E-mail", "value": "hello@hotsausagecompany.com" },
+    "phone": { "label": "T\u00e9l\u00e9phone", "value": "+44 1223 000 000" }
+  }
+}

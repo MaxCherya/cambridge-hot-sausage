@@ -1,0 +1,25 @@
+{
+  "meta": { "title": "\u8054\u7cfb\u6211\u4eec" },
+  "hero": {
+    "eyebrow": "\u53d6\u5f97\u8054\u7cfb",
+    "title": "\u7ed9\u6211\u4eec\u7559\u8a00",
+    "subtitle": "\u65e0\u8bba\u662f\u95ee\u9898\u3001\u9910\u996e\u670d\u52a1\u54a8\u8be2\u8fd8\u662f\u53ea\u60f3\u6253\u4e2a\u62db\u547c\u2014\u2014\u6211\u4eec\u671f\u5f85\u60a8\u7684\u6765\u4fe1\u3002"
+  },
+  "form": {
+    "name": "\u60a8\u7684\u59d3\u540d",
+    "email": "\u60a8\u7684\u7535\u5b50\u90ae\u7bb1",
+    "phone": "\u7535\u8bdd\u53f7\u7801\uff08\u53ef\u9009\uff09",
+    "subject": "\u4e3b\u9898",
+    "message": "\u60a8\u7684\u7559\u8a00",
+    "submit": "\u53d1\u9001\u6d88\u606f",
+    "submitting": "\u53d1\u9001\u4e2d...",
+    "success": "\u6d88\u606f\u5df2\u53d1\u9001\uff01\u6211\u4eec\u4f1a\u5c3d\u5feb\u56de\u590d\u60a8\u3002",
+    "error": "\u51fa\u4e86\u70b9\u95ee\u9898\uff0c\u8bf7\u518d\u8bd5\u4e00\u6b21\u3002"
+  },
+  "info": {
+    "title": "\u5176\u4ed6\u8054\u7cfb\u65b9\u5f0f",
+    "address": { "label": "\u6765\u8bbf\u5730\u5740", "value": "2 Market Passage, Cambridge CB2 3PA" },
+    "email": { "label": "\u7535\u5b50\u90ae\u7bb1", "value": "hello@hotsausagecompany.com" },
+    "phone": { "label": "\u7535\u8bdd", "value": "+44 1223 000 000" }
+  }
+}

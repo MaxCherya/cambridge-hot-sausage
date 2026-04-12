@@ -1,0 +1,25 @@
+{
+  "meta": { "title": "Kontakt" },
+  "hero": {
+    "eyebrow": "Schreiben Sie uns",
+    "title": "Nehmen Sie Kontakt auf",
+    "subtitle": "Fragen, Catering-Anfragen oder einfach nur Hallo sagen — wir freuen uns von Ihnen zu h\u00f6ren."
+  },
+  "form": {
+    "name": "Ihr Name",
+    "email": "Ihre E-Mail",
+    "phone": "Telefonnummer (optional)",
+    "subject": "Betreff",
+    "message": "Ihre Nachricht",
+    "submit": "Nachricht senden",
+    "submitting": "Wird gesendet...",
+    "success": "Nachricht gesendet! Wir melden uns in K\u00fcrze bei Ihnen.",
+    "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+  },
+  "info": {
+    "title": "Weitere M\u00f6glichkeiten uns zu erreichen",
+    "address": { "label": "Besuchen Sie uns", "value": "2 Market Passage, Cambridge CB2 3PA" },
+    "email": { "label": "E-Mail", "value": "hello@hotsausagecompany.com" },
+    "phone": { "label": "Telefon", "value": "+44 1223 000 000" }
+  }
+}
