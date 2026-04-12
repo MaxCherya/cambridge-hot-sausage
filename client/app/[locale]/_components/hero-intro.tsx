@@ -6,6 +6,7 @@ import { Button } from "@heroui/react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 const VantaNetBg = dynamic(
   () => import("./vanta-net-bg").then((m) => m.VantaNetBg),
@@ -52,12 +53,16 @@ export function HeroIntro() {
         {tHome("hero.subtitle")}
       </p>
       <div className="hero-item flex flex-wrap items-center justify-center gap-3">
-        <Button variant="primary" size="lg">
-          {tCommon("actions.visitShop")}
-        </Button>
-        <Button variant="outline" size="lg">
-          {tCommon("actions.bookEvent")}
-        </Button>
+        <Link href="/shop">
+          <Button variant="primary" size="lg">
+            {tCommon("actions.visitShop")}
+          </Button>
+        </Link>
+        <Link href="/events">
+          <Button variant="outline" size="lg">
+            {tCommon("actions.bookEvent")}
+          </Button>
+        </Link>
       </div>
     </div>
   );
