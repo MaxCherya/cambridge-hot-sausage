@@ -32,6 +32,8 @@ class AdminProductListSerializer(serializers.ModelSerializer):
 
 
 class AdminProductWriteSerializer(serializers.ModelSerializer):
+    slug = serializers.SlugField(required=False, allow_blank=True)
+
     class Meta:
         model = Product
         fields = ("id", "name", "slug", "description", "categories", "is_active", "is_featured")

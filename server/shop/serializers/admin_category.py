@@ -18,6 +18,8 @@ class AdminCategorySerializer(serializers.ModelSerializer):
 
 
 class AdminCategoryWriteSerializer(serializers.ModelSerializer):
+    slug = serializers.SlugField(required=False, allow_blank=True)
+
     class Meta:
         model = Category
         fields = ("id", "name", "slug", "description", "image", "parent", "is_active", "order")

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import { toast } from "sonner";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
 import { StatusBadge } from "../../_components/status-badge";
@@ -20,16 +21,23 @@ const STATUSES = ["", "new", "read", "replied", "archived"];
 
 export default function MessagesPage() {
   const [statusFilter, setStatusFilter] = useState("");
+  const [search, setSearch] = useState("");
   const queryClient = useQueryClient();
 
   const params: Record<string, string> = {};
   if (statusFilter) params.status = statusFilter;
+  if (search) params.search = search;
 
   const { data, isLoading } = useQuery({
     queryKey: adminKeys.messages(params),
     queryFn: () => {
-      const qs = statusFilter ? `?status=${statusFilter}` : "";
-      return adminFetch<{ count: number; results: MessageListItem[] }>(`/admin/messages${qs}`);
+      const qs = new URLSearchParams();
+      if (statusFilter) qs.set("status", statusFilter);
+      if (search) qs.set("search", search);
+      const queryString = qs.toString();
+      return adminFetch<{ count: number; results: MessageListItem[] }>(
+        `/admin/messages${queryString ? `?${queryString}` : ""}`,
+      );
     },
   });
 
@@ -39,7 +47,11 @@ export default function MessagesPage() {
         method: "PATCH",
         body: JSON.stringify({ status }),
       }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "messages"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "messages"] });
+      toast.success("Message status updated");
+    },
+    onError: () => toast.error("Failed to update status"),
   });
 
   return (
@@ -61,6 +73,17 @@ export default function MessagesPage() {
             {s || "All"}
           </button>
         ))}
+      </div>
+
+      {/* Search input */}
+      <div className="mt-4">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search..."
+          className="w-full max-w-xs rounded-lg border border-gray-200 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-[#5A1F1F] focus:outline-none focus:ring-4 focus:ring-[#5A1F1F]/10"
+        />
       </div>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">

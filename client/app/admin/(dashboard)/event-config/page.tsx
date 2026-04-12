@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
 
@@ -42,7 +43,6 @@ const FIELD_KEYS = Object.keys(FIELD_LABELS) as (keyof EventConfig)[];
 export default function EventConfigPage() {
   const queryClient = useQueryClient();
   const [form, setForm] = useState<EventConfig | null>(null);
-  const [successMessage, setSuccessMessage] = useState(false);
 
   const { data, isLoading } = useQuery({
     queryKey: adminKeys.eventConfig(),
@@ -63,9 +63,9 @@ export default function EventConfigPage() {
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["admin", "event-config"] });
-      setSuccessMessage(true);
-      setTimeout(() => setSuccessMessage(false), 3000);
+      toast.success("Configuration saved successfully");
     },
+    onError: () => toast.error("Failed to save configuration"),
   });
 
   function handleChange(key: keyof EventConfig, value: string) {
@@ -103,18 +103,6 @@ export default function EventConfigPage() {
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900">Event Configuration</h1>
-
-      {successMessage && (
-        <div className="mt-4 rounded-lg bg-green-50 px-4 py-3 text-sm font-medium text-green-700 ring-1 ring-green-200">
-          Configuration saved successfully.
-        </div>
-      )}
-
-      {saveMutation.isError && (
-        <div className="mt-4 rounded-lg bg-red-50 px-4 py-3 text-sm font-medium text-red-600 ring-1 ring-red-200">
-          Failed to save. Please try again.
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="mt-6 rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

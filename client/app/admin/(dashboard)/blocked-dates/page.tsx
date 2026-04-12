@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
 
@@ -34,13 +35,19 @@ export default function BlockedDatesPage() {
       queryClient.invalidateQueries({ queryKey: ["admin", "blocked-dates"] });
       setNewDate("");
       setNewReason("");
+      toast.success("Date blocked");
     },
+    onError: () => toast.error("Failed to block date"),
   });
 
   const deleteMutation = useMutation({
     mutationFn: (id: number) =>
       adminFetch(`/admin/blocked-dates/${id}`, { method: "DELETE" }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "blocked-dates"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "blocked-dates"] });
+      toast.success("Date unblocked");
+    },
+    onError: () => toast.error("Failed to unblock date"),
   });
 
   function handleAdd(e: React.FormEvent) {
@@ -87,9 +94,6 @@ export default function BlockedDatesPage() {
             {addMutation.isPending ? "Adding..." : "Add"}
           </button>
         </div>
-        {addMutation.isError && (
-          <p className="mt-2 text-xs text-red-600">Failed to add date. Please try again.</p>
-        )}
       </form>
 
       {/* List */}

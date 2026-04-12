@@ -186,7 +186,7 @@ REST_FRAMEWORK = {
         "user": "120/minute",
     },
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
+        "authentication.csrf_exempt_session.CsrfExemptSessionAuthentication",
     ],
 }
 
@@ -194,8 +194,9 @@ REST_FRAMEWORK = {
 
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_SAMESITE = "Lax"
-CSRF_COOKIE_HTTPONLY = False  # JS must read csrftoken cookie for POST requests
+CSRF_COOKIE_HTTPONLY = False
 CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default="http://localhost:3000", cast=Csv())
 
 # ── Stripe ──────────────────────────────────────────────────────
 

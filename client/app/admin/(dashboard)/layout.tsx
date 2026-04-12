@@ -4,6 +4,7 @@ import { AdminQueryProvider } from "../_components/admin-query-provider";
 import { AuthProvider, useAuth } from "../_components/auth-provider";
 import { Sidebar } from "../_components/sidebar";
 import { AdminHeader } from "../_components/admin-header";
+import { ToastProvider } from "../_components/toast-provider";
 
 function AuthenticatedLayout({ children }: { children: React.ReactNode }) {
   const { user } = useAuth();
@@ -28,6 +29,7 @@ export default function DashboardLayout({
     <AdminQueryProvider>
       <AuthProvider>
         <AuthenticatedLayout>{children}</AuthenticatedLayout>
+        <ToastProvider />
       </AuthProvider>
     </AdminQueryProvider>
   );

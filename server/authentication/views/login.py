@@ -1,4 +1,7 @@
 from django.contrib.auth import authenticate, login
+from django.middleware.csrf import get_token
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -7,6 +10,7 @@ from rest_framework.views import APIView
 from authentication.serializers import LoginSerializer, UserSerializer
 
 
+@method_decorator(csrf_exempt, name="dispatch")
 class LoginView(APIView):
     """
     POST /api/v1/auth/login
@@ -41,4 +45,5 @@ class LoginView(APIView):
             )
 
         login(request, user)
+        get_token(request)  # Force Django to set the csrftoken cookie
         return Response(UserSerializer(user).data)

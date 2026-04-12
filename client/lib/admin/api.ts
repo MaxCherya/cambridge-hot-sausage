@@ -16,9 +16,10 @@ export async function adminFetch<T>(
   init?: RequestInit,
 ): Promise<T> {
   const isFormData = init?.body instanceof FormData;
+  const csrfToken = getCsrfToken();
 
   const headers: Record<string, string> = {
-    "X-CSRFToken": getCsrfToken(),
+    ...(csrfToken ? { "X-CSRFToken": csrfToken } : {}),
     ...(!isFormData ? { "Content-Type": "application/json" } : {}),
     ...(init?.headers as Record<string, string> | undefined),
   };
@@ -29,11 +30,25 @@ export async function adminFetch<T>(
     headers,
   });
 
-  if (res.status === 401 || res.status === 403) {
+  if (res.status === 401) {
     if (typeof window !== "undefined" && !window.location.pathname.includes("/admin/login")) {
       window.location.href = "/admin/login";
     }
     throw new Error("Unauthorized");
+  }
+
+  if (res.status === 403) {
+    // Try to read the error — could be CSRF failure or permission denied
+    const body = await res.text();
+    // CSRF failures contain "CSRF" in the response
+    if (body.includes("CSRF")) {
+      throw new Error("CSRF token expired. Please refresh the page.");
+    }
+    // Actual permission denied → redirect to login
+    if (typeof window !== "undefined" && !window.location.pathname.includes("/admin/login")) {
+      window.location.href = "/admin/login";
+    }
+    throw new Error("Forbidden");
   }
 
   if (!res.ok) {

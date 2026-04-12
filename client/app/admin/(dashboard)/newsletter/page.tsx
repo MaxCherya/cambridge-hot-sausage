@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
 
@@ -12,12 +14,22 @@ interface SubscriberListItem {
 }
 
 export default function NewsletterPage() {
+  const [search, setSearch] = useState("");
   const queryClient = useQueryClient();
 
+  const params: Record<string, string> = {};
+  if (search) params.search = search;
+
   const { data, isLoading } = useQuery({
-    queryKey: adminKeys.subscribers(),
-    queryFn: () =>
-      adminFetch<{ count: number; results: SubscriberListItem[] }>("/admin/subscribers"),
+    queryKey: adminKeys.subscribers(Object.keys(params).length > 0 ? params : undefined),
+    queryFn: () => {
+      const qs = new URLSearchParams();
+      if (search) qs.set("search", search);
+      const queryString = qs.toString();
+      return adminFetch<{ count: number; results: SubscriberListItem[] }>(
+        `/admin/subscribers${queryString ? `?${queryString}` : ""}`,
+      );
+    },
   });
 
   const toggleMutation = useMutation({
@@ -26,12 +38,27 @@ export default function NewsletterPage() {
         method: "PATCH",
         body: JSON.stringify({ is_active }),
       }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "subscribers"] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["admin", "subscribers"] });
+      toast.success("Subscriber updated");
+    },
+    onError: () => toast.error("Failed to update subscriber"),
   });
 
   return (
     <div>
       <h1 className="text-2xl font-bold text-gray-900">Newsletter Subscribers</h1>
+
+      {/* Search input */}
+      <div className="mt-4">
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search..."
+          className="w-full max-w-xs rounded-lg border border-gray-200 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-[#5A1F1F] focus:outline-none focus:ring-4 focus:ring-[#5A1F1F]/10"
+        />
+      </div>
 
       <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="w-full text-left text-sm">
