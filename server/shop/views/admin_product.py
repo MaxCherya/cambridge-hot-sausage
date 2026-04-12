@@ -39,7 +39,12 @@ class AdminProductViewSet(viewsets.ModelViewSet):
         product = self.get_object()
         serializer = AdminImageSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
-        serializer.save(product=product)
+        image = serializer.save(product=product)
+        # If this image is primary, unset all others
+        if image.is_primary:
+            ProductImage.objects.filter(
+                product=product, is_primary=True,
+            ).exclude(pk=image.pk).update(is_primary=False)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -55,3 +60,12 @@ class AdminImageViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
     serializer_class = AdminImageSerializer
     queryset = ProductImage.objects.all()
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        # When setting an image as primary, unset all others for that product
+        if instance.is_primary:
+            ProductImage.objects.filter(
+                product=instance.product,
+                is_primary=True,
+            ).exclude(pk=instance.pk).update(is_primary=False)

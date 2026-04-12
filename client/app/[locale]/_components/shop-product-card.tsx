@@ -3,6 +3,18 @@
 import { useTranslations } from "next-intl";
 import { Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+
+/** Strip markdown syntax for plain-text card preview. */
+function stripMarkdown(md: string): string {
+  return md
+    .replace(/#{1,6}\s+/g, "")      // headings
+    .replace(/\*\*(.+?)\*\*/g, "$1") // bold
+    .replace(/\*(.+?)\*/g, "$1")     // italic
+    .replace(/\[(.+?)\]\(.+?\)/g, "$1") // links
+    .replace(/[>\-*_`~]/g, "")       // misc syntax
+    .replace(/\n+/g, " ")            // newlines
+    .trim();
+}
 import type { ProductListItem } from "@/types/shop";
 
 interface ShopProductCardProps {
@@ -70,7 +82,7 @@ export function ShopProductCard({ product }: ShopProductCardProps) {
         </h3>
 
         <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-brand-ink/55">
-          {product.description}
+          {stripMarkdown(product.description)}
         </p>
 
         {/* Price + Rating row */}
