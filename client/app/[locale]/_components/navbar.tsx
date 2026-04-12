@@ -5,9 +5,10 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { X } from "lucide-react";
+import { ShoppingBag, X } from "lucide-react";
 import logo from "@/img/logo.png";
 import { Link, usePathname } from "@/i18n/navigation";
+import { useCart } from "@/lib/cart/context";
 import { LocaleSwitcher } from "./locale-switcher";
 
 type NavKey = "home" | "about" | "shop" | "locations" | "events" | "reviews" | "contact";
@@ -25,6 +26,7 @@ const NAV_ITEMS: { key: NavKey; href: string }[] = [
 export function Navbar() {
   const t = useTranslations("common");
   const pathname = usePathname();
+  const { totalItems, openDrawer } = useCart();
   const headerRef = useRef<HTMLElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const drawerListRef = useRef<HTMLUListElement>(null);
@@ -145,6 +147,19 @@ export function Navbar() {
         </ul>
 
         <div className="nav-tail flex items-center gap-2">
+          <button
+            type="button"
+            onClick={openDrawer}
+            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-ink transition-colors hover:bg-brand-maroon/10"
+            aria-label="Cart"
+          >
+            <ShoppingBag className="h-5 w-5" strokeWidth={1.8} />
+            {totalItems > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-maroon px-1 text-[10px] font-bold text-brand-cream">
+                {totalItems}
+              </span>
+            )}
+          </button>
           <LocaleSwitcher />
           <button
             type="button"

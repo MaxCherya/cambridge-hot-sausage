@@ -10,6 +10,8 @@ import { SmoothScroll } from "./_components/smooth-scroll";
 import { CustomCursor } from "./_components/custom-cursor";
 import { RevealOnScroll } from "./_components/reveal-on-scroll";
 import { QueryProvider } from "./_components/query-provider";
+import { CartProvider } from "@/lib/cart/context";
+import { CartDrawer } from "./_components/cart-drawer";
 import "../globals.css";
 
 const rye = Rye({
@@ -56,12 +58,15 @@ export default async function LocaleLayout({
       <body className="min-h-dvh bg-background text-foreground">
         <NextIntlClientProvider>
           <QueryProvider>
-            <SmoothScroll />
-            <RevealOnScroll />
-            <CustomCursor />
-            <Navbar />
-            {children}
-            <Footer />
+            <CartProvider>
+              <SmoothScroll />
+              <RevealOnScroll />
+              <CustomCursor />
+              <Navbar />
+              <CartDrawer />
+              {children}
+              <Footer />
+            </CartProvider>
           </QueryProvider>
         </NextIntlClientProvider>
       </body>

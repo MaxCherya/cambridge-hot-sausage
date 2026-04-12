@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "mptt",
     # Local
     "shop.apps.ShopConfig",
+    "orders.apps.OrdersConfig",
 ]
 
 # ── Middleware ───────────────────────────────────────────────────
@@ -181,6 +182,12 @@ REST_FRAMEWORK = {
         "user": "120/minute",
     },
 }
+
+# ── Stripe ──────────────────────────────────────────────────────
+
+STRIPE_SECRET_KEY = config("STRIPE_SECRET_KEY", default="")
+STRIPE_WEBHOOK_SECRET = config("STRIPE_WEBHOOK_SECRET", default="")
+FRONTEND_URL = config("FRONTEND_URL", default="http://localhost:3000")
 
 # ── Security hardening (prod only) ─────────────────────────────
 

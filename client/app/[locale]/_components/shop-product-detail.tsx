@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { ArrowLeft, Star, ShoppingCart } from "lucide-react";
+import { ArrowLeft, Check, Minus, Plus, Star, ShoppingCart } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { useCart } from "@/lib/cart/context";
 import type { ProductDetail, ProductVariant } from "@/types/shop";
 import { ShopReviewSection } from "./shop-review-section";
 
@@ -13,9 +14,12 @@ interface ShopProductDetailProps {
 
 export function ShopProductDetail({ product }: ShopProductDetailProps) {
   const t = useTranslations("shop");
+  const { addItem } = useCart();
   const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(
     product.variants.length > 0 ? product.variants[0] : null,
   );
+  const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
 
   const currentImage = product.images.find((img) => img.is_primary) || product.images[0];
 
@@ -189,16 +193,80 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
               )}
 
               {/* Add to cart */}
-              <div data-reveal style={{ animationDelay: "300ms" }} className="mt-8">
+              {/* Quantity input */}
+              <div data-reveal style={{ animationDelay: "280ms" }} className="mt-6">
+                <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.2em] text-brand-ink/50">
+                  {t("detail.quantity")}
+                </span>
+                <div className="inline-flex items-center gap-1.5 rounded-full border border-brand-maroon/10 bg-white/70 px-1.5">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((q) => Math.max(1, q - 1))}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
+                  >
+                    <Minus size={14} />
+                  </button>
+                  <input
+                    type="number"
+                    min={1}
+                    max={selectedVariant?.stock ?? 999}
+                    value={quantity}
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value, 10);
+                      if (!isNaN(val) && val >= 1) setQuantity(Math.min(val, selectedVariant?.stock ?? 999));
+                    }}
+                    className="w-12 bg-transparent text-center text-sm font-semibold tabular-nums text-brand-ink outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((q) => Math.min(q + 1, selectedVariant?.stock ?? 999))}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-brand-ink/50 transition-colors hover:bg-brand-maroon/10 hover:text-brand-maroon"
+                  >
+                    <Plus size={14} />
+                  </button>
+                </div>
+              </div>
+
+              {/* Add to cart */}
+              <div data-reveal style={{ animationDelay: "350ms" }} className="mt-4">
                 <button
                   type="button"
                   disabled={!selectedVariant?.in_stock}
-                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-brand-maroon px-8 py-4 text-sm font-semibold uppercase tracking-wider text-brand-cream shadow-[0_15px_35px_-12px_rgba(90,31,31,0.5)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_20px_45px_-12px_rgba(90,31,31,0.65)] active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:text-base"
+                  onClick={() => {
+                    if (!selectedVariant) return;
+                    const img = product.images.find((i) => i.is_primary) || product.images[0];
+                    addItem({
+                      variantId: selectedVariant.id,
+                      productSlug: product.slug,
+                      productName: product.name,
+                      variantName: selectedVariant.name,
+                      sku: selectedVariant.sku,
+                      price: selectedVariant.price,
+                      image: img?.image ?? null,
+                    }, quantity);
+                    setAdded(true);
+                    setQuantity(1);
+                    setTimeout(() => setAdded(false), 2000);
+                  }}
+                  className={`group inline-flex w-full items-center justify-center gap-3 rounded-full px-8 py-4 text-sm font-semibold uppercase tracking-wider shadow-[0_15px_35px_-12px_rgba(90,31,31,0.5)] transition-all duration-300 ease-out hover:scale-[1.02] hover:shadow-[0_20px_45px_-12px_rgba(90,31,31,0.65)] active:scale-100 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto sm:text-base ${
+                    added
+                      ? "bg-brand-sage text-brand-cream"
+                      : "bg-brand-maroon text-brand-cream"
+                  }`}
                 >
-                  <ShoppingCart size={18} strokeWidth={2} />
-                  {selectedVariant?.in_stock
-                    ? t("detail.addToCart")
-                    : t("detail.outOfStock")}
+                  {added ? (
+                    <>
+                      <Check size={18} strokeWidth={2.5} />
+                      Added!
+                    </>
+                  ) : (
+                    <>
+                      <ShoppingCart size={18} strokeWidth={2} />
+                      {selectedVariant?.in_stock
+                        ? t("detail.addToCart")
+                        : t("detail.outOfStock")}
+                    </>
+                  )}
                 </button>
               </div>
 

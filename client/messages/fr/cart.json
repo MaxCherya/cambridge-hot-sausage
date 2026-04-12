@@ -1,0 +1,28 @@
+{
+  "meta": { "title": "Panier" },
+  "page": {
+    "eyebrow": "Votre commande",
+    "title": "Votre panier",
+    "empty": "Votre panier est vide.",
+    "continueShopping": "Continuer vos achats",
+    "item": "Article",
+    "price": "Prix",
+    "quantity": "Qté",
+    "total": "Total",
+    "remove": "Supprimer",
+    "subtotal": "Sous-total",
+    "shipping": "Frais de livraison calculés lors du paiement",
+    "checkout": "Passer à la caisse",
+    "secureBadge": "Paiement sécurisé via Stripe",
+    "viewCart": "Voir le panier"
+  },
+  "success": {
+    "eyebrow": "Commande confirmée",
+    "title": "Merci !",
+    "subtitle": "Votre commande a été passée avec succès.",
+    "total": "Total",
+    "orderNumber": "Numéro de commande",
+    "viewReceipt": "Voir le reçu",
+    "backToShop": "Retour à la boutique"
+  }
+}

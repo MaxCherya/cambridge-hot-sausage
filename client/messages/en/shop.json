@@ -18,6 +18,7 @@
   "detail": {
     "backToShop": "Back to shop",
     "selectVariant": "Choose an option",
+    "quantity": "Quantity",
     "price": "Price",
     "addToCart": "Add to cart",
     "outOfStock": "Out of stock",

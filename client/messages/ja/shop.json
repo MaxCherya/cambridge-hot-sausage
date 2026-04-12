@@ -18,6 +18,7 @@
   "detail": {
     "backToShop": "ショップに戻る",
     "selectVariant": "オプションを選択",
+    "quantity": "数量",
     "price": "価格",
     "addToCart": "カートに追加",
     "outOfStock": "在庫切れ",

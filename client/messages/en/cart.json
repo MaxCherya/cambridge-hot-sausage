@@ -1,0 +1,28 @@
+{
+  "meta": { "title": "Cart" },
+  "page": {
+    "eyebrow": "Your order",
+    "title": "Your cart",
+    "empty": "Your cart is empty.",
+    "continueShopping": "Continue shopping",
+    "item": "Item",
+    "price": "Price",
+    "quantity": "Qty",
+    "total": "Total",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping calculated at checkout",
+    "checkout": "Proceed to checkout",
+    "secureBadge": "Secure payment via Stripe",
+    "viewCart": "View full cart"
+  },
+  "success": {
+    "eyebrow": "Order confirmed",
+    "title": "Thank you!",
+    "subtitle": "Your order has been placed successfully.",
+    "total": "Total",
+    "orderNumber": "Order number",
+    "viewReceipt": "View receipt",
+    "backToShop": "Back to shop"
+  }
+}

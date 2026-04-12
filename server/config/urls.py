@@ -6,6 +6,7 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/v1/shop/", include("shop.urls")),
+    path("api/v1/orders/", include("orders.urls")),
 ]
 
 # Serve media files in development

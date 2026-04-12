@@ -1,0 +1,28 @@
+{
+  "meta": { "title": "Warenkorb" },
+  "page": {
+    "eyebrow": "Ihre Bestellung",
+    "title": "Ihr Warenkorb",
+    "empty": "Ihr Warenkorb ist leer.",
+    "continueShopping": "Weiter einkaufen",
+    "item": "Artikel",
+    "price": "Preis",
+    "quantity": "Anz.",
+    "total": "Gesamt",
+    "remove": "Entfernen",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versandkosten werden an der Kasse berechnet",
+    "checkout": "Zur Kasse gehen",
+    "secureBadge": "Sichere Zahlung über Stripe",
+    "viewCart": "Warenkorb ansehen"
+  },
+  "success": {
+    "eyebrow": "Bestellung bestätigt",
+    "title": "Vielen Dank!",
+    "subtitle": "Ihre Bestellung wurde erfolgreich aufgegeben.",
+    "total": "Gesamt",
+    "orderNumber": "Bestellnummer",
+    "viewReceipt": "Beleg anzeigen",
+    "backToShop": "Zurück zum Shop"
+  }
+}

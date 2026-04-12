@@ -18,6 +18,7 @@
   "detail": {
     "backToShop": "返回商店",
     "selectVariant": "选择规格",
+    "quantity": "数量",
     "price": "价格",
     "addToCart": "加入购物车",
     "outOfStock": "缺货",

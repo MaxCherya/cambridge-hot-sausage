@@ -1,0 +1,28 @@
+{
+  "meta": { "title": "カート" },
+  "page": {
+    "eyebrow": "ご注文内容",
+    "title": "ショッピングカート",
+    "empty": "カートは空です。",
+    "continueShopping": "買い物を続ける",
+    "item": "商品",
+    "price": "価格",
+    "quantity": "数量",
+    "total": "合計",
+    "remove": "削除",
+    "subtotal": "小計",
+    "shipping": "送料はお会計時に計算されます",
+    "checkout": "お会計へ進む",
+    "secureBadge": "Stripe による安全なお支払い",
+    "viewCart": "カートを見る"
+  },
+  "success": {
+    "eyebrow": "注文確定",
+    "title": "ありがとうございます！",
+    "subtitle": "ご注文が正常に完了しました。",
+    "total": "合計",
+    "orderNumber": "注文番号",
+    "viewReceipt": "領収書を見る",
+    "backToShop": "ショップに戻る"
+  }
+}

@@ -18,6 +18,7 @@
   "detail": {
     "backToShop": "Volver a la tienda",
     "selectVariant": "Elegir opción",
+    "quantity": "Cantidad",
     "price": "Precio",
     "addToCart": "Añadir al carrito",
     "outOfStock": "Agotado",

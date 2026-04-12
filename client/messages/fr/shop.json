@@ -18,6 +18,7 @@
   "detail": {
     "backToShop": "Retour à la boutique",
     "selectVariant": "Choisir une option",
+    "quantity": "Quantité",
     "price": "Prix",
     "addToCart": "Ajouter au panier",
     "outOfStock": "Rupture de stock",
