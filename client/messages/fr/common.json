@@ -24,5 +24,10 @@
     "es": "Español",
     "zh": "中文",
     "ja": "日本語"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page que vous recherchez n'existe pas ou a été déplacée.",
+    "backHome": "Retour à l'accueil"
   }
 }

@@ -24,5 +24,10 @@
     "es": "Español",
     "zh": "中文",
     "ja": "日本語"
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die gesuchte Seite existiert nicht oder wurde verschoben.",
+    "backHome": "Zurück zur Startseite"
   }
 }

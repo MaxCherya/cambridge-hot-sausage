@@ -100,10 +100,10 @@ export default async function CookiesPage({
               <br />
               Email:{" "}
               <a
-                href="mailto:hello@hotsausagecompany.com"
+                href="mailto:Joseph.Board@hotsausagecompany.com"
                 className="text-brand-maroon underline"
               >
-                hello@hotsausagecompany.com
+                Joseph.Board@hotsausagecompany.com
               </a>
             </p>
           </div>
