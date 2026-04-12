@@ -1,0 +1,24 @@
+from rest_framework import serializers
+from shop.models import Category
+
+
+class AdminCategorySerializer(serializers.ModelSerializer):
+    children = serializers.SerializerMethodField()
+    product_count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = ("id", "name", "slug", "description", "image", "parent", "is_active", "order", "children", "product_count")
+
+    def get_children(self, obj):
+        return AdminCategorySerializer(obj.get_children(), many=True).data
+
+    def get_product_count(self, obj):
+        return obj.products.count()
+
+
+class AdminCategoryWriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ("id", "name", "slug", "description", "image", "parent", "is_active", "order")
+        read_only_fields = ("id",)

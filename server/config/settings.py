@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "contact.apps.ContactConfig",
     "newsletter.apps.NewsletterConfig",
     "events.apps.EventsConfig",
+    "authentication.apps.AuthenticationConfig",
 ]
 
 # ── Middleware ───────────────────────────────────────────────────
@@ -184,7 +185,17 @@ REST_FRAMEWORK = {
         "anon": "60/minute",
         "user": "120/minute",
     },
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
 }
+
+# ── Session & CSRF ──────────────────────────────────────────────
+
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_HTTPONLY = False  # JS must read csrftoken cookie for POST requests
+CSRF_COOKIE_SAMESITE = "Lax"
 
 # ── Stripe ──────────────────────────────────────────────────────
 

@@ -1,0 +1,16 @@
+export const adminKeys = {
+  dashboard: () => ["admin", "dashboard"] as const,
+  products: (params?: Record<string, string>) => ["admin", "products", params] as const,
+  product: (id: number) => ["admin", "product", id] as const,
+  categories: () => ["admin", "categories"] as const,
+  orders: (params?: Record<string, string>) => ["admin", "orders", params] as const,
+  order: (id: string) => ["admin", "order", id] as const,
+  bookings: (params?: Record<string, string>) => ["admin", "bookings", params] as const,
+  booking: (id: string) => ["admin", "booking", id] as const,
+  eventConfig: () => ["admin", "event-config"] as const,
+  blockedDates: () => ["admin", "blocked-dates"] as const,
+  reviews: (params?: Record<string, string>) => ["admin", "reviews", params] as const,
+  messages: (params?: Record<string, string>) => ["admin", "messages", params] as const,
+  message: (id: number) => ["admin", "message", id] as const,
+  subscribers: (params?: Record<string, string>) => ["admin", "subscribers", params] as const,
+};

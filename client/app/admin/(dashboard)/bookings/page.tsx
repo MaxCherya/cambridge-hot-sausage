@@ -1,0 +1,120 @@
+"use client";
+
+import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+import { adminFetch } from "@/lib/admin/api";
+import { adminKeys } from "@/lib/admin/query-keys";
+import { StatusBadge } from "../../_components/status-badge";
+
+interface BookingListItem {
+  id: string;
+  short_id: string;
+  date: string;
+  status: string;
+  customer_name: string;
+  customer_email: string;
+  num_guests: number;
+  distance_miles: number | null;
+  price: string | null;
+  created_at: string;
+}
+
+const STATUSES = ["", "held", "confirmed", "cancelled"];
+
+export default function BookingsPage() {
+  const [statusFilter, setStatusFilter] = useState("");
+  const queryClient = useQueryClient();
+
+  const { data, isLoading } = useQuery({
+    queryKey: adminKeys.bookings(statusFilter ? { status: statusFilter } : undefined),
+    queryFn: () => {
+      const qs = statusFilter ? `?status=${statusFilter}` : "";
+      return adminFetch<{ count: number; results: BookingListItem[] }>(`/admin/bookings${qs}`);
+    },
+  });
+
+  const statusMutation = useMutation({
+    mutationFn: ({ id, status }: { id: string; status: string }) =>
+      adminFetch(`/admin/bookings/${id}`, {
+        method: "PATCH",
+        body: JSON.stringify({ status }),
+      }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin", "bookings"] }),
+  });
+
+  return (
+    <div>
+      <h1 className="text-2xl font-bold text-gray-900">Event Bookings</h1>
+
+      <div className="mt-4 flex gap-1.5">
+        {STATUSES.map((s) => (
+          <button
+            key={s}
+            type="button"
+            onClick={() => setStatusFilter(s)}
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
+              statusFilter === s
+                ? "bg-[#5A1F1F] text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            {s || "All"}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+        <table className="w-full text-left text-sm">
+          <thead>
+            <tr className="border-b border-gray-100 bg-gray-50/50">
+              <th className="px-4 py-3 font-semibold text-gray-500">ID</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Date</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Customer</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Guests</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Distance</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Price</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {isLoading ? (
+              <tr><td colSpan={7} className="py-12 text-center text-gray-400">Loading...</td></tr>
+            ) : !data || data.results.length === 0 ? (
+              <tr><td colSpan={7} className="py-12 text-center text-gray-400">No bookings found</td></tr>
+            ) : (
+              data.results.map((b) => (
+                <tr key={b.id} className="border-b border-gray-50 transition-colors hover:bg-gray-50/50">
+                  <td className="px-4 py-3">
+                    <Link href={`/admin/bookings/${b.id}`} className="font-mono text-xs font-semibold text-[#5A1F1F] hover:underline">
+                      #{b.short_id}
+                    </Link>
+                  </td>
+                  <td className="px-4 py-3 font-medium text-gray-800">{b.date}</td>
+                  <td className="px-4 py-3">
+                    <p className="font-medium text-gray-800">{b.customer_name || "—"}</p>
+                    <p className="text-xs text-gray-400">{b.customer_email}</p>
+                  </td>
+                  <td className="px-4 py-3 text-gray-600">{b.num_guests ?? "—"}</td>
+                  <td className="px-4 py-3 text-gray-600">{b.distance_miles ? `${b.distance_miles.toFixed(0)} mi` : "—"}</td>
+                  <td className="px-4 py-3 font-semibold text-gray-800">{b.price ? `£${b.price}` : "—"}</td>
+                  <td className="px-4 py-3">
+                    <select
+                      value={b.status}
+                      onChange={(e) => statusMutation.mutate({ id: b.id, status: e.target.value })}
+                      className="rounded-md border-0 bg-transparent py-0 text-xs font-semibold focus:ring-2 focus:ring-[#5A1F1F]/20"
+                    >
+                      {STATUSES.filter(Boolean).map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
