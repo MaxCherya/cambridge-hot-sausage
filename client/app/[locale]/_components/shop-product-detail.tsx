@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, Check, Minus, Plus, Star, ShoppingCart } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/lib/cart/context";
 import type { ProductDetail, ProductVariant } from "@/types/shop";
@@ -275,9 +276,9 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                 <h2 className="text-xs font-semibold uppercase tracking-[0.25em] text-brand-ink/50">
                   {t("detail.description")}
                 </h2>
-                <p className="mt-3 text-base leading-relaxed text-brand-ink/70">
-                  {product.description}
-                </p>
+                <div className="prose prose-sm mt-3 max-w-none text-brand-ink/70">
+                  <ReactMarkdown>{product.description}</ReactMarkdown>
+                </div>
               </div>
             </div>
           </div>

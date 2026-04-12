@@ -38,6 +38,14 @@ class EventBooking(TimeStampedModel):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     date = models.DateField(db_index=True)
+    time_slot = models.ForeignKey(
+        "events.TimeSlot",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="bookings",
+        help_text="The time slot for this booking.",
+    )
     status = models.CharField(
         max_length=20,
         choices=Status.choices,
@@ -107,9 +115,22 @@ class EventBooking(TimeStampedModel):
 
     @classmethod
     def is_date_available(cls, date):
-        """Check if a date is available (no active hold or confirmed booking)."""
+        """Check if any slot on this date is still available."""
+        cls.cleanup_expired_holds()
+        from events.models.timeslot import TimeSlot
+        active_slots = TimeSlot.objects.filter(is_active=True).count()
+        booked = cls.objects.filter(
+            date=date,
+            status__in=[cls.Status.HELD, cls.Status.CONFIRMED],
+        ).count()
+        return booked < max(active_slots, 1)
+
+    @classmethod
+    def is_slot_available(cls, date, time_slot_id):
+        """Check if a specific slot on a date is available."""
         cls.cleanup_expired_holds()
         return not cls.objects.filter(
             date=date,
+            time_slot_id=time_slot_id,
             status__in=[cls.Status.HELD, cls.Status.CONFIRMED],
         ).exists()

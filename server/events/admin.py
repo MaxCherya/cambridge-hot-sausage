@@ -1,6 +1,13 @@
 from django.contrib import admin
 
-from events.models import BlockedDate, EventBooking, EventConfig
+from events.models import BlockedDate, EventBooking, EventConfig, TimeSlot
+
+
+@admin.register(TimeSlot)
+class TimeSlotAdmin(admin.ModelAdmin):
+    list_display = ("label", "start_time", "end_time", "is_active", "order")
+    list_editable = ("is_active", "order")
+    ordering = ("order", "start_time")
 
 
 @admin.register(EventConfig)

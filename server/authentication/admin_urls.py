@@ -3,7 +3,7 @@ from rest_framework.routers import DefaultRouter
 
 from shop.views import AdminProductViewSet, AdminCategoryViewSet, AdminReviewViewSet, AdminVariantViewSet, AdminImageViewSet
 from orders.views import AdminOrderViewSet
-from events.views import AdminBookingViewSet, AdminBlockedDateViewSet, AdminEventConfigView
+from events.views import AdminBookingViewSet, AdminBlockedDateViewSet, AdminEventConfigView, AdminTimeSlotViewSet
 from contact.views import AdminContactMessageViewSet
 from newsletter.views import AdminSubscriberViewSet
 
@@ -16,6 +16,7 @@ router.register("reviews", AdminReviewViewSet, basename="admin-review")
 router.register("orders", AdminOrderViewSet, basename="admin-order")
 router.register("bookings", AdminBookingViewSet, basename="admin-booking")
 router.register("blocked-dates", AdminBlockedDateViewSet, basename="admin-blocked-date")
+router.register("time-slots", AdminTimeSlotViewSet, basename="admin-time-slot")
 router.register("messages", AdminContactMessageViewSet, basename="admin-message")
 router.register("subscribers", AdminSubscriberViewSet, basename="admin-subscriber")
 

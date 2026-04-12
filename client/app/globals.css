@@ -1,4 +1,6 @@
 @import "@heroui/styles";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @theme inline {
   --font-display: var(--font-rye);

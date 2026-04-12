@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import { Loader2, MapPin } from "lucide-react";
@@ -34,6 +34,16 @@ export function EventLocationPicker({ onLocationConfirm }: EventLocationPickerPr
   const [priceResult, setPriceResult] = useState<PriceResult | null>(null);
   const [error, setError] = useState("");
   const [calculating, setCalculating] = useState(false);
+  const [maxRadius, setMaxRadius] = useState(200);
+
+  useEffect(() => {
+    fetch("/api/v1/events/config")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.max_radius_miles) setMaxRadius(data.max_radius_miles);
+      })
+      .catch(() => {});
+  }, []);
 
   const handleMapClick = useCallback(async (lat: number, lng: number) => {
     setPin({ lat, lng });
@@ -69,7 +79,7 @@ export function EventLocationPicker({ onLocationConfirm }: EventLocationPickerPr
       {/* Map */}
       <div className="overflow-hidden rounded-3xl border border-brand-maroon/8 shadow-[0_8px_30px_-10px_rgba(90,31,31,0.1)]">
         <div className="h-[300px] sm:h-[400px]">
-          <LocationMap onMapClick={handleMapClick} pin={pin} />
+          <LocationMap onMapClick={handleMapClick} pin={pin} radiusMiles={maxRadius} />
         </div>
       </div>
 

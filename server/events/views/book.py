@@ -75,8 +75,6 @@ class ConfirmBookingView(APIView):
         booking.distance_miles = round(distance, 1)
         booking.price = total_price
         booking.num_guests = data["num_guests"]
-        booking.timing_start = data["timing_start"]
-        booking.timing_end = data["timing_end"]
         booking.notes = data.get("notes", "")
         booking.customer_name = data["customer_name"]
         booking.customer_email = data["customer_email"]

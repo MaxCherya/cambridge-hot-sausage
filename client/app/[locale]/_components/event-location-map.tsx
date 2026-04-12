@@ -5,7 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const CAMBRIDGE: [number, number] = [52.2053, 0.1218];
-const RADIUS_METERS = 200 * 1609.34; // 200 miles in meters
+const MILES_TO_METERS = 1609.34;
 
 const pinIcon = L.divIcon({
   className: "event-pin",
@@ -25,6 +25,7 @@ const pinIcon = L.divIcon({
 interface Props {
   onMapClick: (lat: number, lng: number) => void;
   pin: { lat: number; lng: number } | null;
+  radiusMiles: number;
 }
 
 function ClickHandler({ onClick }: { onClick: (lat: number, lng: number) => void }) {
@@ -36,11 +37,11 @@ function ClickHandler({ onClick }: { onClick: (lat: number, lng: number) => void
   return null;
 }
 
-export default function EventLocationMap({ onMapClick, pin }: Props) {
+export default function EventLocationMap({ onMapClick, pin, radiusMiles }: Props) {
   return (
     <MapContainer
       center={CAMBRIDGE}
-      zoom={8}
+      zoom={radiusMiles <= 50 ? 9 : radiusMiles <= 100 ? 8 : 7}
       scrollWheelZoom={true}
       className="h-full w-full"
     >
@@ -49,10 +50,9 @@ export default function EventLocationMap({ onMapClick, pin }: Props) {
         url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
       />
 
-      {/* 200-mile radius circle from Cambridge */}
       <Circle
         center={CAMBRIDGE}
-        radius={RADIUS_METERS}
+        radius={radiusMiles * MILES_TO_METERS}
         pathOptions={{
           color: "#5A1F1F",
           weight: 2,
@@ -63,7 +63,6 @@ export default function EventLocationMap({ onMapClick, pin }: Props) {
         }}
       />
 
-      {/* Cambridge centre marker */}
       <Circle
         center={CAMBRIDGE}
         radius={500}
@@ -75,7 +74,6 @@ export default function EventLocationMap({ onMapClick, pin }: Props) {
         }}
       />
 
-      {/* User's selected pin */}
       {pin && (
         <Marker position={[pin.lat, pin.lng]} icon={pinIcon} />
       )}

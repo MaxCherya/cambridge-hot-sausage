@@ -13,7 +13,7 @@ class AdminReviewViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAdminUser]
     serializer_class = AdminReviewSerializer
     queryset = Review.objects.select_related("product").order_by("-created_at")
-    http_method_names = ["get", "patch", "delete"]
+    http_method_names = ["get", "post", "patch", "delete"]
 
     @action(detail=True, methods=["post"])
     def approve(self, request, pk=None):

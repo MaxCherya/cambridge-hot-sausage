@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from events.models import EventBooking, BlockedDate, EventConfig
+from events.models import EventBooking, BlockedDate, EventConfig, TimeSlot
 
 
 class AdminBookingListSerializer(serializers.ModelSerializer):
@@ -35,3 +35,9 @@ class AdminEventConfigSerializer(serializers.ModelSerializer):
     class Meta:
         model = EventConfig
         exclude = ("id",)
+
+
+class AdminTimeSlotSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TimeSlot
+        fields = ("id", "label", "start_time", "end_time", "is_active", "order")
