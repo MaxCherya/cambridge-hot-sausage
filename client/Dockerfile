@@ -1,15 +1,17 @@
 FROM node:22-alpine AS base
+RUN apk add --no-cache libc6-compat
 
 FROM base AS deps
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts && npm rebuild
 
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV INTERNAL_API_URL=http://localhost:8000
 RUN npm run build
 
 FROM base AS runner
