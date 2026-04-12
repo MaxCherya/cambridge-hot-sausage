@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "Standorte"
+  },
+  "hero": {
+    "eyebrow": "Finden Sie den Karren",
+    "title": "Besuchen Sie uns",
+    "subtitle": "Direkt neben der Hauptstraße, zwei Minuten vom Grand Arcade entfernt. Suchen Sie nach dem viktorianischen Karren — Sie können ihn nicht verfehlen."
+  },
+  "highlight": {
+    "title": "Ein Ort. Vierzig Jahre. Unzählige Hot Dogs.",
+    "subtitle": "Die gleiche Ecke von Cambridge seit 1986 — bei Regen oder Sonnenschein, wir sind da.",
+    "stats": {
+      "years": { "value": "40+", "label": "Jahre im Dienst" },
+      "dogs": { "value": "1M+", "label": "Hot Dogs verkauft" },
+      "days": { "value": "7", "label": "Tage die Woche" }
+    }
+  },
+  "info": {
+    "address": {
+      "label": "Adresse",
+      "name": "Cambridge Hot Sausage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "Öffnungszeiten",
+      "weekdays": "Montag – Freitag",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "Samstag",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "Sonntag",
+      "sundayTimes": "10:00 – 17:00"
+    },
+    "nearby": {
+      "label": "In der Nähe",
+      "items": {
+        "arcade": "Grand Arcade — 2 Min. zu Fuß",
+        "market": "Market Square — 1 Min. zu Fuß",
+        "kings": "King's College — 5 Min. zu Fuß",
+        "station": "Cambridge Bahnhof — 20 Min. zu Fuß"
+      }
+    }
+  },
+  "directions": {
+    "eyebrow": "Anfahrt",
+    "title": "Leicht zu finden, schwer zu verlassen",
+    "subtitle": "Mitten im Herzen von Cambridge — zu Fuß, mit dem Rad oder dem Auto.",
+    "walking": {
+      "title": "Zu Fuß",
+      "description": "Wir sind in der Market Passage, direkt neben der Hauptstraße zwischen Petty Cury und Market Square. Folgen Sie dem Duft."
+    },
+    "cycling": {
+      "title": "Mit dem Rad",
+      "description": "Fahrradständer am Market Square und im Grand Arcade Parkhaus. Abschließen und 30 Sekunden laufen."
+    },
+    "driving": {
+      "title": "Mit dem Auto",
+      "description": "Das Grand Arcade Parkhaus (CB2 3BJ) ist am nächsten — 2 Minuten zu Fuß zum Karren."
+    },
+    "ctaLabel": "Route berechnen",
+    "ctaHint": "Öffnet Ihre Karten-App"
+  }
+}

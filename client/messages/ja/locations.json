@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "場所"
+  },
+  "hero": {
+    "eyebrow": "屋台を見つける",
+    "title": "私たちを見つけてください",
+    "subtitle": "メインストリートのすぐそば、Grand Arcadeから2分。ビクトリア様式の屋台を探してください——見逃すことはありません。"
+  },
+  "highlight": {
+    "title": "一つの場所。四十年。数えきれないホットドッグ。",
+    "subtitle": "1986年からケンブリッジの同じ場所で——雨の日も晴れの日も、ここにいます。",
+    "stats": {
+      "years": { "value": "40+", "label": "年の歴史" },
+      "dogs": { "value": "100万+", "label": "本のホットドッグ" },
+      "days": { "value": "7", "label": "日営業" }
+    }
+  },
+  "info": {
+    "address": {
+      "label": "住所",
+      "name": "Cambridge Hot Sausage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "営業時間",
+      "weekdays": "月曜日〜金曜日",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "土曜日",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "日曜日",
+      "sundayTimes": "10:00 – 17:00"
+    },
+    "nearby": {
+      "label": "近くのランドマーク",
+      "items": {
+        "arcade": "Grand Arcade — 徒歩2分",
+        "market": "Market Square — 徒歩1分",
+        "kings": "キングス・カレッジ — 徒歩5分",
+        "station": "ケンブリッジ駅 — 徒歩20分"
+      }
+    }
+  },
+  "directions": {
+    "eyebrow": "アクセス方法",
+    "title": "来やすく、帰りにくい",
+    "subtitle": "ケンブリッジの中心部に位置しています——徒歩、自転車、車でアクセスできます。",
+    "walking": {
+      "title": "徒歩",
+      "description": "Petty CuryとMarket Squareの間のメインストリートすぐそば、Market Passageにあります。香りをたどってきてください。"
+    },
+    "cycling": {
+      "title": "自転車",
+      "description": "Market SquareとGrand Arcade駐車場に駐輪場があります。鍵をかけて30秒歩くだけ。"
+    },
+    "driving": {
+      "title": "車",
+      "description": "Grand Arcade駐車場（CB2 3BJ）が最寄りです——出口から屋台まで徒歩2分。"
+    },
+    "ctaLabel": "道順を取得",
+    "ctaHint": "マップアプリで開きます"
+  }
+}

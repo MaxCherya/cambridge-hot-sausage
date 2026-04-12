@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "Ubicaciones"
+  },
+  "hero": {
+    "eyebrow": "Encuentra el carrito",
+    "title": "Ven a encontrarnos",
+    "subtitle": "Justo al lado de la calle principal, a dos minutos del Grand Arcade. Busca el carrito victoriano — no tiene pérdida."
+  },
+  "highlight": {
+    "title": "Un lugar. Cuarenta años. Incontables hot dogs.",
+    "subtitle": "La misma esquina de Cambridge desde 1986 — llueva o haga sol, aquí estamos.",
+    "stats": {
+      "years": { "value": "40+", "label": "Años sirviendo" },
+      "dogs": { "value": "1M+", "label": "Hot dogs vendidos" },
+      "days": { "value": "7", "label": "Días a la semana" }
+    }
+  },
+  "info": {
+    "address": {
+      "label": "Dirección",
+      "name": "Cambridge Hot Sausage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "Horario",
+      "weekdays": "Lunes – Viernes",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "Sábado",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "Domingo",
+      "sundayTimes": "10:00 – 17:00"
+    },
+    "nearby": {
+      "label": "Puntos de referencia",
+      "items": {
+        "arcade": "Grand Arcade — 2 min a pie",
+        "market": "Market Square — 1 min a pie",
+        "kings": "King's College — 5 min a pie",
+        "station": "Estación de Cambridge — 20 min a pie"
+      }
+    }
+  },
+  "directions": {
+    "eyebrow": "Cómo llegar",
+    "title": "Fácil de encontrar, difícil de dejar",
+    "subtitle": "En el corazón de Cambridge — a pie, en bici o en coche.",
+    "walking": {
+      "title": "A pie",
+      "description": "Estamos en Market Passage, justo al lado de la calle principal entre Petty Cury y Market Square. Sigue el olor."
+    },
+    "cycling": {
+      "title": "En bici",
+      "description": "Aparcabicis en Market Square y en el aparcamiento del Grand Arcade. Cierra y camina 30 segundos."
+    },
+    "driving": {
+      "title": "En coche",
+      "description": "El aparcamiento Grand Arcade (CB2 3BJ) es el más cercano — 2 minutos andando hasta el carrito."
+    },
+    "ctaLabel": "Obtener indicaciones",
+    "ctaHint": "Se abre en tu app de mapas"
+  }
+}

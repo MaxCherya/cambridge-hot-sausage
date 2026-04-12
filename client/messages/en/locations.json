@@ -1,0 +1,63 @@
+{
+  "meta": {
+    "title": "Locations"
+  },
+  "hero": {
+    "eyebrow": "Find the barrow",
+    "title": "Come find us",
+    "subtitle": "Tucked just off the high street, two minutes from the Grand Arcade. Look for the Victorian barrow — you can't miss it."
+  },
+  "highlight": {
+    "title": "One spot. Forty years. Countless hot dogs.",
+    "subtitle": "The same corner of Cambridge since 1986 — rain or shine, we're here.",
+    "stats": {
+      "years": { "value": "40+", "label": "Years serving" },
+      "dogs": { "value": "1M+", "label": "Hot dogs sold" },
+      "days": { "value": "7", "label": "Days a week" }
+    }
+  },
+  "info": {
+    "address": {
+      "label": "Address",
+      "name": "Cambridge Hot Sausage",
+      "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "Opening hours",
+      "weekdays": "Monday – Friday",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "Saturday",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "Sunday",
+      "sundayTimes": "10:00 – 17:00"
+    },
+    "nearby": {
+      "label": "Nearby landmarks",
+      "items": {
+        "arcade": "Grand Arcade — 2 min walk",
+        "market": "Market Square — 1 min walk",
+        "kings": "King's College — 5 min walk",
+        "station": "Cambridge Station — 20 min walk"
+      }
+    }
+  },
+  "directions": {
+    "eyebrow": "Getting here",
+    "title": "Easy to reach, hard to leave",
+    "subtitle": "Right in the heart of Cambridge — whether you're walking, cycling or driving.",
+    "walking": {
+      "title": "On foot",
+      "description": "We're on Market Passage, just off the high street between Petty Cury and Market Square. Follow the smell."
+    },
+    "cycling": {
+      "title": "By bike",
+      "description": "Bike racks on Market Square and the Grand Arcade multi-storey. Lock up and walk 30 seconds."
+    },
+    "driving": {
+      "title": "By car",
+      "description": "Grand Arcade car park (CB2 3BJ) is the closest — 2 minute walk to the barrow from the exit."
+    },
+    "ctaLabel": "Get directions",
+    "ctaHint": "Opens in your maps app"
+  }
+}
