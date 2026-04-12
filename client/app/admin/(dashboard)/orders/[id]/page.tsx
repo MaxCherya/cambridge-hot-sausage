@@ -1,20 +1,36 @@
 "use client";
 
-import { use } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { use, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "sonner";
 import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, AlertTriangle } from "lucide-react";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
 import { StatusBadge } from "../../../_components/status-badge";
 
 export default function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
+  const queryClient = useQueryClient();
+  const [showRefundConfirm, setShowRefundConfirm] = useState(false);
 
   const { data: order, isLoading } = useQuery({
     queryKey: adminKeys.order(id),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     queryFn: () => adminFetch<any>(`/admin/orders/${id}`),
+  });
+
+  const refundMutation = useMutation({
+    mutationFn: () => adminFetch(`/admin/orders/${id}/refund`, {
+      method: "POST",
+      body: JSON.stringify({ confirm: true }),
+    }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: adminKeys.order(id) });
+      toast.success("Order refunded successfully");
+      setShowRefundConfirm(false);
+    },
+    onError: (err) => toast.error(err instanceof Error ? err.message : "Refund failed"),
   });
 
   if (isLoading || !order) {
@@ -40,6 +56,7 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
           <h2 className="mb-3 text-xs font-semibold uppercase tracking-wider text-gray-400">Customer</h2>
           <p className="font-medium text-gray-800">{order.customer_name as string}</p>
           <p className="text-sm text-gray-500">{order.customer_email as string}</p>
+          {order.customer_phone && <p className="text-sm text-gray-500">{order.customer_phone as string}</p>}
         </div>
 
         {/* Shipping */}
@@ -100,7 +117,71 @@ export default function OrderDetailPage({ params }: { params: Promise<{ id: stri
             </a>
           )}
         </div>
+
+        {/* Refund section */}
+        {order.status !== "cancelled" && (
+          <div className="rounded-xl border border-red-100 bg-red-50/50 p-5 lg:col-span-2">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <AlertTriangle size={16} className="text-red-500" />
+                <span className="text-sm font-medium text-red-800">Refund this order</span>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowRefundConfirm(true)}
+                className="rounded-lg border border-red-300 bg-white px-4 py-2 text-xs font-semibold text-red-600 transition-colors hover:bg-red-50"
+              >
+                Issue refund
+              </button>
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Refund confirmation dialog */}
+      {showRefundConfirm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
+          <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl">
+            <div className="flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-100">
+                <AlertTriangle size={24} className="text-red-600" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-gray-900">Confirm refund</h3>
+                <p className="text-sm text-gray-500">This action cannot be undone.</p>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-lg bg-gray-50 p-4 text-sm">
+              <p className="text-gray-700">
+                Refund <strong>£{order.total}</strong> to <strong>{order.customer_name || "customer"}</strong>?
+              </p>
+              <p className="mt-1 text-xs text-gray-400">
+                The full amount will be returned to the original payment method via Stripe.
+                Order status will be set to "cancelled".
+              </p>
+            </div>
+
+            <div className="mt-6 flex justify-end gap-3">
+              <button
+                type="button"
+                onClick={() => setShowRefundConfirm(false)}
+                className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                onClick={() => refundMutation.mutate()}
+                disabled={refundMutation.isPending}
+                className="rounded-lg bg-red-600 px-4 py-2 text-sm font-semibold text-white hover:bg-red-700 disabled:opacity-50"
+              >
+                {refundMutation.isPending ? "Processing..." : "Yes, refund £" + order.total}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

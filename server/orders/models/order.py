@@ -30,6 +30,7 @@ class Order(TimeStampedModel):
     )
     customer_email = models.EmailField()
     customer_name = models.CharField(max_length=200, blank=True)
+    customer_phone = models.CharField(max_length=30, blank=True)
 
     # Shipping address snapshot
     shipping_name = models.CharField(max_length=200, blank=True)

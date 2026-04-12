@@ -2,7 +2,7 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from shop.views import AdminProductViewSet, AdminCategoryViewSet, AdminReviewViewSet, AdminVariantViewSet, AdminImageViewSet
-from orders.views import AdminOrderViewSet
+from orders.views import AdminOrderViewSet, RefundOrderView
 from events.views import AdminBookingViewSet, AdminBlockedDateViewSet, AdminEventConfigView, AdminTimeSlotViewSet
 from contact.views import AdminContactMessageViewSet
 from newsletter.views import AdminSubscriberViewSet
@@ -23,4 +23,5 @@ router.register("subscribers", AdminSubscriberViewSet, basename="admin-subscribe
 urlpatterns = [
     path("", include(router.urls)),
     path("event-config", AdminEventConfigView.as_view(), name="admin-event-config"),
+    path("orders/<uuid:pk>/refund", RefundOrderView.as_view(), name="admin-order-refund"),
 ]

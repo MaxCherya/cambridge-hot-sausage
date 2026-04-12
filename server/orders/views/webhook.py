@@ -98,6 +98,7 @@ def _handle_checkout_completed(session):
         status=Order.Status.PAID,
         customer_email=getattr(customer, "email", "") if customer else "",
         customer_name=getattr(customer, "name", "") if customer else "",
+        customer_phone=getattr(customer, "phone", "") or "" if customer else "",
         shipping_name=getattr(shipping, "name", "") if shipping else "",
         shipping_line1=getattr(address, "line1", "") if address else "",
         shipping_line2=getattr(address, "line2", "") or "" if address else "",

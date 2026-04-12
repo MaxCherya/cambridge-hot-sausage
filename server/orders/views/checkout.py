@@ -83,6 +83,7 @@ class CreateCheckoutSessionView(APIView):
         session = stripe.checkout.Session.create(
             mode="payment",
             payment_method_types=["card"],
+            phone_number_collection={"enabled": True},
             line_items=line_items,
             shipping_address_collection={
                 "allowed_countries": [
