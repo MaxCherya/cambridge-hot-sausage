@@ -3,6 +3,7 @@
 @plugin "@tailwindcss/typography";
 
 /* Tame Leaflet z-indexes so maps don't overlap navbar/drawer */
+.leaflet-container { z-index: 0 !important; position: relative !important; }
 .leaflet-pane { z-index: 1 !important; }
 .leaflet-control { z-index: 2 !important; }
 .leaflet-top, .leaflet-bottom { z-index: 2 !important; }
