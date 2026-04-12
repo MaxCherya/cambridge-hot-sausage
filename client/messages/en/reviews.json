@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "title": "Reviews"
+  },
+  "hero": {
+    "eyebrow": "What people say",
+    "title": "Loved by Cambridge",
+    "subtitle": "Real reviews from locals, tourists and regulars who've made the barrow part of their story."
+  },
+  "stats": {
+    "averageRating": "Average rating",
+    "totalReviews": "Total reviews",
+    "outOf": "out of 5"
+  },
+  "distribution": {
+    "star": "star",
+    "stars": "stars"
+  },
+  "feed": {
+    "eyebrow": "All reviews",
+    "title": "Hear it from them",
+    "filterAll": "All",
+    "filterStar": "{count} Stars",
+    "filterOneStar": "1 Star",
+    "noResults": "No reviews match this filter.",
+    "readMore": "Read more",
+    "readLess": "Read less",
+    "verified": "Verified review"
+  },
+  "cta": {
+    "title": "Tried our hot dogs?",
+    "subtitle": "Share your experience — your review helps others find us.",
+    "button": "Write a review"
+  }
+}

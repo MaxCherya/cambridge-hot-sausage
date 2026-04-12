@@ -105,7 +105,7 @@ export function Navbar() {
     <>
       <header
         ref={headerRef}
-        data-scrolled={scrolled || undefined}
+        data-scrolled={scrolled || pathname !== "/" || undefined}
         className="fixed inset-x-0 top-0 z-50 transition-[backdrop-filter,background-color,border-color] duration-300 data-[scrolled]:border-b data-[scrolled]:border-brand-maroon/10 data-[scrolled]:bg-brand-cream/90 data-[scrolled]:backdrop-blur-lg"
       >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 transition-all duration-300 data-[scrolled]:py-2 sm:px-6">

@@ -149,10 +149,16 @@
 
    Stagger via inline `style={{ animationDelay: '120ms' }}` (or the
    `transitionDelay` helper in @keyframes-aware components). */
+/* Before reveal: hidden via base rule.
+   During reveal: `fill-mode: both` means the animation owns opacity
+   and transform for the entire lifecycle — no static end-state that
+   could flash for a frame before the keyframe kicks in.
+   After reveal: RevealOnScroll removes both data attributes once the
+   animation finishes, so the element falls back to its normal
+   class-based styles and hover transitions work unblocked. */
 [data-reveal] {
   opacity: 0;
   transform: translate3d(0, 40px, 0);
-  will-change: opacity, transform;
 }
 [data-reveal="left"] {
   transform: translate3d(40px, 0, 0);
@@ -206,14 +212,7 @@
 }
 
 [data-reveal][data-revealed] {
-  /* Static end state — reverts to these values after the animation
-     finishes so hover transitions on transform/opacity can take over.
-     (Without these, the animation's `both` fill-mode would keep
-     overriding hover transforms because animations beat transitions
-     in the CSS cascade.) */
-  opacity: 1;
-  transform: none;
-  animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: reveal-up 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 [data-reveal="left"][data-revealed] {
   animation-name: reveal-left;

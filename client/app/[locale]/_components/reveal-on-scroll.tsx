@@ -36,8 +36,25 @@ export function RevealOnScroll() {
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            entry.target.setAttribute("data-revealed", "");
-            observer.unobserve(entry.target);
+            const el = entry.target as HTMLElement;
+            el.setAttribute("data-revealed", "");
+
+            // After the CSS animation finishes, strip both data
+            // attributes so the element falls back to its normal
+            // class-based styles — hover transitions can then work
+            // without the animation's fill-mode blocking them.
+            el.addEventListener(
+              "animationend",
+              () => {
+                el.style.opacity = "1";
+                el.style.transform = "none";
+                el.removeAttribute("data-reveal");
+                el.removeAttribute("data-revealed");
+              },
+              { once: true },
+            );
+
+            observer.unobserve(el);
           }
         }
       },

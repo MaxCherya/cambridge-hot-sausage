@@ -1,0 +1,35 @@
+{
+  "meta": {
+    "title": "Reseñas"
+  },
+  "hero": {
+    "eyebrow": "Lo que dicen",
+    "title": "Querido en Cambridge",
+    "subtitle": "Reseñas reales de locales, turistas y habituales que han hecho del barrow parte de su historia."
+  },
+  "stats": {
+    "averageRating": "Valoración media",
+    "totalReviews": "Reseñas totales",
+    "outOf": "de 5"
+  },
+  "distribution": {
+    "star": "estrella",
+    "stars": "estrellas"
+  },
+  "feed": {
+    "eyebrow": "Todas las reseñas",
+    "title": "Escúchalo de ellos",
+    "filterAll": "Todas",
+    "filterStar": "{count} Estrellas",
+    "filterOneStar": "1 Estrella",
+    "noResults": "Ninguna reseña coincide con este filtro.",
+    "readMore": "Leer más",
+    "readLess": "Leer menos",
+    "verified": "Reseña verificada"
+  },
+  "cta": {
+    "title": "¿Has probado nuestros hot dogs?",
+    "subtitle": "Comparte tu experiencia — tu reseña ayuda a otros a encontrarnos.",
+    "button": "Escribir una reseña"
+  }
+}
