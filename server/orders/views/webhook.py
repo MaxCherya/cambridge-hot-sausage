@@ -9,16 +9,20 @@ from orders.models import Order, OrderItem
 from shop.models import ProductVariant
 
 
+def _stripe_attr(obj, key, default=""):
+    """Safely read an attribute from a StripeObject or dict."""
+    if obj is None:
+        return default
+    try:
+        val = obj[key]
+        return val if val is not None else default
+    except (KeyError, TypeError):
+        return getattr(obj, key, default) or default
+
+
 @csrf_exempt
 @require_POST
 def stripe_webhook(request):
-    """
-    POST /api/v1/orders/webhook
-
-    Handles Stripe webhook events. The main event we care about is
-    checkout.session.completed — this creates the Order record and
-    decrements stock.
-    """
     stripe.api_key = settings.STRIPE_SECRET_KEY
     payload = request.body
     sig_header = request.META.get("HTTP_STRIPE_SIGNATURE", "")
@@ -34,10 +38,8 @@ def stripe_webhook(request):
 
     if event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
-
-        # Dispatch to event booking handler if applicable
-        metadata = session.get("metadata", {}) if isinstance(session, dict) else (session.metadata or {})
-        booking_type = metadata.get("type", "") if isinstance(metadata, dict) else getattr(metadata, "get", lambda *a: "")("type", "")
+        metadata = getattr(session, "metadata", None)
+        booking_type = _stripe_attr(metadata, "type")
 
         if booking_type == "event_booking":
             from events.views.webhook import handle_event_booking_completed
@@ -61,43 +63,43 @@ def _handle_checkout_completed(session):
         expand=["payment_intent.latest_charge"],
     )
 
-    # Extract receipt URL from the charge
     receipt_url = ""
-    pi = full_session.payment_intent
-    if pi and hasattr(pi, "latest_charge") and pi.latest_charge:
-        receipt_url = getattr(pi.latest_charge, "receipt_url", "") or ""
+    pi = getattr(full_session, "payment_intent", None)
+    if pi:
+        charge = getattr(pi, "latest_charge", None)
+        if charge:
+            receipt_url = getattr(charge, "receipt_url", "") or ""
 
-    # Shipping details
-    shipping = full_session.shipping_details
-    address = shipping.address if shipping else None
+    shipping = getattr(full_session, "shipping_details", None)
+    address = getattr(shipping, "address", None) if shipping else None
 
-    shipping_cost_obj = full_session.shipping_cost
-    shipping_amount = shipping_cost_obj.amount_total if shipping_cost_obj else 0
+    shipping_cost_obj = getattr(full_session, "shipping_cost", None)
+    shipping_amount = getattr(shipping_cost_obj, "amount_total", 0) if shipping_cost_obj else 0
 
-    customer = full_session.customer_details
+    customer = getattr(full_session, "customer_details", None)
 
     order = Order.objects.create(
         stripe_session_id=session_id,
-        stripe_payment_intent=pi.id if pi and hasattr(pi, "id") else str(pi or ""),
+        stripe_payment_intent=getattr(pi, "id", "") if pi else str(pi or ""),
         status=Order.Status.PAID,
-        customer_email=customer.email if customer else "",
-        customer_name=customer.name if customer else "",
-        shipping_name=shipping.name if shipping else "",
-        shipping_line1=address.line1 if address else "",
-        shipping_line2=address.line2 or "" if address else "",
-        shipping_city=address.city or "" if address else "",
-        shipping_postal_code=address.postal_code or "" if address else "",
-        shipping_country=address.country or "" if address else "",
-        subtotal=(full_session.amount_subtotal or 0) / 100,
+        customer_email=getattr(customer, "email", "") if customer else "",
+        customer_name=getattr(customer, "name", "") if customer else "",
+        shipping_name=getattr(shipping, "name", "") if shipping else "",
+        shipping_line1=getattr(address, "line1", "") if address else "",
+        shipping_line2=getattr(address, "line2", "") or "" if address else "",
+        shipping_city=getattr(address, "city", "") or "" if address else "",
+        shipping_postal_code=getattr(address, "postal_code", "") or "" if address else "",
+        shipping_country=getattr(address, "country", "") or "" if address else "",
+        subtotal=(getattr(full_session, "amount_subtotal", 0) or 0) / 100,
         shipping_cost=shipping_amount / 100,
-        total=(full_session.amount_total or 0) / 100,
-        currency=full_session.currency or "gbp",
+        total=(getattr(full_session, "amount_total", 0) or 0) / 100,
+        currency=getattr(full_session, "currency", "gbp") or "gbp",
         stripe_receipt_url=receipt_url,
     )
 
-    # Parse items from metadata and create OrderItems + decrement stock
-    metadata = full_session.metadata
-    items_str = metadata.get("items", "") if metadata else ""
+    # Parse items from metadata
+    metadata = getattr(full_session, "metadata", None)
+    items_str = _stripe_attr(metadata, "items")
 
     for entry in items_str.split("|"):
         parts = entry.split(":")

@@ -79,7 +79,10 @@ export default function CategoriesPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: adminKeys.categories(),
-    queryFn: () => adminFetch<Category[]>("/admin/categories"),
+    queryFn: async () => {
+      const res = await adminFetch<{ count: number; results: Category[] } | Category[]>("/admin/categories");
+      return Array.isArray(res) ? res : res.results;
+    },
   });
 
   const toggleMutation = useMutation<unknown, Error, { id: number; is_active: boolean }>({

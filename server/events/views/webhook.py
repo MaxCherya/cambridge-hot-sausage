@@ -1,22 +1,4 @@
-import stripe
-from django.conf import settings
-from django.http import HttpResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-
 from events.models import EventBooking
-
-
-@csrf_exempt
-@require_POST
-def events_webhook(request):
-    """
-    Shares the same Stripe webhook endpoint as orders.
-    This handler specifically looks for event booking metadata.
-    Called from the main webhook dispatcher.
-    """
-    # This is called by the main webhook, not directly
-    pass
 
 
 def handle_event_booking_completed(session):
@@ -24,17 +6,14 @@ def handle_event_booking_completed(session):
     Called from the orders webhook when metadata.type == 'event_booking'.
     Confirms the booking and removes the hold expiry.
     """
-    stripe.api_key = settings.STRIPE_SECRET_KEY
+    metadata = getattr(session, "metadata", None)
 
-    hold_token = session.get("metadata", {}).get("hold_token") if isinstance(session, dict) else getattr(getattr(session, "metadata", None), "get", lambda *a: None)("hold_token")
-
-    # Handle both dict and StripeObject
-    if hasattr(session, "metadata") and hasattr(session.metadata, "get"):
-        hold_token = session.metadata.get("hold_token")
-    elif isinstance(session, dict):
-        hold_token = session.get("metadata", {}).get("hold_token")
-    else:
-        hold_token = None
+    hold_token = None
+    if metadata is not None:
+        try:
+            hold_token = metadata["hold_token"]
+        except (KeyError, TypeError):
+            hold_token = getattr(metadata, "hold_token", None)
 
     if not hold_token:
         return
