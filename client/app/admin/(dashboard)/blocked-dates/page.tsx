@@ -18,7 +18,10 @@ export default function BlockedDatesPage() {
 
   const { data, isLoading } = useQuery({
     queryKey: adminKeys.blockedDates(),
-    queryFn: () => adminFetch<BlockedDate[]>("/admin/blocked-dates"),
+    queryFn: async () => {
+      const res = await adminFetch<{ results: BlockedDate[] } | BlockedDate[]>("/admin/blocked-dates");
+      return Array.isArray(res) ? res : res.results;
+    },
   });
 
   const addMutation = useMutation({
