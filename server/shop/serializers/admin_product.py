@@ -10,10 +10,20 @@ class AdminVariantSerializer(serializers.ModelSerializer):
 
 
 class AdminImageSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField()
+
     class Meta:
         model = ProductImage
         fields = ("id", "image", "alt_text", "is_primary", "order")
         read_only_fields = ("id",)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        if instance.image and hasattr(instance.image, 'url'):
+            url = instance.image.url
+            if url.startswith("http"):
+                data["image"] = url
+        return data
 
 
 class AdminProductListSerializer(serializers.ModelSerializer):
