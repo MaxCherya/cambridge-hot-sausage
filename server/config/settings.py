@@ -20,6 +20,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third-party
+    "cloudinary_storage",
+    "cloudinary",
     "rest_framework",
     "django_filters",
     "corsheaders",
@@ -153,6 +155,19 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# ── Cloudinary ──────────────────────────────────────────────────
+
+_cloudinary_name = config("CLOUDINARY_CLOUD_NAME", default="")
+
+if _cloudinary_name:
+    CLOUDINARY_STORAGE = {
+        "CLOUD_NAME": _cloudinary_name,
+        "API_KEY": config("CLOUDINARY_API_KEY"),
+        "API_SECRET": config("CLOUDINARY_API_SECRET"),
+        "FOLDER": "cambridge_sausages",
+    }
+    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # ── Default primary key ────────────────────────────────────────
 
