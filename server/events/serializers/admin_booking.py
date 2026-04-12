@@ -40,4 +40,4 @@ class AdminEventConfigSerializer(serializers.ModelSerializer):
 class AdminTimeSlotSerializer(serializers.ModelSerializer):
     class Meta:
         model = TimeSlot
-        fields = ("id", "label", "start_time", "end_time", "is_active", "order")
+        fields = ("id", "label", "start_time", "end_time", "is_active", "order", "available_days")

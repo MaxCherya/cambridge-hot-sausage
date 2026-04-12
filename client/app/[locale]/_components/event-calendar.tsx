@@ -138,7 +138,7 @@ export function EventCalendar({ onSlotSelect, selectedDate, selectedSlotId }: Ev
           <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-brand-sage">
             {new Date(expandedDay.date).toLocaleDateString("en", { weekday: "long", month: "long", day: "numeric" })}
           </p>
-          <div className="flex flex-col gap-2 sm:flex-row">
+          <div className="grid gap-2">
             {expandedDay.slots.map((slot) => {
               const isBooked = slot.status === "booked";
               const isThisSelected = selectedDate === expandedDay.date && selectedSlotId === slot.id;
@@ -153,7 +153,7 @@ export function EventCalendar({ onSlotSelect, selectedDate, selectedSlotId }: Ev
                       onSlotSelect(expandedDay.date, slot.id, slot.label);
                     }
                   }}
-                  className={`flex flex-1 items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
+                  className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition-all duration-200 ${
                     isThisSelected
                       ? "border-brand-maroon bg-brand-maroon text-brand-cream shadow-md"
                       : isBooked
