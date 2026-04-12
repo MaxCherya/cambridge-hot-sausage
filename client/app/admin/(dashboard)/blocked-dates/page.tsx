@@ -97,7 +97,7 @@ export default function BlockedDatesPage() {
       </form>
 
       {/* List */}
-      <div className="mt-6 overflow-hidden rounded-xl border border-gray-100 bg-white shadow-sm">
+      <div className="mt-6 overflow-x-auto rounded-xl border border-gray-100 bg-white shadow-sm">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="border-b border-gray-100 bg-gray-50/50">
