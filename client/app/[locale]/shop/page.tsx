@@ -3,8 +3,9 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getCategories, getProducts } from "@/lib/shop/server";
 import { ShopListing } from "../_components/shop-listing";
 
-// Fetch fresh data on every request — not static
-export const dynamic = "force-dynamic";
+// Revalidate every 60 seconds — serves cached HTML to visitors,
+// refreshes in the background. New products appear within 1 minute.
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
