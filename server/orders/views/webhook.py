@@ -70,13 +70,27 @@ def _handle_checkout_completed(session):
         if charge:
             receipt_url = getattr(charge, "receipt_url", "") or ""
 
-    shipping = getattr(full_session, "shipping_details", None)
-    address = getattr(shipping, "address", None) if shipping else None
+    # Stripe moved shipping to collected_information.shipping_details
+    # Fall back to shipping_details (legacy) then customer_details.address
+    collected = getattr(full_session, "collected_information", None)
+    shipping = None
+    address = None
+
+    if collected:
+        shipping = getattr(collected, "shipping_details", None)
+    if not shipping:
+        shipping = getattr(full_session, "shipping_details", None)
+
+    if shipping:
+        address = getattr(shipping, "address", None)
+
+    # If still no address, try customer_details.address
+    customer = getattr(full_session, "customer_details", None)
+    if not address and customer:
+        address = getattr(customer, "address", None)
 
     shipping_cost_obj = getattr(full_session, "shipping_cost", None)
     shipping_amount = getattr(shipping_cost_obj, "amount_total", 0) if shipping_cost_obj else 0
-
-    customer = getattr(full_session, "customer_details", None)
 
     order = Order.objects.create(
         stripe_session_id=session_id,
