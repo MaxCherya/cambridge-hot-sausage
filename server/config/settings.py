@@ -20,8 +20,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Third-party
-    "cloudinary_storage",
-    "cloudinary",
+    "storages",
     "rest_framework",
     "django_filters",
     "corsheaders",
@@ -156,18 +155,29 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-# ── Cloudinary ──────────────────────────────────────────────────
+# ── Object Storage (Railway Bucket / S3-compatible) ─────────────
 
-_cloudinary_name = config("CLOUDINARY_CLOUD_NAME", default="")
+_bucket_endpoint = config("BUCKET_ENDPOINT", default="")
 
-if _cloudinary_name:
-    CLOUDINARY_STORAGE = {
-        "CLOUD_NAME": _cloudinary_name,
-        "API_KEY": config("CLOUDINARY_API_KEY"),
-        "API_SECRET": config("CLOUDINARY_API_SECRET"),
-        "FOLDER": "cambridge_sausages",
+if _bucket_endpoint:
+    STORAGES = {
+        "default": {
+            "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+            "OPTIONS": {
+                "endpoint_url": _bucket_endpoint,
+                "access_key": config("BUCKET_ACCESS_KEY"),
+                "secret_key": config("BUCKET_SECRET_KEY"),
+                "bucket_name": config("BUCKET_NAME"),
+                "default_acl": "public-read",
+                "querystring_auth": False,
+                "file_overwrite": False,
+                "custom_domain": None,
+            },
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
     }
-    DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
 
 # ── Default primary key ────────────────────────────────────────
 
