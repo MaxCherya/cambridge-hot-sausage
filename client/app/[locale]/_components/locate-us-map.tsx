@@ -5,10 +5,10 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 const POSITION: [number, number] = [
-  52.206090944020346, 0.12063357052785396,
+  52.2065986, 0.1300951,
 ];
 const NAME = "Cambridge Hot Sausage";
-const ADDRESS = "2 Market Passage, Cambridge CB2 3PA";
+const ADDRESS = "Pitch 14, Fitzroy Street, Cambridge CB1 1EW";
 
 // Custom maroon pin built from inline HTML so it picks up brand colors
 const pinIcon = L.divIcon({

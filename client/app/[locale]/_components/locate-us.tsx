@@ -13,10 +13,10 @@ const LocateUsMap = dynamic(() => import("./locate-us-map"), {
   ),
 });
 
-const LAT = 52.206090944020346;
-const LNG = 0.12063357052785396;
+const LAT = 52.2065986;
+const LNG = 0.1300951;
 const NAME = "Cambridge Hot Sausage";
-const ADDRESS = "2 Market Passage, Cambridge CB2 3PA";
+const ADDRESS = "Pitch 14, Fitzroy Street, Cambridge CB1 1EW";
 
 // Universal directions URL — opens Google Maps in browser, or the native
 // Google/Apple Maps app on mobile devices that have it installed.
