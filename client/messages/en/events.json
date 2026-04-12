@@ -1,0 +1,58 @@
+{
+  "meta": { "title": "Book an Event" },
+  "hero": {
+    "eyebrow": "Private events",
+    "title": "Book the barrow",
+    "subtitle": "Pop-up hot dog service for weddings, parties and corporate events — fully self-contained, ready to serve at any venue."
+  },
+  "calendar": {
+    "title": "Pick your date",
+    "subtitle": "Choose an available date. Your selection will be held for 5 minutes while you complete the booking.",
+    "available": "Available",
+    "held": "Held",
+    "confirmed": "Booked",
+    "blocked": "Unavailable",
+    "past": "Past",
+    "holdActive": "Date held until {time}",
+    "holdExpired": "Hold expired — please select again"
+  },
+  "location": {
+    "title": "Where's your event?",
+    "subtitle": "Click the map to place your pin. Must be within 200 miles of Cambridge.",
+    "placeholder": "Click on the map to select a location",
+    "distance": "{miles} miles from Cambridge",
+    "tooFar": "Too far — maximum 200 miles from Cambridge",
+    "invalidLocation": "Please choose a valid land address",
+    "calculating": "Calculating..."
+  },
+  "pricing": {
+    "title": "Price breakdown",
+    "basePrice": "Base price",
+    "distanceBand": "Distance surcharge",
+    "total": "Total",
+    "band": "{label}"
+  },
+  "form": {
+    "title": "Event details",
+    "guests": "Number of guests",
+    "timingStart": "Start time",
+    "timingEnd": "End time",
+    "notes": "Notes (optional)",
+    "notesPlaceholder": "Special requirements, dietary needs, setup details...",
+    "name": "Your name",
+    "email": "Your email",
+    "phone": "Phone number (optional)",
+    "submit": "Proceed to payment",
+    "submitting": "Processing..."
+  },
+  "success": {
+    "eyebrow": "Booking confirmed",
+    "title": "You're all set!",
+    "subtitle": "Your event has been booked. We'll be in touch with the details.",
+    "date": "Date",
+    "location": "Location",
+    "guests": "Guests",
+    "total": "Total paid",
+    "backToHome": "Back to home"
+  }
+}

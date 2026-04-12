@@ -1,0 +1,58 @@
+{
+  "meta": { "title": "Veranstaltung buchen" },
+  "hero": {
+    "eyebrow": "Private Veranstaltungen",
+    "title": "Den Wagen buchen",
+    "subtitle": "Mobiler Hot-Dog-Service für Hochzeiten, Partys und Firmenveranstaltungen — komplett eigenständig, bereit an jedem Veranstaltungsort zu servieren."
+  },
+  "calendar": {
+    "title": "Wählen Sie Ihr Datum",
+    "subtitle": "Wählen Sie ein verfügbares Datum. Ihre Auswahl wird 5 Minuten reserviert, während Sie die Buchung abschließen.",
+    "available": "Verfügbar",
+    "held": "Reserviert",
+    "confirmed": "Gebucht",
+    "blocked": "Nicht verfügbar",
+    "past": "Vergangen",
+    "holdActive": "Datum reserviert bis {time}",
+    "holdExpired": "Reservierung abgelaufen — bitte erneut auswählen"
+  },
+  "location": {
+    "title": "Wo findet Ihre Veranstaltung statt?",
+    "subtitle": "Klicken Sie auf die Karte, um Ihren Standort zu markieren. Muss innerhalb von 200 Meilen von Cambridge liegen.",
+    "placeholder": "Klicken Sie auf die Karte, um einen Standort auszuwählen",
+    "distance": "{miles} Meilen von Cambridge",
+    "tooFar": "Zu weit — maximal 200 Meilen von Cambridge",
+    "invalidLocation": "Bitte wählen Sie eine gültige Adresse",
+    "calculating": "Berechnung läuft..."
+  },
+  "pricing": {
+    "title": "Preisaufstellung",
+    "basePrice": "Grundpreis",
+    "distanceBand": "Entfernungszuschlag",
+    "total": "Gesamt",
+    "band": "{label}"
+  },
+  "form": {
+    "title": "Veranstaltungsdetails",
+    "guests": "Anzahl der Gäste",
+    "timingStart": "Startzeit",
+    "timingEnd": "Endzeit",
+    "notes": "Anmerkungen (optional)",
+    "notesPlaceholder": "Besondere Anforderungen, Ernährungsbedürfnisse, Aufbaudetails...",
+    "name": "Ihr Name",
+    "email": "Ihre E-Mail",
+    "phone": "Telefonnummer (optional)",
+    "submit": "Weiter zur Zahlung",
+    "submitting": "Verarbeitung..."
+  },
+  "success": {
+    "eyebrow": "Buchung bestätigt",
+    "title": "Alles erledigt!",
+    "subtitle": "Ihre Veranstaltung wurde gebucht. Wir melden uns mit den Details.",
+    "date": "Datum",
+    "location": "Veranstaltungsort",
+    "guests": "Gäste",
+    "total": "Gesamtbetrag",
+    "backToHome": "Zurück zur Startseite"
+  }
+}

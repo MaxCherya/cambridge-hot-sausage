@@ -1,0 +1,58 @@
+{
+  "meta": { "title": "Reservar un evento" },
+  "hero": {
+    "eyebrow": "Eventos privados",
+    "title": "Reserva el carrito",
+    "subtitle": "Servicio de hot dogs itinerante para bodas, fiestas y eventos corporativos — completamente autónomo, listo para servir en cualquier lugar."
+  },
+  "calendar": {
+    "title": "Elige tu fecha",
+    "subtitle": "Selecciona una fecha disponible. Tu selección se mantendrá durante 5 minutos mientras completas la reserva.",
+    "available": "Disponible",
+    "held": "Retenido",
+    "confirmed": "Reservado",
+    "blocked": "No disponible",
+    "past": "Pasado",
+    "holdActive": "Fecha retenida hasta las {time}",
+    "holdExpired": "Reserva expirada — por favor selecciona de nuevo"
+  },
+  "location": {
+    "title": "¿Dónde es tu evento?",
+    "subtitle": "Haz clic en el mapa para colocar tu marcador. Debe estar dentro de 200 millas de Cambridge.",
+    "placeholder": "Haz clic en el mapa para seleccionar una ubicación",
+    "distance": "{miles} millas de Cambridge",
+    "tooFar": "Demasiado lejos — máximo 200 millas de Cambridge",
+    "invalidLocation": "Por favor elige una dirección terrestre válida",
+    "calculating": "Calculando..."
+  },
+  "pricing": {
+    "title": "Desglose de precios",
+    "basePrice": "Precio base",
+    "distanceBand": "Recargo por distancia",
+    "total": "Total",
+    "band": "{label}"
+  },
+  "form": {
+    "title": "Detalles del evento",
+    "guests": "Número de invitados",
+    "timingStart": "Hora de inicio",
+    "timingEnd": "Hora de fin",
+    "notes": "Notas (opcional)",
+    "notesPlaceholder": "Requisitos especiales, necesidades dietéticas, detalles de montaje...",
+    "name": "Tu nombre",
+    "email": "Tu correo electrónico",
+    "phone": "Número de teléfono (opcional)",
+    "submit": "Proceder al pago",
+    "submitting": "Procesando..."
+  },
+  "success": {
+    "eyebrow": "Reserva confirmada",
+    "title": "¡Todo listo!",
+    "subtitle": "Tu evento ha sido reservado. Nos pondremos en contacto con los detalles.",
+    "date": "Fecha",
+    "location": "Ubicación",
+    "guests": "Invitados",
+    "total": "Total pagado",
+    "backToHome": "Volver al inicio"
+  }
+}

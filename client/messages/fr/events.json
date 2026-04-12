@@ -1,0 +1,58 @@
+{
+  "meta": { "title": "Réserver un événement" },
+  "hero": {
+    "eyebrow": "Événements privés",
+    "title": "Réservez la carriole",
+    "subtitle": "Service de hot dogs itinérant pour mariages, fêtes et événements d'entreprise — entièrement autonome, prêt à servir sur n'importe quel site."
+  },
+  "calendar": {
+    "title": "Choisissez votre date",
+    "subtitle": "Sélectionnez une date disponible. Votre choix sera retenu pendant 5 minutes le temps de finaliser la réservation.",
+    "available": "Disponible",
+    "held": "Retenu",
+    "confirmed": "Réservé",
+    "blocked": "Indisponible",
+    "past": "Passé",
+    "holdActive": "Date retenue jusqu'à {time}",
+    "holdExpired": "Réservation expirée — veuillez sélectionner à nouveau"
+  },
+  "location": {
+    "title": "Où se déroule votre événement ?",
+    "subtitle": "Cliquez sur la carte pour placer votre repère. Doit être dans un rayon de 200 miles de Cambridge.",
+    "placeholder": "Cliquez sur la carte pour sélectionner un lieu",
+    "distance": "{miles} miles de Cambridge",
+    "tooFar": "Trop loin — maximum 200 miles de Cambridge",
+    "invalidLocation": "Veuillez choisir une adresse terrestre valide",
+    "calculating": "Calcul en cours..."
+  },
+  "pricing": {
+    "title": "Détail du prix",
+    "basePrice": "Prix de base",
+    "distanceBand": "Supplément distance",
+    "total": "Total",
+    "band": "{label}"
+  },
+  "form": {
+    "title": "Détails de l'événement",
+    "guests": "Nombre d'invités",
+    "timingStart": "Heure de début",
+    "timingEnd": "Heure de fin",
+    "notes": "Notes (facultatif)",
+    "notesPlaceholder": "Exigences particulières, besoins alimentaires, détails d'installation...",
+    "name": "Votre nom",
+    "email": "Votre e-mail",
+    "phone": "Numéro de téléphone (facultatif)",
+    "submit": "Procéder au paiement",
+    "submitting": "Traitement en cours..."
+  },
+  "success": {
+    "eyebrow": "Réservation confirmée",
+    "title": "C'est tout bon !",
+    "subtitle": "Votre événement a été réservé. Nous vous contacterons avec les détails.",
+    "date": "Date",
+    "location": "Lieu",
+    "guests": "Invités",
+    "total": "Total payé",
+    "backToHome": "Retour à l'accueil"
+  }
+}

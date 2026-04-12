@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "orders.apps.OrdersConfig",
     "contact.apps.ContactConfig",
     "newsletter.apps.NewsletterConfig",
+    "events.apps.EventsConfig",
 ]
 
 # ── Middleware ───────────────────────────────────────────────────

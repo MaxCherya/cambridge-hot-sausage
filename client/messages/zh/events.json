@@ -1,0 +1,58 @@
+{
+  "meta": { "title": "预订活动" },
+  "hero": {
+    "eyebrow": "私人活动",
+    "title": "预订餐车",
+    "subtitle": "为婚礼、派对和企业活动提供流动热狗服务——完全自给自足，随时为任何场地提供服务。"
+  },
+  "calendar": {
+    "title": "选择日期",
+    "subtitle": "选择一个可用日期。您的选择将保留5分钟，以便您完成预订。",
+    "available": "可预订",
+    "held": "已保留",
+    "confirmed": "已预订",
+    "blocked": "不可用",
+    "past": "已过期",
+    "holdActive": "日期保留至 {time}",
+    "holdExpired": "保留已过期——请重新选择"
+  },
+  "location": {
+    "title": "您的活动在哪里？",
+    "subtitle": "点击地图放置标记。必须在距剑桥200英里范围内。",
+    "placeholder": "点击地图选择位置",
+    "distance": "距剑桥 {miles} 英里",
+    "tooFar": "距离过远——最远200英里",
+    "invalidLocation": "请选择有效的地址",
+    "calculating": "计算中..."
+  },
+  "pricing": {
+    "title": "价格明细",
+    "basePrice": "基础价格",
+    "distanceBand": "距离附加费",
+    "total": "合计",
+    "band": "{label}"
+  },
+  "form": {
+    "title": "活动详情",
+    "guests": "宾客人数",
+    "timingStart": "开始时间",
+    "timingEnd": "结束时间",
+    "notes": "备注（可选）",
+    "notesPlaceholder": "特殊要求、饮食需求、布置细节...",
+    "name": "您的姓名",
+    "email": "您的邮箱",
+    "phone": "电话号码（可选）",
+    "submit": "前往支付",
+    "submitting": "处理中..."
+  },
+  "success": {
+    "eyebrow": "预订已确认",
+    "title": "一切就绪！",
+    "subtitle": "您的活动已预订成功。我们将与您联系确认详情。",
+    "date": "日期",
+    "location": "地点",
+    "guests": "宾客",
+    "total": "已支付总额",
+    "backToHome": "返回首页"
+  }
+}

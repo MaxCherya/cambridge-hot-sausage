@@ -1,0 +1,58 @@
+{
+  "meta": { "title": "イベント予約" },
+  "hero": {
+    "eyebrow": "プライベートイベント",
+    "title": "屋台を予約する",
+    "subtitle": "結婚式、パーティー、企業イベント向けの移動式ホットドッグサービス——完全自立型で、どの会場でもすぐにご提供可能です。"
+  },
+  "calendar": {
+    "title": "日付を選択",
+    "subtitle": "空いている日付を選んでください。予約完了まで5分間仮押さえされます。",
+    "available": "予約可能",
+    "held": "仮押さえ中",
+    "confirmed": "予約済み",
+    "blocked": "利用不可",
+    "past": "過去",
+    "holdActive": "{time} まで仮押さえ中",
+    "holdExpired": "仮押さえが期限切れです——再度選択してください"
+  },
+  "location": {
+    "title": "イベントの場所はどこですか？",
+    "subtitle": "地図をクリックしてピンを配置してください。ケンブリッジから200マイル以内である必要があります。",
+    "placeholder": "地図をクリックして場所を選択",
+    "distance": "ケンブリッジから {miles} マイル",
+    "tooFar": "遠すぎます——ケンブリッジから最大200マイル",
+    "invalidLocation": "有効な住所を選択してください",
+    "calculating": "計算中..."
+  },
+  "pricing": {
+    "title": "料金内訳",
+    "basePrice": "基本料金",
+    "distanceBand": "距離追加料金",
+    "total": "合計",
+    "band": "{label}"
+  },
+  "form": {
+    "title": "イベント詳細",
+    "guests": "ゲスト人数",
+    "timingStart": "開始時間",
+    "timingEnd": "終了時間",
+    "notes": "備考（任意）",
+    "notesPlaceholder": "特別な要件、食事制限、設営の詳細...",
+    "name": "お名前",
+    "email": "メールアドレス",
+    "phone": "電話番号（任意）",
+    "submit": "お支払いへ進む",
+    "submitting": "処理中..."
+  },
+  "success": {
+    "eyebrow": "予約確定",
+    "title": "準備完了！",
+    "subtitle": "イベントの予約が完了しました。詳細についてご連絡いたします。",
+    "date": "日付",
+    "location": "場所",
+    "guests": "ゲスト",
+    "total": "お支払い総額",
+    "backToHome": "ホームに戻る"
+  }
+}

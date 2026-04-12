@@ -34,7 +34,16 @@ def stripe_webhook(request):
 
     if event["type"] == "checkout.session.completed":
         session = event["data"]["object"]
-        _handle_checkout_completed(session)
+
+        # Dispatch to event booking handler if applicable
+        metadata = session.get("metadata", {}) if isinstance(session, dict) else (session.metadata or {})
+        booking_type = metadata.get("type", "") if isinstance(metadata, dict) else getattr(metadata, "get", lambda *a: "")("type", "")
+
+        if booking_type == "event_booking":
+            from events.views.webhook import handle_event_booking_completed
+            handle_event_booking_completed(session)
+        else:
+            _handle_checkout_completed(session)
 
     return HttpResponse(status=200)
 
