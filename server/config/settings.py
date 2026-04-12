@@ -168,10 +168,10 @@ if _bucket_endpoint:
                 "access_key": config("BUCKET_ACCESS_KEY"),
                 "secret_key": config("BUCKET_SECRET_KEY"),
                 "bucket_name": config("BUCKET_NAME"),
-                "default_acl": "public-read",
-                "querystring_auth": False,
+                "default_acl": "private",
+                "querystring_auth": True,
+                "querystring_expire": 3600,
                 "file_overwrite": False,
-                "custom_domain": None,
             },
         },
         "staticfiles": {
