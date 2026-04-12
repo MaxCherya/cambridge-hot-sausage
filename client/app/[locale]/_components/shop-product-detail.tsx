@@ -22,8 +22,12 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
   );
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const [selectedImageId, setSelectedImageId] = useState<number | null>(null);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
-  const currentImage = product.images.find((img) => img.is_primary) || product.images[0];
+  const currentImage = selectedImageId
+    ? product.images.find((img) => img.id === selectedImageId) || product.images[0]
+    : product.images.find((img) => img.is_primary) || product.images[0];
 
   return (
     <>
@@ -43,7 +47,12 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
             {/* Image column */}
             <div>
               <div className="overflow-hidden rounded-3xl border border-brand-maroon/8 bg-white/60 shadow-[0_8px_30px_-10px_rgba(90,31,31,0.1)]">
-                <div className="relative aspect-square w-full bg-brand-cream/50">
+                {/* Main image — click to open fullscreen */}
+                <button
+                  type="button"
+                  onClick={() => currentImage?.image && setLightboxOpen(true)}
+                  className="relative aspect-square w-full cursor-zoom-in bg-brand-cream/50"
+                >
                   {currentImage?.image ? (
                     <img
                       src={currentImage.image}
@@ -57,14 +66,16 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                       </span>
                     </div>
                   )}
-                </div>
+                </button>
 
-                {/* Thumbnail strip */}
+                {/* Thumbnail strip — click to change */}
                 {product.images.length > 1 && (
-                  <div className="flex gap-2 border-t border-brand-maroon/5 p-3">
+                  <div className="flex gap-2 overflow-x-auto border-t border-brand-maroon/5 p-3">
                     {product.images.map((img) => (
-                      <div
+                      <button
                         key={img.id}
+                        type="button"
+                        onClick={() => setSelectedImageId(img.id)}
                         className={`h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-300 ${
                           img.id === currentImage?.id
                             ? "border-brand-maroon"
@@ -84,7 +95,7 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                             </span>
                           </div>
                         )}
-                      </div>
+                      </button>
                     ))}
                   </div>
                 )}
@@ -287,6 +298,75 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
       </section>
 
       <ShopReviewSection product={product} />
+
+      {/* Fullscreen lightbox */}
+      {lightboxOpen && currentImage?.image && (
+        <div
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+          onClick={() => setLightboxOpen(false)}
+        >
+          <button
+            type="button"
+            onClick={() => setLightboxOpen(false)}
+            className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+          >
+            ✕
+          </button>
+
+          {/* Prev / Next arrows */}
+          {product.images.length > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const idx = product.images.findIndex((i) => i.id === currentImage.id);
+                  const prev = product.images[(idx - 1 + product.images.length) % product.images.length];
+                  setSelectedImageId(prev.id);
+                }}
+                className="absolute left-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-colors hover:bg-white/20"
+              >
+                ‹
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const idx = product.images.findIndex((i) => i.id === currentImage.id);
+                  const next = product.images[(idx + 1) % product.images.length];
+                  setSelectedImageId(next.id);
+                }}
+                className="absolute right-4 z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-2xl text-white transition-colors hover:bg-white/20"
+              >
+                ›
+              </button>
+            </>
+          )}
+
+          <img
+            src={currentImage.image}
+            alt={currentImage.alt_text || product.name}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+          />
+
+          {/* Thumbnail dots */}
+          {product.images.length > 1 && (
+            <div className="absolute bottom-6 left-1/2 flex -translate-x-1/2 gap-2">
+              {product.images.map((img) => (
+                <button
+                  key={img.id}
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); setSelectedImageId(img.id); }}
+                  className={`h-2 w-2 rounded-full transition-all ${
+                    img.id === currentImage.id ? "w-6 bg-white" : "bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      )}
     </>
   );
 }
