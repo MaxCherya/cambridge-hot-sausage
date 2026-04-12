@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "Boutique",
+    "productTitle": "{name}"
+  },
+  "listing": {
+    "eyebrow": "Le menu",
+    "title": "Notre boutique",
+    "subtitle": "Hot dogs classiques, accompagnements, boissons et produits dérivés — tout du chariot, disponible en ligne.",
+    "filterAll": "Tout",
+    "search": "Rechercher…",
+    "noResults": "Aucun produit ne correspond à votre recherche.",
+    "featured": "En vedette",
+    "from": "À partir de",
+    "outOfStock": "Rupture de stock",
+    "viewProduct": "Voir le produit"
+  },
+  "detail": {
+    "backToShop": "Retour à la boutique",
+    "selectVariant": "Choisir une option",
+    "price": "Prix",
+    "addToCart": "Ajouter au panier",
+    "outOfStock": "Rupture de stock",
+    "description": "Description",
+    "inStock": "En stock",
+    "lowStock": "Plus que {count}"
+  },
+  "reviews": {
+    "title": "Avis",
+    "noReviews": "Pas encore d'avis. Soyez le premier !",
+    "writeReview": "Écrire un avis",
+    "form": {
+      "name": "Votre nom",
+      "email": "Votre email",
+      "rating": "Note",
+      "reviewTitle": "Titre (optionnel)",
+      "text": "Votre avis",
+      "submit": "Envoyer",
+      "submitting": "Envoi en cours…",
+      "success": "Merci ! Votre avis apparaîtra après modération.",
+      "error": "Une erreur est survenue. Veuillez réessayer."
+    }
+  }
+}

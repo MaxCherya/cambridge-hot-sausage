@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "Shop",
+    "productTitle": "{name}"
+  },
+  "listing": {
+    "eyebrow": "The menu",
+    "title": "Our shop",
+    "subtitle": "Classic hot dogs, sides, drinks and merch — everything from the barrow, available online.",
+    "filterAll": "All",
+    "search": "Search products…",
+    "noResults": "No products match your search.",
+    "featured": "Featured",
+    "from": "From",
+    "outOfStock": "Out of stock",
+    "viewProduct": "View product"
+  },
+  "detail": {
+    "backToShop": "Back to shop",
+    "selectVariant": "Choose an option",
+    "price": "Price",
+    "addToCart": "Add to cart",
+    "outOfStock": "Out of stock",
+    "description": "Description",
+    "inStock": "In stock",
+    "lowStock": "Only {count} left"
+  },
+  "reviews": {
+    "title": "Reviews",
+    "noReviews": "No reviews yet. Be the first!",
+    "writeReview": "Write a review",
+    "form": {
+      "name": "Your name",
+      "email": "Your email",
+      "rating": "Rating",
+      "reviewTitle": "Title (optional)",
+      "text": "Your review",
+      "submit": "Submit review",
+      "submitting": "Submitting…",
+      "success": "Thanks! Your review will appear after moderation.",
+      "error": "Something went wrong. Please try again."
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "Tienda",
+    "productTitle": "{name}"
+  },
+  "listing": {
+    "eyebrow": "El menú",
+    "title": "Nuestra tienda",
+    "subtitle": "Hot dogs clásicos, acompañamientos, bebidas y merchandising — todo del carrito, disponible online.",
+    "filterAll": "Todo",
+    "search": "Buscar productos…",
+    "noResults": "No se encontraron productos.",
+    "featured": "Destacado",
+    "from": "Desde",
+    "outOfStock": "Agotado",
+    "viewProduct": "Ver producto"
+  },
+  "detail": {
+    "backToShop": "Volver a la tienda",
+    "selectVariant": "Elegir opción",
+    "price": "Precio",
+    "addToCart": "Añadir al carrito",
+    "outOfStock": "Agotado",
+    "description": "Descripción",
+    "inStock": "En stock",
+    "lowStock": "Solo quedan {count}"
+  },
+  "reviews": {
+    "title": "Reseñas",
+    "noReviews": "Sin reseñas aún. ¡Sé el primero!",
+    "writeReview": "Escribir reseña",
+    "form": {
+      "name": "Tu nombre",
+      "email": "Tu email",
+      "rating": "Valoración",
+      "reviewTitle": "Título (opcional)",
+      "text": "Tu reseña",
+      "submit": "Enviar",
+      "submitting": "Enviando…",
+      "success": "¡Gracias! Tu reseña aparecerá tras la moderación.",
+      "error": "Algo salió mal. Inténtalo de nuevo."
+    }
+  }
+}

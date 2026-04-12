@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "Shop",
+    "productTitle": "{name}"
+  },
+  "listing": {
+    "eyebrow": "Die Karte",
+    "title": "Unser Shop",
+    "subtitle": "Klassische Hot Dogs, Beilagen, Getränke und Merchandise — alles vom Karren, online verfügbar.",
+    "filterAll": "Alle",
+    "search": "Produkte suchen…",
+    "noResults": "Keine Produkte gefunden.",
+    "featured": "Empfohlen",
+    "from": "Ab",
+    "outOfStock": "Ausverkauft",
+    "viewProduct": "Produkt ansehen"
+  },
+  "detail": {
+    "backToShop": "Zurück zum Shop",
+    "selectVariant": "Option wählen",
+    "price": "Preis",
+    "addToCart": "In den Warenkorb",
+    "outOfStock": "Ausverkauft",
+    "description": "Beschreibung",
+    "inStock": "Auf Lager",
+    "lowStock": "Nur noch {count}"
+  },
+  "reviews": {
+    "title": "Bewertungen",
+    "noReviews": "Noch keine Bewertungen. Seien Sie der Erste!",
+    "writeReview": "Bewertung schreiben",
+    "form": {
+      "name": "Ihr Name",
+      "email": "Ihre E-Mail",
+      "rating": "Bewertung",
+      "reviewTitle": "Titel (optional)",
+      "text": "Ihre Bewertung",
+      "submit": "Absenden",
+      "submitting": "Wird gesendet…",
+      "success": "Danke! Ihre Bewertung erscheint nach Prüfung.",
+      "error": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    }
+  }
+}

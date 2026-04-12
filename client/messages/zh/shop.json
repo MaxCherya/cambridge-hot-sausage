@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "商店",
+    "productTitle": "{name}"
+  },
+  "listing": {
+    "eyebrow": "菜单",
+    "title": "我们的商店",
+    "subtitle": "经典热狗、配菜、饮品和周边商品——推车上的一切，在线即可购买。",
+    "filterAll": "全部",
+    "search": "搜索商品…",
+    "noResults": "未找到匹配的商品。",
+    "featured": "推荐",
+    "from": "起价",
+    "outOfStock": "缺货",
+    "viewProduct": "查看商品"
+  },
+  "detail": {
+    "backToShop": "返回商店",
+    "selectVariant": "选择规格",
+    "price": "价格",
+    "addToCart": "加入购物车",
+    "outOfStock": "缺货",
+    "description": "描述",
+    "inStock": "有货",
+    "lowStock": "仅剩 {count} 件"
+  },
+  "reviews": {
+    "title": "评价",
+    "noReviews": "暂无评价，来做第一个评价者吧！",
+    "writeReview": "撰写评价",
+    "form": {
+      "name": "您的姓名",
+      "email": "您的邮箱",
+      "rating": "评分",
+      "reviewTitle": "标题（可选）",
+      "text": "您的评价",
+      "submit": "提交评价",
+      "submitting": "提交中…",
+      "success": "感谢！您的评价将在审核后显示。",
+      "error": "出了点问题，请重试。"
+    }
+  }
+}

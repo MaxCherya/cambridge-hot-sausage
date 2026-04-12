@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "title": "ショップ",
+    "productTitle": "{name}"
+  },
+  "listing": {
+    "eyebrow": "メニュー",
+    "title": "ショップ",
+    "subtitle": "クラシックなホットドッグ、サイドメニュー、ドリンク、グッズ——屋台のすべてをオンラインで。",
+    "filterAll": "すべて",
+    "search": "商品を検索…",
+    "noResults": "該当する商品がありません。",
+    "featured": "おすすめ",
+    "from": "から",
+    "outOfStock": "在庫切れ",
+    "viewProduct": "商品を見る"
+  },
+  "detail": {
+    "backToShop": "ショップに戻る",
+    "selectVariant": "オプションを選択",
+    "price": "価格",
+    "addToCart": "カートに追加",
+    "outOfStock": "在庫切れ",
+    "description": "商品説明",
+    "inStock": "在庫あり",
+    "lowStock": "残り {count} 点"
+  },
+  "reviews": {
+    "title": "レビュー",
+    "noReviews": "まだレビューはありません。最初のレビューを書きましょう！",
+    "writeReview": "レビューを書く",
+    "form": {
+      "name": "お名前",
+      "email": "メールアドレス",
+      "rating": "評価",
+      "reviewTitle": "タイトル（任意）",
+      "text": "レビュー本文",
+      "submit": "レビューを送信",
+      "submitting": "送信中…",
+      "success": "ありがとうございます！レビューは審査後に表示されます。",
+      "error": "エラーが発生しました。もう一度お試しください。"
+    }
+  }
+}
