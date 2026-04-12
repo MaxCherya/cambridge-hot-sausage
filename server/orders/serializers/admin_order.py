@@ -14,7 +14,7 @@ class AdminOrderListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ("id", "short_id", "customer_name", "customer_email", "status", "total", "created_at", "item_count")
+        fields = ("id", "short_id", "customer_name", "customer_email", "status", "total", "created_at", "item_count", "shipping_city", "shipping_postal_code", "shipping_country")
 
     def get_item_count(self, obj):
         return obj.items.count()

@@ -17,6 +17,9 @@ interface OrderListItem {
   total: string;
   created_at: string;
   item_count: number;
+  shipping_city: string;
+  shipping_postal_code: string;
+  shipping_country: string;
 }
 
 const STATUSES = ["", "pending", "paid", "shipped", "delivered", "cancelled"];
@@ -96,6 +99,7 @@ export default function OrdersPage() {
             <tr className="border-b border-gray-100 bg-gray-50/50">
               <th className="px-4 py-3 font-semibold text-gray-500">Order</th>
               <th className="px-4 py-3 font-semibold text-gray-500">Customer</th>
+              <th className="px-4 py-3 font-semibold text-gray-500">Ship to</th>
               <th className="px-4 py-3 font-semibold text-gray-500">Items</th>
               <th className="px-4 py-3 font-semibold text-gray-500">Total</th>
               <th className="px-4 py-3 font-semibold text-gray-500">Status</th>
@@ -104,9 +108,9 @@ export default function OrdersPage() {
           </thead>
           <tbody>
             {isLoading ? (
-              <tr><td colSpan={6} className="py-12 text-center text-gray-400">Loading...</td></tr>
+              <tr><td colSpan={7} className="py-12 text-center text-gray-400">Loading...</td></tr>
             ) : !data || data.results.length === 0 ? (
-              <tr><td colSpan={6} className="py-12 text-center text-gray-400">No orders found</td></tr>
+              <tr><td colSpan={7} className="py-12 text-center text-gray-400">No orders found</td></tr>
             ) : (
               data.results.map((order) => (
                 <tr key={order.id} className="border-b border-gray-50 transition-colors hover:bg-gray-50/50">
@@ -118,6 +122,13 @@ export default function OrdersPage() {
                   <td className="px-4 py-3">
                     <p className="font-medium text-gray-800">{order.customer_name || "Guest"}</p>
                     <p className="text-xs text-gray-400">{order.customer_email}</p>
+                  </td>
+                  <td className="px-4 py-3">
+                    {order.shipping_city ? (
+                      <p className="text-sm text-gray-700">{order.shipping_city}, {order.shipping_postal_code}<br /><span className="text-xs text-gray-400">{order.shipping_country}</span></p>
+                    ) : (
+                      <span className="text-xs text-gray-300">—</span>
+                    )}
                   </td>
                   <td className="px-4 py-3 text-gray-600">{order.item_count}</td>
                   <td className="px-4 py-3 font-semibold text-gray-800">£{order.total}</td>
