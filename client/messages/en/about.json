@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "title": "About Us"
+  },
+  "hero": {
+    "eyebrow": "Since 1986",
+    "title": "The man behind the barrow",
+    "subtitle": "Forty years of Cambridge tradition, one sausage at a time."
+  },
+  "story": {
+    "eyebrow": "Our story",
+    "title": "From a humble barrow to a Cambridge legend",
+    "paragraphs": {
+      "origin": "Serving Cambridge's famous hot sausages for over 40 years, our Victorian-style barrow on Fitzroy Street has been a local favourite since 1986. We specialise in classic hot dogs made with the legendary Cambridge sausage, freshly prepared and served with simple, satisfying toppings.",
+      "community": "What started as a humble street barrow has become a familiar part of the neighbourhood, feeding students, locals, workers, and passers-by alike. Generations have stopped by for a proper hot dog and a friendly chat.",
+      "mission": "From 1986 to 2026, our mission has stayed the same: great sausages, great service, and a bit of Cambridge tradition on every bun.",
+      "grandma": "Officially voted the best hot dogs around by our most important critic — my very own grandmother."
+    }
+  },
+  "milestones": {
+    "eyebrow": "Forty years in the making",
+    "title": "A timeline of tradition",
+    "items": {
+      "founded": {
+        "year": "1986",
+        "title": "The barrow is born",
+        "description": "A Victorian-style cart appears on Fitzroy Street for the very first time."
+      },
+      "recipe": {
+        "year": "1990s",
+        "title": "The recipe is perfected",
+        "description": "After years of refinement, the legendary Cambridge sausage recipe reaches its final form."
+      },
+      "landmark": {
+        "year": "2000s",
+        "title": "A Cambridge landmark",
+        "description": "The barrow becomes a recognised part of the city's identity, feeding thousands every year."
+      },
+      "events": {
+        "year": "2010s",
+        "title": "Events & catering",
+        "description": "Weddings, festivals and corporate events — the barrow starts travelling across the region."
+      },
+      "today": {
+        "year": "2020s",
+        "title": "Still going strong",
+        "description": "Four decades in, the mission hasn't changed. Great sausages, great service, every single day."
+      }
+    }
+  },
+  "values": {
+    "eyebrow": "What we stand for",
+    "title": "Simple values, honest food",
+    "quality": {
+      "title": "Quality first",
+      "description": "Every sausage is made with premium ingredients — no shortcuts, no compromises."
+    },
+    "tradition": {
+      "title": "Tradition",
+      "description": "The same recipe, the same barrow, the same commitment since day one."
+    },
+    "community": {
+      "title": "Community",
+      "description": "We're not just a food stand — we're part of the neighbourhood."
+    }
+  }
+}
