@@ -8,42 +8,15 @@
     "subtitle": "Justo al lado de la calle principal, a dos minutos del Grand Arcade. Busca el carrito victoriano — no tiene pérdida."
   },
   "highlight": {
-    "title": "Un lugar. Cuarenta años. Incontables hot dogs.",
-    "subtitle": "La misma esquina de Cambridge desde 1986 — llueva o haga sol, aquí estamos.",
+    "title": "Dos lugares. Cuarenta años. Incontables hot dogs.",
+    "subtitle": "Las mismas esquinas de Cambridge desde 1986 — llueva o haga sol, aquí estamos.",
     "stats": {
-      "years": {
-        "value": "40+",
-        "label": "Años sirviendo"
-      },
-      "dogs": {
-        "value": "1M+",
-        "label": "Hot dogs vendidos"
-      },
-      "days": {
-        "value": "7",
-        "label": "Días a la semana"
-      }
+      "years": { "value": "40+", "label": "Años sirviendo" },
+      "dogs": { "value": "1M+", "label": "Hot dogs vendidos" },
+      "days": { "value": "7", "label": "Días a la semana" }
     }
   },
   "info": {
-    "hours": {
-      "label": "Horario",
-      "weekdays": "Lunes – Viernes",
-      "weekdaysTimes": "10:00 – 18:00",
-      "saturday": "Sábado",
-      "saturdayTimes": "09:00 – 19:00",
-      "sunday": "Domingo",
-      "sundayTimes": "10:00 – 17:00"
-    },
-    "nearby": {
-      "label": "Puntos de referencia",
-      "items": {
-        "arcade": "Grand Arcade — 2 min a pie",
-        "market": "Market Square — 1 min a pie",
-        "kings": "King's College — 5 min a pie",
-        "station": "Estación de Cambridge — 20 min a pie"
-      }
-    },
     "main": {
       "label": "Ubicación principal",
       "name": "The Barrow — Fitzroy Street",
@@ -53,25 +26,73 @@
       "label": "Segunda ubicación",
       "name": "Market Passage",
       "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "Horario",
+      "weekdays": "Lunes – Viernes",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "Sábado",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "Domingo",
+      "sundayTimes": "10:00 – 17:00"
     }
   },
   "directions": {
     "eyebrow": "Cómo llegar",
     "title": "Fácil de encontrar, difícil de dejar",
-    "subtitle": "En el corazón de Cambridge — a pie, en bici o en coche.",
-    "walking": {
-      "title": "A pie",
-      "description": "Estamos en Market Passage, justo al lado de la calle principal entre Petty Cury y Market Square. Sigue el olor."
-    },
-    "cycling": {
-      "title": "En bici",
-      "description": "Aparcabicis en Market Square y en el aparcamiento del Grand Arcade. Cierra y camina 30 segundos."
-    },
-    "driving": {
-      "title": "En coche",
-      "description": "El aparcamiento Grand Arcade (CB2 3BJ) es el más cercano — 2 minutos andando hasta el carrito."
-    },
+    "subtitle": "Dos carritos, ambos en el corazón de Cambridge — elige el que te resulte más fácil.",
+    "swipeHint": "Desliza para cambiar",
     "ctaLabel": "Obtener indicaciones",
-    "ctaHint": "Se abre en tu app de mapas"
+    "ctaHint": "Se abre en tu app de mapas",
+    "kiosks": {
+      "main": {
+        "tabLabel": "Fitzroy Street",
+        "walking": {
+          "title": "A pie",
+          "description": "Estamos en el Pitch 14 de Fitzroy Street, a poca distancia del Grafton Centre y Christ's Pieces. Unos diez minutos del centro de la ciudad."
+        },
+        "cycling": {
+          "title": "En bici",
+          "description": "Aparcabicis a lo largo de Fitzroy Street y Burleigh Street. Cierra junto al Grafton Centre y estás a 30 segundos."
+        },
+        "driving": {
+          "title": "En coche",
+          "description": "El aparcamiento del Grafton Centre (CB1 1PS) es el más cercano — 3 minutos andando desde la salida hasta el carrito."
+        },
+        "nearby": {
+          "label": "Puntos de referencia",
+          "items": {
+            "grafton": "Grafton Centre — 2 min a pie",
+            "christs": "Christ's Pieces — 3 min a pie",
+            "busStation": "Estación de Drummer St — 5 min a pie",
+            "station": "Estación de Cambridge — 18 min a pie"
+          }
+        }
+      },
+      "secondary": {
+        "tabLabel": "Market Passage",
+        "walking": {
+          "title": "A pie",
+          "description": "Estamos en Market Passage, justo al lado de la calle principal entre Petty Cury y Market Square. Sigue el olor."
+        },
+        "cycling": {
+          "title": "En bici",
+          "description": "Aparcabicis en Market Square y en el aparcamiento del Grand Arcade. Cierra y camina 30 segundos."
+        },
+        "driving": {
+          "title": "En coche",
+          "description": "El aparcamiento Grand Arcade (CB2 3BJ) es el más cercano — 2 minutos andando hasta el carrito."
+        },
+        "nearby": {
+          "label": "Puntos de referencia",
+          "items": {
+            "arcade": "Grand Arcade — 2 min a pie",
+            "market": "Market Square — 1 min a pie",
+            "kings": "King's College — 5 min a pie",
+            "station": "Estación de Cambridge — 20 min a pie"
+          }
+        }
+      }
+    }
   }
 }

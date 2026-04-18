@@ -8,42 +8,15 @@
     "subtitle": "Direkt neben der Hauptstraße, zwei Minuten vom Grand Arcade entfernt. Suchen Sie nach dem viktorianischen Karren — Sie können ihn nicht verfehlen."
   },
   "highlight": {
-    "title": "Ein Ort. Vierzig Jahre. Unzählige Hot Dogs.",
-    "subtitle": "Die gleiche Ecke von Cambridge seit 1986 — bei Regen oder Sonnenschein, wir sind da.",
+    "title": "Zwei Orte. Vierzig Jahre. Unzählige Hot Dogs.",
+    "subtitle": "Dieselben Ecken von Cambridge seit 1986 — bei Regen oder Sonnenschein, wir sind da.",
     "stats": {
-      "years": {
-        "value": "40+",
-        "label": "Jahre im Dienst"
-      },
-      "dogs": {
-        "value": "1M+",
-        "label": "Hot Dogs verkauft"
-      },
-      "days": {
-        "value": "7",
-        "label": "Tage die Woche"
-      }
+      "years": { "value": "40+", "label": "Jahre im Dienst" },
+      "dogs": { "value": "1M+", "label": "Hot Dogs verkauft" },
+      "days": { "value": "7", "label": "Tage die Woche" }
     }
   },
   "info": {
-    "hours": {
-      "label": "Öffnungszeiten",
-      "weekdays": "Montag – Freitag",
-      "weekdaysTimes": "10:00 – 18:00",
-      "saturday": "Samstag",
-      "saturdayTimes": "09:00 – 19:00",
-      "sunday": "Sonntag",
-      "sundayTimes": "10:00 – 17:00"
-    },
-    "nearby": {
-      "label": "In der Nähe",
-      "items": {
-        "arcade": "Grand Arcade — 2 Min. zu Fuß",
-        "market": "Market Square — 1 Min. zu Fuß",
-        "kings": "King's College — 5 Min. zu Fuß",
-        "station": "Cambridge Bahnhof — 20 Min. zu Fuß"
-      }
-    },
     "main": {
       "label": "Hauptstandort",
       "name": "The Barrow — Fitzroy Street",
@@ -53,25 +26,73 @@
       "label": "Zweiter Standort",
       "name": "Market Passage",
       "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "Öffnungszeiten",
+      "weekdays": "Montag – Freitag",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "Samstag",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "Sonntag",
+      "sundayTimes": "10:00 – 17:00"
     }
   },
   "directions": {
     "eyebrow": "Anfahrt",
     "title": "Leicht zu finden, schwer zu verlassen",
-    "subtitle": "Mitten im Herzen von Cambridge — zu Fuß, mit dem Rad oder dem Auto.",
-    "walking": {
-      "title": "Zu Fuß",
-      "description": "Wir sind in der Market Passage, direkt neben der Hauptstraße zwischen Petty Cury und Market Square. Folgen Sie dem Duft."
-    },
-    "cycling": {
-      "title": "Mit dem Rad",
-      "description": "Fahrradständer am Market Square und im Grand Arcade Parkhaus. Abschließen und 30 Sekunden laufen."
-    },
-    "driving": {
-      "title": "Mit dem Auto",
-      "description": "Das Grand Arcade Parkhaus (CB2 3BJ) ist am nächsten — 2 Minuten zu Fuß zum Karren."
-    },
+    "subtitle": "Zwei Karren, beide mitten im Herzen von Cambridge — wählen Sie den, der für Sie einfacher ist.",
+    "swipeHint": "Wischen zum Wechseln",
     "ctaLabel": "Route berechnen",
-    "ctaHint": "Öffnet Ihre Karten-App"
+    "ctaHint": "Öffnet Ihre Karten-App",
+    "kiosks": {
+      "main": {
+        "tabLabel": "Fitzroy Street",
+        "walking": {
+          "title": "Zu Fuß",
+          "description": "Wir sind am Pitch 14 in der Fitzroy Street, nur einen kurzen Spaziergang vom Grafton Centre und Christ's Pieces entfernt. Etwa zehn Minuten vom Stadtzentrum."
+        },
+        "cycling": {
+          "title": "Mit dem Rad",
+          "description": "Fahrradständer entlang Fitzroy Street und Burleigh Street. Am Grafton Centre abschließen und Sie sind 30 Sekunden entfernt."
+        },
+        "driving": {
+          "title": "Mit dem Auto",
+          "description": "Das Grafton Centre Parkhaus (CB1 1PS) ist am nächsten — 3 Minuten zu Fuß vom Ausgang zum Karren."
+        },
+        "nearby": {
+          "label": "In der Nähe",
+          "items": {
+            "grafton": "Grafton Centre — 2 Min. zu Fuß",
+            "christs": "Christ's Pieces — 3 Min. zu Fuß",
+            "busStation": "Drummer St Busbahnhof — 5 Min. zu Fuß",
+            "station": "Cambridge Bahnhof — 18 Min. zu Fuß"
+          }
+        }
+      },
+      "secondary": {
+        "tabLabel": "Market Passage",
+        "walking": {
+          "title": "Zu Fuß",
+          "description": "Wir sind in der Market Passage, direkt neben der Hauptstraße zwischen Petty Cury und Market Square. Folgen Sie dem Duft."
+        },
+        "cycling": {
+          "title": "Mit dem Rad",
+          "description": "Fahrradständer am Market Square und im Grand Arcade Parkhaus. Abschließen und 30 Sekunden laufen."
+        },
+        "driving": {
+          "title": "Mit dem Auto",
+          "description": "Das Grand Arcade Parkhaus (CB2 3BJ) ist am nächsten — 2 Minuten zu Fuß zum Karren."
+        },
+        "nearby": {
+          "label": "In der Nähe",
+          "items": {
+            "arcade": "Grand Arcade — 2 Min. zu Fuß",
+            "market": "Market Square — 1 Min. zu Fuß",
+            "kings": "King's College — 5 Min. zu Fuß",
+            "station": "Cambridge Bahnhof — 20 Min. zu Fuß"
+          }
+        }
+      }
+    }
   }
 }

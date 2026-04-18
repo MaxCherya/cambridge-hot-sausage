@@ -8,42 +8,15 @@
     "subtitle": "就在主街旁边，距离Grand Arcade两分钟路程。找那辆维多利亚风格的推车——你不会错过的。"
   },
   "highlight": {
-    "title": "一个地点。四十年。无数热狗。",
+    "title": "两个地点。四十年。无数热狗。",
     "subtitle": "自1986年以来，剑桥的同一个角落——无论风雨，我们都在。",
     "stats": {
-      "years": {
-        "value": "40+",
-        "label": "年服务"
-      },
-      "dogs": {
-        "value": "100万+",
-        "label": "热狗售出"
-      },
-      "days": {
-        "value": "7",
-        "label": "天营业"
-      }
+      "years": { "value": "40+", "label": "年服务" },
+      "dogs": { "value": "100万+", "label": "热狗售出" },
+      "days": { "value": "7", "label": "天营业" }
     }
   },
   "info": {
-    "hours": {
-      "label": "营业时间",
-      "weekdays": "周一至周五",
-      "weekdaysTimes": "10:00 – 18:00",
-      "saturday": "周六",
-      "saturdayTimes": "09:00 – 19:00",
-      "sunday": "周日",
-      "sundayTimes": "10:00 – 17:00"
-    },
-    "nearby": {
-      "label": "附近地标",
-      "items": {
-        "arcade": "Grand Arcade — 步行2分钟",
-        "market": "Market Square — 步行1分钟",
-        "kings": "国王学院 — 步行5分钟",
-        "station": "剑桥火车站 — 步行20分钟"
-      }
-    },
     "main": {
       "label": "主要地点",
       "name": "The Barrow — Fitzroy Street",
@@ -53,25 +26,73 @@
       "label": "第二地点",
       "name": "Market Passage",
       "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "营业时间",
+      "weekdays": "周一至周五",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "周六",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "周日",
+      "sundayTimes": "10:00 – 17:00"
     }
   },
   "directions": {
     "eyebrow": "如何到达",
     "title": "容易到达，难以离开",
-    "subtitle": "位于剑桥心脏地带——步行、骑车或驾车均可到达。",
-    "walking": {
-      "title": "步行",
-      "description": "我们在Market Passage，就在Petty Cury和Market Square之间的主街旁。跟着香味走。"
-    },
-    "cycling": {
-      "title": "骑车",
-      "description": "Market Square和Grand Arcade停车场有自行车架。锁好车步行30秒即到。"
-    },
-    "driving": {
-      "title": "驾车",
-      "description": "Grand Arcade停车场（CB2 3BJ）最近——从出口步行2分钟到推车。"
-    },
+    "subtitle": "两辆推车，都位于剑桥中心——选择对您来说更方便的一辆。",
+    "swipeHint": "滑动切换位置",
     "ctaLabel": "获取路线",
-    "ctaHint": "在地图应用中打开"
+    "ctaHint": "在地图应用中打开",
+    "kiosks": {
+      "main": {
+        "tabLabel": "Fitzroy Street",
+        "walking": {
+          "title": "步行",
+          "description": "我们位于Fitzroy Street的Pitch 14，距离Grafton Centre和Christ's Pieces仅数步之遥。距市中心约十分钟。"
+        },
+        "cycling": {
+          "title": "骑车",
+          "description": "Fitzroy Street和Burleigh Street沿途有自行车架。在Grafton Centre锁好车，30秒即到。"
+        },
+        "driving": {
+          "title": "驾车",
+          "description": "Grafton Centre停车场（CB1 1PS）最近——从出口步行3分钟到推车。"
+        },
+        "nearby": {
+          "label": "附近地标",
+          "items": {
+            "grafton": "Grafton Centre — 步行2分钟",
+            "christs": "Christ's Pieces — 步行3分钟",
+            "busStation": "Drummer St 巴士总站 — 步行5分钟",
+            "station": "剑桥火车站 — 步行18分钟"
+          }
+        }
+      },
+      "secondary": {
+        "tabLabel": "Market Passage",
+        "walking": {
+          "title": "步行",
+          "description": "我们在Market Passage，就在Petty Cury和Market Square之间的主街旁。跟着香味走。"
+        },
+        "cycling": {
+          "title": "骑车",
+          "description": "Market Square和Grand Arcade停车场有自行车架。锁好车步行30秒即到。"
+        },
+        "driving": {
+          "title": "驾车",
+          "description": "Grand Arcade停车场（CB2 3BJ）最近——从出口步行2分钟到推车。"
+        },
+        "nearby": {
+          "label": "附近地标",
+          "items": {
+            "arcade": "Grand Arcade — 步行2分钟",
+            "market": "Market Square — 步行1分钟",
+            "kings": "国王学院 — 步行5分钟",
+            "station": "剑桥火车站 — 步行20分钟"
+          }
+        }
+      }
+    }
   }
 }

@@ -5,8 +5,9 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ShoppingBag, X } from "lucide-react";
+import { X } from "lucide-react";
 import logo from "@/img/logo.png";
+import cartIcon from "@/img/cart.png";
 import { Link, usePathname } from "@/i18n/navigation";
 import { useCart } from "@/lib/cart/context";
 import { LocaleSwitcher } from "./locale-switcher";
@@ -150,10 +151,15 @@ export function Navbar() {
           <button
             type="button"
             onClick={openDrawer}
-            className="relative inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-ink transition-colors hover:bg-brand-maroon/10"
+            className="group relative inline-flex h-10 w-10 items-center justify-center rounded-full text-brand-ink transition-colors hover:bg-brand-maroon/10"
             aria-label="Cart"
           >
-            <ShoppingBag className="h-5 w-5" strokeWidth={1.8} />
+            <Image
+              src={cartIcon}
+              alt=""
+              aria-hidden
+              className="h-6 w-6 object-contain transition-transform duration-300 group-hover:scale-110"
+            />
             {totalItems > 0 && (
               <span className="absolute -right-0.5 -top-0.5 inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-brand-maroon px-1 text-[10px] font-bold text-brand-cream">
                 {totalItems}

@@ -8,42 +8,15 @@
     "subtitle": "メインストリートのすぐそば、Grand Arcadeから2分。ビクトリア様式の屋台を探してください——見逃すことはありません。"
   },
   "highlight": {
-    "title": "一つの場所。四十年。数えきれないホットドッグ。",
+    "title": "二つの場所。四十年。数えきれないホットドッグ。",
     "subtitle": "1986年からケンブリッジの同じ場所で——雨の日も晴れの日も、ここにいます。",
     "stats": {
-      "years": {
-        "value": "40+",
-        "label": "年の歴史"
-      },
-      "dogs": {
-        "value": "100万+",
-        "label": "本のホットドッグ"
-      },
-      "days": {
-        "value": "7",
-        "label": "日営業"
-      }
+      "years": { "value": "40+", "label": "年の歴史" },
+      "dogs": { "value": "100万+", "label": "本のホットドッグ" },
+      "days": { "value": "7", "label": "日営業" }
     }
   },
   "info": {
-    "hours": {
-      "label": "営業時間",
-      "weekdays": "月曜日〜金曜日",
-      "weekdaysTimes": "10:00 – 18:00",
-      "saturday": "土曜日",
-      "saturdayTimes": "09:00 – 19:00",
-      "sunday": "日曜日",
-      "sundayTimes": "10:00 – 17:00"
-    },
-    "nearby": {
-      "label": "近くのランドマーク",
-      "items": {
-        "arcade": "Grand Arcade — 徒歩2分",
-        "market": "Market Square — 徒歩1分",
-        "kings": "キングス・カレッジ — 徒歩5分",
-        "station": "ケンブリッジ駅 — 徒歩20分"
-      }
-    },
     "main": {
       "label": "メインの場所",
       "name": "The Barrow — Fitzroy Street",
@@ -53,25 +26,73 @@
       "label": "2番目の場所",
       "name": "Market Passage",
       "line": "2 Market Passage, Cambridge CB2 3PA"
+    },
+    "hours": {
+      "label": "営業時間",
+      "weekdays": "月曜日〜金曜日",
+      "weekdaysTimes": "10:00 – 18:00",
+      "saturday": "土曜日",
+      "saturdayTimes": "09:00 – 19:00",
+      "sunday": "日曜日",
+      "sundayTimes": "10:00 – 17:00"
     }
   },
   "directions": {
     "eyebrow": "アクセス方法",
     "title": "来やすく、帰りにくい",
-    "subtitle": "ケンブリッジの中心部に位置しています——徒歩、自転車、車でアクセスできます。",
-    "walking": {
-      "title": "徒歩",
-      "description": "Petty CuryとMarket Squareの間のメインストリートすぐそば、Market Passageにあります。香りをたどってきてください。"
-    },
-    "cycling": {
-      "title": "自転車",
-      "description": "Market SquareとGrand Arcade駐車場に駐輪場があります。鍵をかけて30秒歩くだけ。"
-    },
-    "driving": {
-      "title": "車",
-      "description": "Grand Arcade駐車場（CB2 3BJ）が最寄りです——出口から屋台まで徒歩2分。"
-    },
+    "subtitle": "二つの屋台、どちらもケンブリッジの中心——お好きな方をお選びください。",
+    "swipeHint": "スワイプして切り替え",
     "ctaLabel": "道順を取得",
-    "ctaHint": "マップアプリで開きます"
+    "ctaHint": "マップアプリで開きます",
+    "kiosks": {
+      "main": {
+        "tabLabel": "Fitzroy Street",
+        "walking": {
+          "title": "徒歩",
+          "description": "Fitzroy StreetのPitch 14にあります。Grafton CentreとChrist's Piecesから徒歩圏内。市の中心から約10分。"
+        },
+        "cycling": {
+          "title": "自転車",
+          "description": "Fitzroy StreetとBurleigh Streetに駐輪場があります。Grafton Centreで鍵をかければ30秒です。"
+        },
+        "driving": {
+          "title": "車",
+          "description": "Grafton Centre駐車場（CB1 1PS）が最寄りです——出口から屋台まで徒歩3分。"
+        },
+        "nearby": {
+          "label": "近くのランドマーク",
+          "items": {
+            "grafton": "Grafton Centre — 徒歩2分",
+            "christs": "Christ's Pieces — 徒歩3分",
+            "busStation": "Drummer Stバスターミナル — 徒歩5分",
+            "station": "ケンブリッジ駅 — 徒歩18分"
+          }
+        }
+      },
+      "secondary": {
+        "tabLabel": "Market Passage",
+        "walking": {
+          "title": "徒歩",
+          "description": "Petty CuryとMarket Squareの間のメインストリートすぐそば、Market Passageにあります。香りをたどってきてください。"
+        },
+        "cycling": {
+          "title": "自転車",
+          "description": "Market SquareとGrand Arcade駐車場に駐輪場があります。鍵をかけて30秒歩くだけ。"
+        },
+        "driving": {
+          "title": "車",
+          "description": "Grand Arcade駐車場（CB2 3BJ）が最寄りです——出口から屋台まで徒歩2分。"
+        },
+        "nearby": {
+          "label": "近くのランドマーク",
+          "items": {
+            "arcade": "Grand Arcade — 徒歩2分",
+            "market": "Market Square — 徒歩1分",
+            "kings": "キングス・カレッジ — 徒歩5分",
+            "station": "ケンブリッジ駅 — 徒歩20分"
+          }
+        }
+      }
+    }
   }
 }
