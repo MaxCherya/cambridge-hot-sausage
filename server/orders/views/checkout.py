@@ -1,3 +1,5 @@
+import secrets
+
 import stripe
 from django.conf import settings
 from rest_framework import status
@@ -5,51 +7,81 @@ from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from orders.models import PendingOrder
 from shop.models import ProductVariant
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+# Generous cart cap purely as DoS protection. The cart payload now lives
+# in the DB (PendingOrder.cart_snapshot), so we are no longer constrained
+# by Stripe's 500-char metadata-value limit.
+MAX_CART_ITEMS = 200
+BUYER_COOKIE_NAME = "chs_buyer"
+BUYER_COOKIE_MAX_AGE = 60 * 60 * 24  # 1 day
 
 
 class CreateCheckoutSessionView(APIView):
     """
     POST /api/v1/orders/checkout
 
-    Accepts a list of {variant_id, quantity} from the client-side cart,
-    validates them against the DB, and creates a Stripe Checkout session
-    with shipping address collection.
+    1. Validate the cart against the DB.
+    2. Snapshot it into a PendingOrder row (server-of-truth for the
+       webhook — replaces the previous "pack into Stripe metadata" path
+       which was vulnerable to SKU injection and capped at 500 chars).
+    3. Create a Stripe Checkout session referencing the PendingOrder.
+    4. Set a buyer_id cookie scoped to this checkout — the success page
+       must echo it back when calling /api/v1/orders/session, preventing
+       IDOR via Stripe session-ID leaks.
     """
 
     permission_classes = [AllowAny]
 
     def post(self, request):
-        stripe.api_key = settings.STRIPE_SECRET_KEY
         cart_items = request.data.get("items", [])
-        if not cart_items:
+        if not isinstance(cart_items, list) or not cart_items:
             return Response(
                 {"error": "Cart is empty."},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+        if len(cart_items) > MAX_CART_ITEMS:
+            return Response(
+                {"error": f"Cart cannot have more than {MAX_CART_ITEMS} items."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
 
-        # Validate and build Stripe line items
-        variant_ids = [item["variant_id"] for item in cart_items]
+        try:
+            variant_ids = [int(item["variant_id"]) for item in cart_items]
+        except (KeyError, TypeError, ValueError):
+            return Response(
+                {"error": "Each cart item must include a numeric variant_id."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
         variants = ProductVariant.objects.filter(
             id__in=variant_ids,
             is_active=True,
             product__is_active=True,
         ).select_related("product")
-
         variant_map = {v.id: v for v in variants}
 
         line_items = []
-        metadata_items = []
+        cart_snapshot = []
 
         for item in cart_items:
-            variant = variant_map.get(item["variant_id"])
+            variant = variant_map.get(int(item["variant_id"]))
             if not variant:
                 return Response(
                     {"error": f"Variant {item['variant_id']} not found or inactive."},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
 
-            quantity = int(item.get("quantity", 1))
+            try:
+                quantity = int(item.get("quantity", 1))
+            except (TypeError, ValueError):
+                return Response(
+                    {"error": "Quantity must be a positive integer."},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             if quantity < 1:
                 return Response(
                     {"error": "Quantity must be at least 1."},
@@ -75,11 +107,22 @@ class CreateCheckoutSessionView(APIView):
                 "quantity": quantity,
             })
 
-            metadata_items.append(
-                f"{variant.id}:{quantity}:{variant.sku}"
-            )
+            cart_snapshot.append({
+                "variant_id": variant.id,
+                "quantity": quantity,
+                "sku": variant.sku,
+                "product_name": variant.product.name,
+                "variant_name": variant.name,
+                "unit_price": str(variant.price),
+            })
 
-        # Create Stripe Checkout session
+        buyer_id = secrets.token_urlsafe(32)
+        pending = PendingOrder.objects.create(
+            buyer_id=buyer_id,
+            cart_snapshot=cart_snapshot,
+            expires_at=PendingOrder.default_expires_at(),
+        )
+
         session = stripe.checkout.Session.create(
             mode="payment",
             payment_method_types=["card"],
@@ -119,8 +162,20 @@ class CreateCheckoutSessionView(APIView):
             success_url=settings.FRONTEND_URL + "/checkout/success?session_id={CHECKOUT_SESSION_ID}",
             cancel_url=settings.FRONTEND_URL + "/cart",
             metadata={
-                "items": "|".join(metadata_items),
+                "type": "shop_order",
+                "pending_id": str(pending.id),
+                "buyer_id": buyer_id,
             },
         )
 
-        return Response({"url": session.url})
+        response = Response({"url": session.url})
+        response.set_cookie(
+            BUYER_COOKIE_NAME,
+            buyer_id,
+            max_age=BUYER_COOKIE_MAX_AGE,
+            httponly=True,
+            samesite="Lax",
+            secure=not settings.DEBUG,
+            path="/",
+        )
+        return response

@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Cookie Policy" };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    title: "Cookie Policy",
+    description:
+      "Cambridge Hot Sausage uses only essential cookies. Full list of what we set and why.",
+    path: "/legal/cookies",
+    locale,
+  });
+}
 
 export default async function CookiesPage({
   params,

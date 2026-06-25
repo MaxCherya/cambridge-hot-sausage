@@ -1,12 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import Link from "next/link";
 import { toast } from "sonner";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
 import { StatusBadge } from "../../_components/status-badge";
+import { ADMIN_PAGE_SIZE, Pagination } from "../../_components/pagination";
 
 interface MessageListItem {
   id: number;
@@ -22,9 +23,10 @@ const STATUSES = ["", "new", "read", "replied", "archived"];
 export default function MessagesPage() {
   const [statusFilter, setStatusFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const queryClient = useQueryClient();
 
-  const params: Record<string, string> = {};
+  const params: Record<string, string> = { page: String(page) };
   if (statusFilter) params.status = statusFilter;
   if (search) params.search = search;
 
@@ -32,13 +34,14 @@ export default function MessagesPage() {
     queryKey: adminKeys.messages(params),
     queryFn: () => {
       const qs = new URLSearchParams();
+      qs.set("page", String(page));
       if (statusFilter) qs.set("status", statusFilter);
       if (search) qs.set("search", search);
-      const queryString = qs.toString();
-      return adminFetch<{ count: number; results: MessageListItem[] }>(
-        `/admin/messages${queryString ? `?${queryString}` : ""}`,
+      return adminFetch<{ count: number; next: string | null; previous: string | null; results: MessageListItem[] }>(
+        `/admin/messages?${qs.toString()}`,
       );
     },
+    placeholderData: keepPreviousData,
   });
 
   const statusMutation = useMutation({
@@ -63,7 +66,7 @@ export default function MessagesPage() {
           <button
             key={s}
             type="button"
-            onClick={() => setStatusFilter(s)}
+            onClick={() => { setStatusFilter(s); setPage(1); }}
             className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
               statusFilter === s
                 ? "bg-[#5A1F1F] text-white"
@@ -80,7 +83,7 @@ export default function MessagesPage() {
         <input
           type="text"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => { setSearch(e.target.value); setPage(1); }}
           placeholder="Search..."
           className="w-full max-w-xs rounded-lg border border-gray-200 px-3 py-2 text-sm placeholder:text-gray-400 focus:border-[#5A1F1F] focus:outline-none focus:ring-4 focus:ring-[#5A1F1F]/10"
         />
@@ -131,6 +134,16 @@ export default function MessagesPage() {
             )}
           </tbody>
         </table>
+        {data && (
+          <Pagination
+            page={page}
+            totalCount={data.count}
+            pageSize={ADMIN_PAGE_SIZE}
+            hasNext={Boolean(data.next)}
+            hasPrev={Boolean(data.previous)}
+            onChange={setPage}
+          />
+        )}
       </div>
     </div>
   );

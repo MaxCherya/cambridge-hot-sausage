@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Terms of Service" };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    title: "Terms of Service",
+    description:
+      "Terms and conditions governing the use of the Cambridge Hot Sausage website, online shop and event booking service.",
+    path: "/legal/terms",
+    locale,
+  });
+}
 
 export default async function TermsPage({
   params,

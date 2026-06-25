@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { CheckoutSuccess } from "../../_components/checkout-success";
 
 export async function generateMetadata({
@@ -10,7 +11,16 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "cart.success" });
-  return { title: t("title") };
+  return {
+    ...pageMetadata({
+      title: t("title"),
+      description: "Thanks for your order from Cambridge Hot Sausage.",
+      path: "/checkout/success",
+      locale,
+    }),
+    // One-shot post-payment page; never indexable.
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function CheckoutSuccessPage({

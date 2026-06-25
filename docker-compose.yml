@@ -20,6 +20,9 @@ services:
 
   redis:
     image: redis:7-alpine
+    # Bind to loopback only — unauthenticated Redis must never be
+    # reachable from the network. Inter-container access still works
+    # via the compose network.
     ports:
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     restart: unless-stopped

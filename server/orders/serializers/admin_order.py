@@ -9,15 +9,24 @@ class AdminOrderItemSerializer(serializers.ModelSerializer):
 
 
 class AdminOrderListSerializer(serializers.ModelSerializer):
-    item_count = serializers.SerializerMethodField()
+    item_count = serializers.IntegerField(read_only=True)
     short_id = serializers.SerializerMethodField()
 
     class Meta:
         model = Order
-        fields = ("id", "short_id", "customer_name", "customer_email", "status", "total", "created_at", "item_count", "shipping_city", "shipping_postal_code", "shipping_country")
-
-    def get_item_count(self, obj):
-        return obj.items.count()
+        fields = (
+            "id",
+            "short_id",
+            "customer_name",
+            "customer_email",
+            "status",
+            "total",
+            "created_at",
+            "item_count",
+            "shipping_city",
+            "shipping_postal_code",
+            "shipping_country",
+        )
 
     def get_short_id(self, obj):
         return obj.id.hex[:8]
@@ -28,7 +37,31 @@ class AdminOrderDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = "__all__"
+        # Explicit field list — guards against accidentally exposing future
+        # internal-only columns (notes, audit fields, etc.).
+        fields = (
+            "id",
+            "stripe_session_id",
+            "stripe_payment_intent",
+            "stripe_receipt_url",
+            "status",
+            "customer_name",
+            "customer_email",
+            "customer_phone",
+            "shipping_name",
+            "shipping_line1",
+            "shipping_line2",
+            "shipping_city",
+            "shipping_postal_code",
+            "shipping_country",
+            "subtotal",
+            "shipping_cost",
+            "total",
+            "currency",
+            "items",
+            "created_at",
+            "updated_at",
+        )
 
 
 class AdminOrderStatusSerializer(serializers.ModelSerializer):

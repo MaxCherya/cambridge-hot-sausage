@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from authentication.serializers import LoginSerializer, UserSerializer
-from authentication.throttles import LoginRateThrottle
+from authentication.throttles import LoginRateThrottle, LoginUsernameRateThrottle
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -22,7 +22,7 @@ class LoginView(APIView):
     """
 
     permission_classes = [AllowAny]
-    throttle_classes = [LoginRateThrottle]
+    throttle_classes = [LoginRateThrottle, LoginUsernameRateThrottle]
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)

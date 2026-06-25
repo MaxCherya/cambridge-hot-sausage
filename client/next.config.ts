@@ -5,6 +5,17 @@ const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 
 const API_URL = process.env.INTERNAL_API_URL || "http://localhost:8000";
 
+const SECURITY_HEADERS = [
+  { key: "X-Content-Type-Options", value: "nosniff" },
+  { key: "X-Frame-Options", value: "DENY" },
+  { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=(self), interest-cohort=()",
+  },
+  { key: "X-DNS-Prefetch-Control", value: "on" },
+];
+
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   skipTrailingSlashRedirect: true,
@@ -16,6 +27,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "www.hotsausagecompany.com" },
       { protocol: "http", hostname: "localhost" },
     ],
+  },
+  async headers() {
+    return [{ source: "/:path*", headers: SECURITY_HEADERS }];
   },
   async rewrites() {
     return [

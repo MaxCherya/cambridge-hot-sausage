@@ -156,7 +156,6 @@ export function Moments() {
                   fill
                   sizes="60vh"
                   className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  unoptimized
                 />
                 <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-ink/70 via-brand-ink/20 to-transparent px-5 pb-4 pt-12 text-xs font-medium uppercase tracking-wider text-brand-cream opacity-0 transition-opacity duration-500 group-hover:opacity-100">
                   {String(i + 1).padStart(2, "0")} · {p.alt}

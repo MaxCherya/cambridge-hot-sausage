@@ -1,6 +1,8 @@
+from django.db.models import Count
 from rest_framework import viewsets, status
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 
@@ -13,11 +15,19 @@ from shop.serializers.admin_product import (
     AdminImageSerializer,
 )
 
+# Reject image uploads larger than 10 MB to stop image-bomb DoS.
+MAX_IMAGE_BYTES = 10 * 1024 * 1024
+
 
 class AdminProductViewSet(viewsets.ModelViewSet):
     authentication_classes = [SessionAuthentication]
     permission_classes = [IsAdminUser]
-    queryset = Product.objects.prefetch_related("variants", "images", "categories").order_by("-created_at")
+    queryset = (
+        Product.objects
+        .annotate(variant_count=Count("variants", distinct=True))
+        .prefetch_related("variants", "images", "categories")
+        .order_by("-created_at")
+    )
 
     def get_serializer_class(self):
         if self.action == "list":
@@ -37,6 +47,11 @@ class AdminProductViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=["post"], url_path="images")
     def add_image(self, request, pk=None):
         product = self.get_object()
+        uploaded = request.data.get("image")
+        if uploaded is not None and getattr(uploaded, "size", 0) > MAX_IMAGE_BYTES:
+            raise ValidationError({
+                "image": f"File too large (max {MAX_IMAGE_BYTES // (1024 * 1024)} MB).",
+            })
         serializer = AdminImageSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         image = serializer.save(product=product)

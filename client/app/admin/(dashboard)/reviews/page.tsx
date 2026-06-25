@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Check, ChevronDown, ChevronRight, Search, Star, X } from "lucide-react";
 import { adminFetch } from "@/lib/admin/api";
 import { adminKeys } from "@/lib/admin/query-keys";
+import { ADMIN_PAGE_SIZE, Pagination } from "../../_components/pagination";
 
 interface ReviewItem {
   id: number;
@@ -26,9 +27,10 @@ export default function ReviewsPage() {
   const queryClient = useQueryClient();
   const [filter, setFilter] = useState("");
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const [expandedId, setExpandedId] = useState<number | null>(null);
 
-  const params: Record<string, string> = {};
+  const params: Record<string, string> = { page: String(page) };
   if (filter === "pending") params.is_approved = "false";
   if (filter === "approved") params.is_approved = "true";
   if (search) params.search = search;
@@ -37,8 +39,11 @@ export default function ReviewsPage() {
     queryKey: adminKeys.reviews(params),
     queryFn: () => {
       const qs = new URLSearchParams(params).toString();
-      return adminFetch<{ count: number; results: ReviewItem[] }>(`/admin/reviews${qs ? `?${qs}` : ""}`);
+      return adminFetch<{ count: number; next: string | null; previous: string | null; results: ReviewItem[] }>(
+        `/admin/reviews?${qs}`,
+      );
     },
+    placeholderData: keepPreviousData,
   });
 
   const approveMutation = useMutation({
@@ -78,7 +83,7 @@ export default function ReviewsPage() {
             <button
               key={f}
               type="button"
-              onClick={() => setFilter(f)}
+              onClick={() => { setFilter(f); setPage(1); }}
               className={`rounded-lg px-3 py-1.5 text-xs font-medium capitalize transition-colors ${
                 filter === f ? "bg-[#5A1F1F] text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
@@ -93,7 +98,7 @@ export default function ReviewsPage() {
           <input
             type="text"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
             placeholder="Search reviews..."
             className="w-64 rounded-lg border border-gray-200 py-2 pl-9 pr-3 text-sm placeholder:text-gray-400 focus:border-[#5A1F1F] focus:outline-none focus:ring-4 focus:ring-[#5A1F1F]/10"
           />
@@ -177,6 +182,17 @@ export default function ReviewsPage() {
               </div>
             );
           })
+        )}
+        {data && (
+          <Pagination
+            page={page}
+            totalCount={data.count}
+            pageSize={ADMIN_PAGE_SIZE}
+            hasNext={Boolean(data.next)}
+            hasPrev={Boolean(data.previous)}
+            onChange={setPage}
+            className="mt-2 rounded-xl border border-gray-100 bg-white"
+          />
         )}
       </div>
     </div>

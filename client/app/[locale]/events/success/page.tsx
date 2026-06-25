@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { EventBookingSuccess } from "../../_components/event-booking-success";
 
 export async function generateMetadata({
@@ -10,7 +11,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "events.success" });
-  return { title: t("title") };
+  return {
+    ...pageMetadata({
+      title: t("title"),
+      description: "Your event booking is confirmed. We'll be in touch shortly.",
+      path: "/events/success",
+      locale,
+    }),
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function EventSuccessPage({

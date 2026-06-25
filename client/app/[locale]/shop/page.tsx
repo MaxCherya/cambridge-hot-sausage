@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { getCategories, getProducts } from "@/lib/shop/server";
 import { ShopListing } from "../_components/shop-listing";
 
@@ -14,7 +15,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "shop.meta" });
-  return { title: t("title") };
+  return pageMetadata({
+    title: t("title"),
+    description:
+      "Order Cambridge Hot Sausage's classic hot dogs, sides, drinks and merchandise online. Delivery across the UK from the Fitzroy Street barrow.",
+    path: "/shop",
+    locale,
+  });
 }
 
 const EMPTY_PRODUCTS = { count: 0, next: null, previous: null, results: [] };

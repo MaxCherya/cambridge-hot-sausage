@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { ArrowRight, Lock, Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useCart } from "@/lib/cart/context";
@@ -19,9 +18,17 @@ export function CartDrawer() {
   const popoverRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(
-    () => {
-      if (!overlayRef.current || !popoverRef.current) return;
+  // gsap is dynamic-imported so the layout chunk doesn't pay for it.
+  // The drawer is closed at first paint anyway, so deferring the animation
+  // runtime is invisible to the user.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!overlayRef.current || !popoverRef.current) return;
+    let cancelled = false;
+
+    (async () => {
+      const { default: gsap } = await import("gsap");
+      if (cancelled || !overlayRef.current || !popoverRef.current) return;
 
       if (drawerOpen) {
         const isMobile = window.innerWidth < 640;
@@ -55,9 +62,12 @@ export function CartDrawer() {
           onComplete: () => { if (overlayRef.current) overlayRef.current.style.display = "none"; },
         });
       }
-    },
-    { dependencies: [drawerOpen] },
-  );
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [drawerOpen]);
 
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
@@ -119,9 +129,9 @@ export function CartDrawer() {
                   className="flex items-center gap-3 rounded-xl border border-brand-maroon/5 bg-white/60 p-2.5 transition-[border-color] duration-300 hover:border-brand-maroon/12"
                 >
                   {/* Thumbnail */}
-                  <div className="h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg bg-brand-cream/80">
+                  <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-lg bg-brand-cream/80">
                     {item.image ? (
-                      <img src={item.image} alt={item.productName} className="h-full w-full object-cover" />
+                      <Image src={item.image} alt={item.productName} fill sizes="48px" className="object-cover" />
                     ) : (
                       <div className="flex h-full w-full items-center justify-center">
                         <span className="font-display text-sm text-brand-maroon/10">

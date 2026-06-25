@@ -1,9 +1,29 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { pageMetadata, SITE_NAME, SITE_TAGLINE } from "@/lib/seo";
 import { HeroIntro } from "./_components/hero-intro";
 import { Certifications } from "./_components/certifications";
 import { Moments } from "./_components/moments";
 import { EventBookingCta } from "./_components/event-booking-cta";
 import { LocateUs } from "./_components/locate-us";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    // `title.absolute` short-circuits the layout's template — keeps the home
+    // tab clean: "Cambridge Hot Sausage — Hot Dogs on Fitzroy Street since 1986"
+    // instead of "X · Cambridge Hot Sausage".
+    title: `${SITE_NAME} — ${SITE_TAGLINE}`,
+    description:
+      "Cambridge's famous hot dogs. Victorian-style barrow at Pitch 14, Fitzroy Street — serving the legendary Cambridge sausage since 1986. Order online, book us for events, or visit us in town.",
+    path: "/",
+    locale,
+  });
+}
 
 export default async function Home({
   params,

@@ -9,6 +9,7 @@ import math
 from dataclasses import dataclass
 
 import requests
+from django.core.cache import cache
 
 # Barrow location — Pitch 14 Fitzroy Street
 CAMBRIDGE_LAT = 52.206680540625506
@@ -20,6 +21,13 @@ EARTH_RADIUS_MI = 3958.8
 # Nominatim requires a meaningful User-Agent
 NOMINATIM_UA = "CambridgeHotSausage/1.0"
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse"
+
+# Cache reverse-geocode for 24h, keyed by ~11m grid (4 decimal places).
+GEO_CACHE_TTL = 60 * 60 * 24
+GEO_GRID_DECIMALS = 4
+
+_SESSION = requests.Session()
+_SESSION.headers.update({"User-Agent": NOMINATIM_UA})
 
 
 def haversine_miles(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
@@ -43,6 +51,34 @@ class GeoValidation:
     error: str
 
 
+def _reverse_geocode(lat: float, lng: float) -> dict | None:
+    """Reverse-geocode with Redis-backed caching. Returns Nominatim JSON or None on failure."""
+    key = f"geo:rev:{round(lat, GEO_GRID_DECIMALS)}:{round(lng, GEO_GRID_DECIMALS)}"
+    cached = cache.get(key)
+    if cached is not None:
+        return cached or None
+
+    try:
+        resp = _SESSION.get(
+            NOMINATIM_URL,
+            params={
+                "lat": lat,
+                "lon": lng,
+                "format": "json",
+                "addressdetails": 1,
+                "zoom": 16,
+            },
+            timeout=5,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+    except (requests.RequestException, ValueError):
+        return None
+
+    cache.set(key, data, GEO_CACHE_TTL)
+    return data
+
+
 def validate_location(lat: float, lng: float, max_radius: float) -> GeoValidation:
     """
     Validate that coordinates are:
@@ -58,23 +94,8 @@ def validate_location(lat: float, lng: float, max_radius: float) -> GeoValidatio
             error=f"Location is {distance:.0f} miles from Cambridge. Maximum is {max_radius:.0f} miles.",
         )
 
-    # Reverse geocode to check it's a real land address
-    try:
-        resp = requests.get(
-            NOMINATIM_URL,
-            params={
-                "lat": lat,
-                "lon": lng,
-                "format": "json",
-                "addressdetails": 1,
-                "zoom": 16,
-            },
-            headers={"User-Agent": NOMINATIM_UA},
-            timeout=5,
-        )
-        resp.raise_for_status()
-        data = resp.json()
-    except (requests.RequestException, ValueError):
+    data = _reverse_geocode(lat, lng)
+    if data is None:
         # If geocoding fails, allow it (admin can review)
         return GeoValidation(valid=True, address="", error="")
 
@@ -85,7 +106,6 @@ def validate_location(lat: float, lng: float, max_radius: float) -> GeoValidatio
             error="This location doesn't appear to be a valid address. Please pick a location on land.",
         )
 
-    # Check for water bodies
     address_type = data.get("type", "")
     category = data.get("class", "")
     if category in ("natural", "waterway") and address_type in ("water", "riverbank", "river", "lake", "sea", "ocean", "bay", "strait"):

@@ -66,8 +66,8 @@ export function RevealOnScroll() {
       },
     );
 
-    const scan = () => {
-      document
+    const scanRoot = (root: ParentNode) => {
+      root
         .querySelectorAll<HTMLElement>("[data-reveal]:not([data-revealed])")
         .forEach((el) => {
           if (observed.has(el)) return;
@@ -76,10 +76,26 @@ export function RevealOnScroll() {
         });
     };
 
-    scan();
+    scanRoot(document);
 
-    // Catch elements added later (client navigations, dynamic content)
-    const mutation = new MutationObserver(() => scan());
+    // Catch elements added later (client navigations, dynamic content).
+    // Scope the work to the actually-added subtrees instead of re-scanning
+    // the whole document on every mutation — O(added) instead of O(DOM).
+    const mutation = new MutationObserver((records) => {
+      for (const record of records) {
+        record.addedNodes.forEach((node) => {
+          if (node.nodeType !== Node.ELEMENT_NODE) return;
+          const el = node as HTMLElement;
+          if (el.matches?.("[data-reveal]:not([data-revealed])")) {
+            if (!observed.has(el)) {
+              observed.add(el);
+              observer.observe(el);
+            }
+          }
+          scanRoot(el);
+        });
+      }
+    });
     mutation.observe(document.body, { childList: true, subtree: true });
 
     return () => {

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { AboutHero } from "../_components/about-hero";
 import { AboutStory } from "../_components/about-story";
 
@@ -10,7 +11,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "about.meta" });
-  return { title: t("title") };
+  return pageMetadata({
+    title: t("title"),
+    description:
+      "Cambridge Hot Sausage has served the city's famous hot dogs from a Victorian-style barrow on Fitzroy Street since 1986. Meet the family, the recipe, and the regulars.",
+    path: "/about",
+    locale,
+  });
 }
 
 export default async function AboutPage({

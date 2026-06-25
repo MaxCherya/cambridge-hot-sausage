@@ -2,14 +2,15 @@
 Cache invalidation on admin writes.
 
 When a product, category, variant, image, or review is saved/deleted
-via the admin, we bust the relevant cache keys so the API serves
-fresh data on the next request.
+via the admin, we bump the relevant version counters so the next API
+read serves fresh data. This is O(1) regardless of cache size — unlike
+`cache.delete_pattern`, which scans the entire keyspace.
 """
 
-from django.core.cache import cache
 from django.db.models.signals import m2m_changed, post_delete, post_save
 from django.dispatch import receiver
 
+from shop.cache_versions import bump_categories_version, bump_products_version
 from shop.models import (
     Category,
     Product,
@@ -18,47 +19,25 @@ from shop.models import (
     Review,
 )
 
-CATEGORY_PREFIXES = ["categories", "category_detail"]
-PRODUCT_PREFIXES = ["products", "product_detail"]
-
-
-def _bust(prefixes):
-    """
-    Clear cache keys that start with any of the given prefixes.
-
-    On LocMemCache (dev) this clears everything — acceptable for dev.
-    On Redis (prod) this uses delete_pattern for surgical invalidation.
-    """
-    backend = cache.__class__.__name__
-    if backend == "RedisCache":
-        for prefix in prefixes:
-            cache.delete_pattern(f"*{prefix}*")
-    else:
-        cache.clear()
-
-
-# ── Category signals ────────────────────────────────────────────
 
 @receiver(post_save, sender=Category)
 @receiver(post_delete, sender=Category)
 def invalidate_category_cache(sender, **kwargs):
-    _bust(CATEGORY_PREFIXES + PRODUCT_PREFIXES)
+    bump_categories_version()
+    bump_products_version()
 
-
-# ── Product signals ─────────────────────────────────────────────
 
 @receiver(post_save, sender=Product)
 @receiver(post_delete, sender=Product)
 def invalidate_product_cache(sender, **kwargs):
-    _bust(PRODUCT_PREFIXES)
+    bump_products_version()
 
 
 @receiver(m2m_changed, sender=Product.categories.through)
 def invalidate_product_categories_cache(sender, **kwargs):
-    _bust(PRODUCT_PREFIXES + CATEGORY_PREFIXES)
+    bump_products_version()
+    bump_categories_version()
 
-
-# ── Variant / Image / Review signals ────────────────────────────
 
 @receiver(post_save, sender=ProductVariant)
 @receiver(post_delete, sender=ProductVariant)
@@ -67,4 +46,4 @@ def invalidate_product_categories_cache(sender, **kwargs):
 @receiver(post_save, sender=Review)
 @receiver(post_delete, sender=Review)
 def invalidate_product_related_cache(sender, **kwargs):
-    _bust(PRODUCT_PREFIXES)
+    bump_products_version()

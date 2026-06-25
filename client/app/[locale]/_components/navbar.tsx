@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { X } from "lucide-react";
 import logo from "@/img/logo.png";
 import cartIcon from "@/img/cart.png";
@@ -52,25 +50,45 @@ export function Navbar() {
     };
   }, [open]);
 
-  // Entry animation
-  useGSAP(
-    () => {
-      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-      tl.from(".nav-logo", { x: -20, opacity: 0, duration: 0.6 })
-        .from(
-          ".nav-link",
-          { y: -12, opacity: 0, duration: 0.45, stagger: 0.06 },
-          "-=0.35",
-        )
-        .from(".nav-tail > *", { y: -10, opacity: 0, duration: 0.4, stagger: 0.06 }, "-=0.3");
-    },
-    { scope: headerRef },
-  );
+  // Lazy-load gsap and run the entry animation. The header markup renders
+  // immediately at full opacity; the only thing deferred is the animation,
+  // which is a no-op for first-meaningful-paint anyway.
+  useEffect(() => {
+    if (typeof window === "undefined" || !headerRef.current) return;
+    let cancelled = false;
+    let ctx: { revert: () => void } | null = null;
 
-  // Mobile drawer animation — bg fades in slowly, content reveals after
-  useGSAP(
-    () => {
-      if (!drawerRef.current || !drawerListRef.current) return;
+    (async () => {
+      const { default: gsap } = await import("gsap");
+      if (cancelled || !headerRef.current) return;
+
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        tl.from(".nav-logo", { x: -20, opacity: 0, duration: 0.6 })
+          .from(
+            ".nav-link",
+            { y: -12, opacity: 0, duration: 0.45, stagger: 0.06 },
+            "-=0.35",
+          )
+          .from(".nav-tail > *", { y: -10, opacity: 0, duration: 0.4, stagger: 0.06 }, "-=0.3");
+      }, headerRef.current);
+    })();
+
+    return () => {
+      cancelled = true;
+      ctx?.revert();
+    };
+  }, []);
+
+  // Mobile drawer animation — bg fades in slowly, content reveals after.
+  useEffect(() => {
+    if (typeof window === "undefined" || !drawerRef.current || !drawerListRef.current) return;
+    let cancelled = false;
+
+    (async () => {
+      const { default: gsap } = await import("gsap");
+      if (cancelled || !drawerRef.current || !drawerListRef.current) return;
+
       if (open) {
         gsap.set(drawerRef.current, { display: "flex" });
         gsap.fromTo(
@@ -100,9 +118,12 @@ export function Navbar() {
           },
         });
       }
-    },
-    { dependencies: [open] },
-  );
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
 
   return (
     <>

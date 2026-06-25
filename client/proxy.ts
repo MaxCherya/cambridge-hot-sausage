@@ -4,6 +4,13 @@ import { routing } from "./i18n/routing";
 export default createMiddleware(routing);
 
 export const config = {
-  // Match all pathnames except API, Next internals, and static files
-  matcher: "/((?!api|admin|_next|_vercel|.*\\..*).*)",
+  // Match all pathnames except:
+  //   - API + admin routes
+  //   - Next internals and Vercel preview routes
+  //   - Any path with a dot (regular static assets like .jpg, .css, .txt)
+  //   - Root-level Next metadata routes (opengraph-image, icon, apple-icon,
+  //     sitemap, robots) — they're served at fixed paths and must NOT be
+  //     locale-prefixed.
+  matcher:
+    "/((?!api|admin|_next|_vercel|opengraph-image|twitter-image|icon|apple-icon|sitemap|robots|llms|ai|.*\\..*).*)",
 };

@@ -1,6 +1,21 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Privacy Policy" };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    title: "Privacy Policy",
+    description:
+      "How Cambridge Hot Sausage collects, uses and protects your personal data under UK GDPR.",
+    path: "/legal/privacy",
+    locale,
+  });
+}
 
 export default async function PrivacyPage({
   params,

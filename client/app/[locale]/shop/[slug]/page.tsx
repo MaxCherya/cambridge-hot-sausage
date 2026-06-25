@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getProduct } from "@/lib/shop/server";
+import { canonicalFor, pageMetadata, SITE_URL } from "@/lib/seo";
 import { ShopProductDetail } from "../../_components/shop-product-detail";
 
 export async function generateMetadata({
@@ -14,12 +15,27 @@ export async function generateMetadata({
 
   try {
     const product = await getProduct(slug);
-    return {
+    const image = product.images?.[0]?.image;
+    const description = product.description
+      ? product.description.replace(/[#*_>`~\n]/g, " ").replace(/\s+/g, " ").trim().slice(0, 160)
+      : `Order ${product.name} from Cambridge Hot Sausage — fresh from the Fitzroy Street barrow.`;
+    return pageMetadata({
       title: t("productTitle", { name: product.name }),
-      description: product.description,
-    };
+      description,
+      path: `/shop/${slug}`,
+      locale,
+      image,
+      // Next.js's typed OpenGraph doesn't include "product" — the rich
+      // product structured data is emitted as JSON-LD in the page body.
+      type: "article",
+    });
   } catch {
-    return { title: t("title") };
+    return pageMetadata({
+      title: t("title"),
+      description: "Browse Cambridge Hot Sausage products.",
+      path: `/shop/${slug}`,
+      locale,
+    });
   }
 }
 
@@ -38,8 +54,50 @@ export default async function ProductPage({
     notFound();
   }
 
+  const prices = product.variants
+    .map((v) => Number(v.price))
+    .filter((n) => Number.isFinite(n));
+  const minPrice = prices.length ? Math.min(...prices) : null;
+  const maxPrice = prices.length ? Math.max(...prices) : null;
+  const productUrl = canonicalFor(`/shop/${slug}`, locale);
+
+  const productJsonLd: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    description: product.description?.slice(0, 5000),
+    sku: product.variants[0]?.sku,
+    url: productUrl,
+    brand: { "@type": "Brand", name: "Cambridge Hot Sausage" },
+    image: product.images?.map((i) => i.image).filter(Boolean),
+  };
+  if (minPrice !== null && maxPrice !== null) {
+    productJsonLd.offers = {
+      "@type": "AggregateOffer",
+      priceCurrency: "GBP",
+      lowPrice: minPrice.toFixed(2),
+      highPrice: maxPrice.toFixed(2),
+      offerCount: product.variants.length,
+      availability: product.variants.some((v) => v.in_stock)
+        ? "https://schema.org/InStock"
+        : "https://schema.org/OutOfStock",
+      seller: { "@id": `${SITE_URL}/#business` },
+    };
+  }
+  if (product.average_rating !== null && product.review_count > 0) {
+    productJsonLd.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: product.average_rating,
+      reviewCount: product.review_count,
+    };
+  }
+
   return (
     <main className="relative overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <ShopProductDetail product={product} />
     </main>
   );

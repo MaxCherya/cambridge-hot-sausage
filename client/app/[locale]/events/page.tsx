@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { EventBooking } from "../_components/event-booking";
 
 export async function generateMetadata({
@@ -9,7 +10,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "events.meta" });
-  return { title: t("title") };
+  return pageMetadata({
+    title: t("title"),
+    description:
+      "Hire Cambridge Hot Sausage for your wedding, college ball, corporate event or private party. Live calendar, instant quote, single-day bookings across Cambridgeshire and beyond.",
+    path: "/events",
+    locale,
+  });
 }
 
 export default async function EventsPage({

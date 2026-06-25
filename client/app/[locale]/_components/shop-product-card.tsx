@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import { Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
@@ -34,10 +35,12 @@ export function ShopProductCard({ product }: ShopProductCardProps) {
       {/* Image area */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-cream/50">
         {product.primary_image?.image ? (
-          <img
+          <Image
             src={product.primary_image.image}
             alt={product.primary_image.alt_text || product.name}
-            className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center">

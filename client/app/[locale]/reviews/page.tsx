@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { ReviewsHero } from "../_components/reviews-hero";
 import { ReviewsFeed } from "../_components/reviews-feed";
 import { MOCK_REVIEWS, MOCK_SUMMARY } from "@/data/mock-reviews";
@@ -11,7 +12,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "reviews.meta" });
-  return { title: t("title") };
+  return pageMetadata({
+    title: t("title"),
+    description:
+      "What Cambridge thinks of us. Real reviews from regulars, students and visitors who have stopped at the Fitzroy Street barrow over the years.",
+    path: "/reviews",
+    locale,
+  });
 }
 
 export default async function ReviewsPage({

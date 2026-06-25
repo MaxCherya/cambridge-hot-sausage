@@ -1,11 +1,14 @@
 import stripe
 from django.conf import settings
+from django.db import transaction
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAdminUser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from orders.models import Order
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 class RefundOrderView(APIView):
@@ -20,37 +23,34 @@ class RefundOrderView(APIView):
     permission_classes = [IsAdminUser]
 
     def post(self, request, pk):
-        stripe.api_key = settings.STRIPE_SECRET_KEY
-
-        # Safety: require explicit confirmation
         if not request.data.get("confirm"):
             return Response(
                 {"error": "Send { \"confirm\": true } to proceed with refund."},
                 status=400,
             )
 
-        try:
-            order = Order.objects.get(pk=pk)
-        except Order.DoesNotExist:
-            return Response({"error": "Order not found."}, status=404)
+        with transaction.atomic():
+            try:
+                order = Order.objects.select_for_update().get(pk=pk)
+            except Order.DoesNotExist:
+                return Response({"error": "Order not found."}, status=404)
 
-        if order.status == Order.Status.CANCELLED:
-            return Response({"error": "Order is already cancelled/refunded."}, status=400)
+            if order.status == Order.Status.CANCELLED:
+                return Response({"error": "Order is already cancelled/refunded."}, status=400)
 
-        if not order.stripe_payment_intent:
-            return Response({"error": "No payment intent found for this order."}, status=400)
+            if not order.stripe_payment_intent:
+                return Response({"error": "No payment intent found for this order."}, status=400)
 
-        # Issue Stripe refund
-        try:
-            refund = stripe.Refund.create(
-                payment_intent=order.stripe_payment_intent,
-            )
-        except stripe.error.StripeError as e:
-            return Response({"error": f"Stripe error: {str(e)}"}, status=400)
+            try:
+                refund = stripe.Refund.create(
+                    payment_intent=order.stripe_payment_intent,
+                    idempotency_key=f"refund:{order.id}",
+                )
+            except stripe.error.StripeError as e:
+                return Response({"error": f"Stripe error: {str(e)}"}, status=400)
 
-        # Update order status
-        order.status = Order.Status.CANCELLED
-        order.save(update_fields=["status", "updated_at"])
+            order.status = Order.Status.CANCELLED
+            order.save(update_fields=["status", "updated_at"])
 
         return Response({
             "detail": "Order refunded successfully.",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { ArrowLeft, Check, Minus, Plus, Star, ShoppingCart } from "lucide-react";
 import ReactMarkdown from "react-markdown";
@@ -54,10 +55,13 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                   className="relative aspect-square w-full cursor-zoom-in bg-brand-cream/50"
                 >
                   {currentImage?.image ? (
-                    <img
+                    <Image
                       src={currentImage.image}
                       alt={currentImage.alt_text || product.name}
-                      className="h-full w-full object-cover"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                      className="object-cover"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center">
@@ -83,9 +87,12 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
                         }`}
                       >
                         {img.image ? (
-                          <img
+                          <Image
                             src={img.image}
                             alt={img.alt_text}
+                            width={64}
+                            height={64}
+                            sizes="64px"
                             className="h-full w-full object-cover"
                           />
                         ) : (
@@ -343,11 +350,14 @@ export function ShopProductDetail({ product }: ShopProductDetailProps) {
             </>
           )}
 
-          <img
+          <Image
             src={currentImage.image}
             alt={currentImage.alt_text || product.name}
+            width={1600}
+            height={1600}
+            sizes="90vw"
             onClick={(e) => e.stopPropagation()}
-            className="max-h-[90vh] max-w-[90vw] rounded-lg object-contain"
+            className="max-h-[90vh] w-auto max-w-[90vw] rounded-lg object-contain"
           />
 
           {/* Thumbnail dots */}

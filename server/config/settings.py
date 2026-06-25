@@ -94,6 +94,7 @@ if _database_url:
             "HOST": _m.group("host"),
             "PORT": _m.group("port"),
             "CONN_MAX_AGE": 600,
+            "CONN_HEALTH_CHECKS": True,
             "OPTIONS": {"connect_timeout": 5},
         }
     }
@@ -188,6 +189,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default="", cast=Csv())
 CORS_ALLOW_CREDENTIALS = True
 
+if any(o.strip() == "*" for o in CORS_ALLOWED_ORIGINS):
+    from django.core.exceptions import ImproperlyConfigured
+    raise ImproperlyConfigured(
+        "CORS_ALLOWED_ORIGINS cannot contain '*' while CORS_ALLOW_CREDENTIALS=True."
+    )
+
 # ── Django REST Framework ───────────────────────────────────────
 
 REST_FRAMEWORK = {
@@ -211,7 +218,7 @@ REST_FRAMEWORK = {
         "user": "120/minute",
     },
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "authentication.csrf_exempt_session.CsrfExemptSessionAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
     ],
 }
 

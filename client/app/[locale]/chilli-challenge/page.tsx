@@ -1,8 +1,23 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { Flame, Trophy, AlertTriangle, Clock } from "lucide-react";
 import { Link } from "@/i18n/navigation";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata = { title: "Chilli Challenge" };
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  return pageMetadata({
+    title: "Chilli Challenge",
+    description:
+      "Four levels of heat, four legendary sausages and one Wall of Flame. Take the Cambridge Hot Sausage chilli challenge at the Fitzroy Street barrow.",
+    path: "/chilli-challenge",
+    locale,
+  });
+}
 
 const LEVELS = [
   { name: "Warm Up", heat: 1, sausage: "Jalapeño Kick", description: "A gentle introduction. Green jalapeño and mild chilli flakes.", color: "bg-green-500" },

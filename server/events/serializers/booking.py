@@ -4,7 +4,6 @@ from rest_framework import serializers
 class HoldDateSerializer(serializers.Serializer):
     date = serializers.DateField()
     time_slot_id = serializers.IntegerField()
-    hold_token = serializers.CharField(max_length=64)
 
 
 class CalculatePriceSerializer(serializers.Serializer):

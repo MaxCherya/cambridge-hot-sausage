@@ -2,11 +2,16 @@ import calendar as cal
 from collections import defaultdict
 from datetime import date, timedelta
 
+from django.core.cache import cache
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from events.models import BlockedDate, EventBooking, TimeSlot
+
+# Throttle hold-cleanup to at most once per minute across the cluster.
+CLEANUP_LOCK_KEY = "events:cleanup_holds_lock"
+CLEANUP_LOCK_TTL = 60
 
 
 class CalendarView(APIView):
@@ -26,7 +31,10 @@ class CalendarView(APIView):
         except (ValueError, TypeError):
             return Response({"error": "Invalid year/month"}, status=400)
 
-        EventBooking.cleanup_expired_holds()
+        # Only one request per minute (cluster-wide) triggers the cleanup —
+        # cache.add() is atomic so this scales safely under load.
+        if cache.add(CLEANUP_LOCK_KEY, "1", timeout=CLEANUP_LOCK_TTL):
+            EventBooking.cleanup_expired_holds()
 
         _, num_days = cal.monthrange(year, month)
         month_start = date(year, month, 1)

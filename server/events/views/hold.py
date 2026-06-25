@@ -1,22 +1,34 @@
+import secrets
 from datetime import timedelta
 
 from django.utils import timezone
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.throttling import AnonRateThrottle
 from rest_framework.views import APIView
 
 from events.models import EventBooking, EventConfig, TimeSlot
 from events.serializers import HoldDateSerializer
 
 
+class HoldThrottle(AnonRateThrottle):
+    """Tight rate-limit to stop calendar-locking attacks."""
+
+    rate = "5/min"
+    scope = "events_hold"
+
+
 class HoldDateView(APIView):
     """
     POST /api/v1/events/hold
 
-    Hold a specific time slot on a date.
+    Hold a specific time slot on a date. The server generates the
+    hold_token — clients must never supply one (prevents token
+    enumeration and inventory-locking abuse).
     """
 
     permission_classes = [AllowAny]
+    throttle_classes = [HoldThrottle]
 
     def post(self, request):
         serializer = HoldDateSerializer(data=request.data)
@@ -24,17 +36,12 @@ class HoldDateView(APIView):
 
         event_date = serializer.validated_data["date"]
         time_slot_id = serializer.validated_data["time_slot_id"]
-        hold_token = serializer.validated_data["hold_token"]
 
-        EventBooking.cleanup_expired_holds()
-
-        # Validate time slot exists
         try:
             time_slot = TimeSlot.objects.get(id=time_slot_id, is_active=True)
         except TimeSlot.DoesNotExist:
             return Response({"error": "Invalid time slot."}, status=400)
 
-        # Check this specific slot is available
         if not EventBooking.is_slot_available(event_date, time_slot_id):
             return Response(
                 {"error": "This time slot is no longer available."},
@@ -43,6 +50,7 @@ class HoldDateView(APIView):
 
         config = EventConfig.load()
         expires_at = timezone.now() + timedelta(minutes=config.hold_duration_minutes)
+        hold_token = secrets.token_urlsafe(32)
 
         booking = EventBooking.objects.create(
             date=event_date,

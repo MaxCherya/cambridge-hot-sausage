@@ -27,18 +27,16 @@ class AdminImageSerializer(serializers.ModelSerializer):
 
 
 class AdminProductListSerializer(serializers.ModelSerializer):
-    variant_count = serializers.SerializerMethodField()
+    variant_count = serializers.IntegerField(read_only=True)
     category_names = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = ("id", "name", "slug", "is_active", "is_featured", "variant_count", "category_names", "created_at")
 
-    def get_variant_count(self, obj):
-        return obj.variants.count()
-
     def get_category_names(self, obj):
-        return list(obj.categories.values_list("name", flat=True))
+        # Read from the prefetched M2M cache — no extra query.
+        return [c.name for c in obj.categories.all()]
 
 
 class AdminProductWriteSerializer(serializers.ModelSerializer):

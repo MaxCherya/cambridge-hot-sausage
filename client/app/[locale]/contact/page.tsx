@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { pageMetadata } from "@/lib/seo";
 import { ContactForm } from "../_components/contact-form";
 
 export async function generateMetadata({
@@ -9,7 +10,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact.meta" });
-  return { title: t("title") };
+  return pageMetadata({
+    title: t("title"),
+    description:
+      "Get in touch with Cambridge Hot Sausage. Send a message, ask about events, suggest a stockist, or just say hello.",
+    path: "/contact",
+    locale,
+  });
 }
 
 export default async function ContactPage({

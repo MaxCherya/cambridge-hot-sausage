@@ -41,13 +41,12 @@ export function EventBooking() {
     setSelectedSlotId(slotId);
     setSelectedSlotLabel(slotLabel);
     setHoldError("");
-    const token = crypto.randomUUID();
 
     try {
       const res = await fetch("/api/v1/events/hold", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ date, time_slot_id: slotId, hold_token: token }),
+        body: JSON.stringify({ date, time_slot_id: slotId }),
       });
       const data = await res.json();
 
@@ -58,7 +57,8 @@ export function EventBooking() {
         return;
       }
 
-      setHoldToken(token);
+      // hold_token is now server-generated to prevent inventory-locking abuse.
+      setHoldToken(data.hold_token);
       setHoldExpiry(data.expires_at);
 
       setTimeout(() => {

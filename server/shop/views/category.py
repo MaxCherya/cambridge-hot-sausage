@@ -1,8 +1,9 @@
-from django.utils.decorators import method_decorator
-from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
+from shop.cache_versions import get_categories_version
 from shop.models import Category
 from shop.serializers import CategorySerializer
 
@@ -14,6 +15,9 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     Public read-only endpoint for the category tree.
     Only root-level active categories are returned at the top level;
     children are nested via the serializer.
+
+    Both list and retrieve use version-keyed caching — invalidation is
+    O(1) via cache.incr in the model signals.
     """
 
     serializer_class = CategorySerializer
@@ -27,10 +31,24 @@ class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
             .prefetch_related("children", "products")
         )
 
-    @method_decorator(cache_page(CACHE_TTL, key_prefix="categories"))
     def list(self, request, *args, **kwargs):
-        return super().list(request, *args, **kwargs)
+        version = get_categories_version()
+        cache_key = f"shop:v{version}:categories:list:{request.get_full_path()}"
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return Response(cached)
+        response = super().list(request, *args, **kwargs)
+        if response.status_code == 200:
+            cache.set(cache_key, response.data, CACHE_TTL)
+        return response
 
-    @method_decorator(cache_page(CACHE_TTL, key_prefix="category_detail"))
     def retrieve(self, request, *args, **kwargs):
-        return super().retrieve(request, *args, **kwargs)
+        version = get_categories_version()
+        cache_key = f"shop:v{version}:category_detail:{kwargs.get(self.lookup_field, '')}"
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return Response(cached)
+        response = super().retrieve(request, *args, **kwargs)
+        if response.status_code == 200:
+            cache.set(cache_key, response.data, CACHE_TTL)
+        return response
